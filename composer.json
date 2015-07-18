@@ -1,0 +1,23 @@
+{
+    "name": "jp3cki/inkfest",
+    "description": "https://fest.ink/",
+    "homepage": "https://fest.ink/",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">= 5.4.0",
+        "yiisoft/yii2": "^2.0.4",
+        "yiisoft/yii2-smarty": "^2.0.4",
+        "bower-asset/fontawesome": "^4.3"
+    },
+    "require-dev": {
+        "yiisoft/yii2-gii": "^2.0.4"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
