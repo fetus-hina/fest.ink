@@ -32,7 +32,8 @@ class OfficialWinData extends \yii\db\ActiveRecord
         return [
             [['data_id', 'color_id', 'count'], 'required'],
             [['data_id', 'color_id', 'count'], 'integer'],
-            [['data_id', 'color_id'], 'unique', 'targetAttribute' => ['data_id', 'color_id'], 'message' => 'The combination of Data ID and Color ID has already been taken.']
+            [['data_id', 'color_id'], 'unique', 'targetAttribute' => ['data_id', 'color_id'],
+                'message' => 'The combination of Data ID and Color ID has already been taken.']
         ];
     }
 

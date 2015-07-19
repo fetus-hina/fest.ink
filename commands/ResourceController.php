@@ -24,7 +24,7 @@ class ResourceController extends Controller
 
     public function actionJs()
     {
-        $this->exec(function($inPath, $outPath) {
+        $this->exec(function ($inPath, $outPath) {
             if (!preg_match('/\.js$/', $inPath)) {
                 return;
             }
@@ -48,7 +48,7 @@ class ResourceController extends Controller
 
     public function actionCss()
     {
-        $this->exec(function($inPath, $outPath) {
+        $this->exec(function ($inPath, $outPath) {
             if (!preg_match('/\.css$/', $inPath)) {
                 return;
             }

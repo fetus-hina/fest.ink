@@ -62,7 +62,8 @@ class Color extends \yii\db\ActiveRecord
      */
     public function getDatas()
     {
-        return $this->hasMany(OfficialData::className(), ['id' => 'data_id'])->viaTable('official_win_data', ['color_id' => 'id']);
+        return $this->hasMany(OfficialData::className(), ['id' => 'data_id'])
+            ->viaTable('official_win_data', ['color_id' => 'id']);
     }
 
     /**

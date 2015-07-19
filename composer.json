@@ -16,6 +16,7 @@
         "yiisoft/yii2-smarty": "^2.0.4"
     },
     "require-dev": {
+        "squizlabs/php_codesniffer": "^2.3",
         "yiisoft/yii2-gii": "^2.0.4"
     },
     "extra": {

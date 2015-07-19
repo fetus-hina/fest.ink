@@ -26,7 +26,7 @@ class OfficialDataController extends Controller
         }
 
         $ret = $obj->getWinCounts();
-        foreach(['red' => 38, 'green' => 57] as $color => $expect) {
+        foreach (['red' => 38, 'green' => 57] as $color => $expect) {
             if ($ret->$color !== $expect) {
                 echo "WinCount mismatch ($color)\n";
                 echo "  Expect: " . $expect . "\n";
@@ -137,10 +137,13 @@ class OfficialDataController extends Controller
 
     private function saveJson(Fest $fest, $json, $fetchedAt)
     {
-        $filepath = __DIR__ . '/../runtime/official-data/fest-' . $fest->id . '/' . date('Y-m-d\TH-i-s', $fetchedAt) . '.json';
+        $filepath = __DIR__ . '/../runtime/official-data/' .
+            'fest-' . $fest->id . '/' . date('Y-m-d\TH-i-s', $fetchedAt) . '.json';
+
         if (!file_exists(dirname($filepath))) {
             mkdir(dirname($filepath), 0755, true);
         }
+
         file_put_contents($filepath, $json);
     }
 }

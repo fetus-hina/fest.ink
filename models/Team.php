@@ -34,7 +34,8 @@ class Team extends \yii\db\ActiveRecord
             [['fest_id', 'color_id', 'name', 'keyword'], 'required'],
             [['fest_id', 'color_id'], 'integer'],
             [['name', 'keyword'], 'string'],
-            [['fest_id', 'color_id'], 'unique', 'targetAttribute' => ['fest_id', 'color_id'], 'message' => 'The combination of Fest ID and Color ID has already been taken.']
+            [['fest_id', 'color_id'], 'unique', 'targetAttribute' => ['fest_id', 'color_id'],
+                'message' => 'The combination of Fest ID and Color ID has already been taken.']
         ];
     }
 
