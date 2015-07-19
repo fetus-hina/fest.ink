@@ -28,15 +28,7 @@ https://fest.ink/ のソースコードです。
     make
     ```
 
-3. SQLite DB の準備をします。`db/fest.sqlite` ファイルはウェブサーバ経由の PHP プロセス「も」書き込めるような権限にしておいてください。
-
-    ```sh
-    cd db
-    sqlite3 fest.sqlite < sqls/01/table.sql
-    sqlite3 fest.sqlite < sqls/01/2ndfest.sql
-    ```
-
-4. ウェブサーバとかを良い感じにセットアップするときっと動きます。
+3. ウェブサーバとかを良い感じにセットアップするときっと動きます。
 
 
 ### MANUAL ###
