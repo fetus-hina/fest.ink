@@ -10,6 +10,7 @@ use Yii;
  * @property integer $fest_id
  * @property integer $color_id
  * @property string $name
+ * @property string $keyword
  *
  * @property Color $color
  * @property Fest $fest
@@ -30,9 +31,9 @@ class Team extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fest_id', 'color_id', 'name'], 'required'],
+            [['fest_id', 'color_id', 'name', 'keyword'], 'required'],
             [['fest_id', 'color_id'], 'integer'],
-            [['name'], 'string'],
+            [['name', 'keyword'], 'string'],
             [['fest_id', 'color_id'], 'unique', 'targetAttribute' => ['fest_id', 'color_id'], 'message' => 'The combination of Fest ID and Color ID has already been taken.']
         ];
     }
@@ -46,6 +47,7 @@ class Team extends \yii\db\ActiveRecord
             'fest_id' => 'Fest ID',
             'color_id' => 'Color ID',
             'name' => 'Name',
+            'keyword' => 'Keyword',
         ];
     }
 

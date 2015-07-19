@@ -15,6 +15,7 @@ CREATE TABLE "team" (
     "fest_id"       INTEGER NOT NULL REFERENCES "fest" ( "id" ),
     "color_id"      INTEGER NOT NULL REFERENCES "color" ( "id" ),
     "name"          TEXT NOT NULL,
+    "keyword"       TEXT NOT NULL,
     PRIMARY KEY ( "fest_id", "color_id" )
 );
 
@@ -42,9 +43,9 @@ INSERT INTO "fest" VALUES
     ( 3, 'レモンティー vs ミルクティー', 1437804000, 1437890400 );
 
 INSERT INTO "team" VALUES
-    ( 1, 1, 'ごはん' ),
-    ( 1, 2, 'パン' ),
-    ( 2, 1, '赤いきつね' ),
-    ( 2, 2, '緑のたぬき' ),
-    ( 3, 1, 'レモンティー' ),
-    ( 3, 2, 'ミルクティー' );
+    ( 1, 1, 'ごはん', 'ごはん' ),
+    ( 1, 2, 'パン', 'パン' ),
+    ( 2, 1, '赤いきつね', '赤いきつね' ),
+    ( 2, 2, '緑のたぬき', '緑のたぬき' ),
+    ( 3, 1, 'レモンティー', 'レモン' ),
+    ( 3, 2, 'ミルクティー', 'ミルク' );
