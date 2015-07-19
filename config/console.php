@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Tokyo');
 
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 

@@ -7,9 +7,13 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">= 5.4.0",
+        "ext-pcre": "*",
+        "ext-mbstring": "*",
+        "ext-intl": "*",
+        "ext-curl": "*",
+        "php-curl-class/php-curl-class": "^3.5",
         "yiisoft/yii2": "^2.0.4",
-        "yiisoft/yii2-smarty": "^2.0.4",
-        "bower-asset/fontawesome": "^4.3"
+        "yiisoft/yii2-smarty": "^2.0.4"
     },
     "require-dev": {
         "yiisoft/yii2-gii": "^2.0.4"
