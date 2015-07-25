@@ -14,6 +14,11 @@
       <script>{literal}!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');{/literal}</script>
     </div>
 
+    <p>
+      <span title="サーバが任天堂から最後にデータを取得したタイミングです">データ最終更新: <span class="last-updated-at">(取得中)</span></span>、
+      <span title="あなた（ブラウザ）が fest.ink のサーバから最後にデータを取得したタイミングです">データ最終取得: <span class="last-fetched-at">(取得中)</span></span>
+    </p>
+
     <h2>
       推定勝率: <span class="total-rate" data-team="red">(取得中)</span> vs <span class="total-rate" data-team="green">(取得中)</span>
     </h2>

@@ -11,7 +11,10 @@
         var $totalRate = $('.total-rate');
         var $totalProgressBar = $('.total-progressbar');
         var $rateGraph = $('.rate-graph');
-        if ($totalRate.length < 1 && $totalProgressBar.length < 1 && $rateGraph.length < 1) {
+        var $lastUpdatedAt = $('.last-updated-at');
+        var $lastFetchedAt = $('.last-fetched-at');
+        if ($totalRate.length < 1 && $totalProgressBar.length < 1 && $rateGraph.length < 1 &&
+                $lastUpdatedAt.length < 1 && $lastFetchedAt.length < 1) {
             return;
         }
 
@@ -91,7 +94,7 @@
                     ]
                 };
             }; // }}}
-            var updateShortGraph = function (json) {
+            var updateShortGraph = function (json) { // {{{
                 var $targets = $rateGraph.filter('.rate-graph-short');
                 if ($targets.length > 0) {
                     var red = [];
@@ -116,8 +119,8 @@
                         $.plot($area, [red, green], getGraphOptions(json.term));
                     });
                 }
-            };
-            var updateWholeGraph = function (json) {
+            }; // }}}
+            var updateWholeGraph = function (json) { // {{{
                 var $targets = $rateGraph.filter('.rate-graph-whole');
                 if ($targets.length > 0) {
                     var wins = json.wins.slice(0);
@@ -151,17 +154,51 @@
                         $.plot($area, [red, green], getGraphOptions(json.term));
                     });
                 }
-            };
+            }; // }}}
+            var updateTimestampString = function (requestDate, json) { // {{{
+                var format = function (date) {
+                    var zeroPadding = function (num) {
+                        num = ~~num;
+                        return (num > 9 ? '' : '0') + num;
+                    };
 
+                    return date.getFullYear() + '-' +
+                        zeroPadding(date.getMonth() + 1) + '-' +
+                        zeroPadding(date.getDate()) + ' ' +
+                        zeroPadding(date.getHours()) + ':' +
+                        zeroPadding(date.getMinutes());
+                };
+
+                // json.wins[n].at の最大値を取得
+                var retJsonTimestamp = Math.max.apply(
+                    null,
+                    json.wins.map(function(value) {
+                        return value.at;
+                    })
+                );
+
+                $lastUpdatedAt.text(
+                    retJsonTimestamp < 1 || retJsonTimestamp === undefined || isNaN(retJsonTimestamp)
+                        ? '???'
+                        : format(new Date(retJsonTimestamp * 1000))
+                );
+
+                $lastFetchedAt.text(
+                    format(requestDate)
+                );
+            }; // }}}
+
+            var requestDate = new Date();
             $.getJSON(
                 '/' + encodeURIComponent(festId) + '.json',
-                { '_t': Math.floor(new Date() / 1000) },
+                { '_t': Math.floor(requestDate / 1000) },
                 function (retJson) {
                     var total = calcCurrentTotal(retJson);
                     updateRateString(total);
                     updateRateProgressBar(total);
                     updateShortGraph(retJson);
                     updateWholeGraph(retJson);
+                    updateTimestampString(requestDate, retJson);
                 }
             );
         };
