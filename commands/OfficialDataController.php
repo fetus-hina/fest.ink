@@ -15,7 +15,7 @@ class OfficialDataController extends Controller
     {
         $obj = new OfficialJson(
             Fest::findOne(['id' => 2]),
-            file_get_contents(__DIR__ . '/../db/sqls/01/2ndfest/data/results.20150703171806.json')
+            file_get_contents(__DIR__ . '/../data/old-results/2/2015-07-03T17-18-06.json')
         );
         
         if ($obj->sha256sum !== 'XNLnndL5YOVClyYIqqoKisBbty82S+74mtMFYlr6lbg=') {
@@ -50,7 +50,7 @@ class OfficialDataController extends Controller
         }
 
         $json = $debug
-            ? file_get_contents(__DIR__ . '/../db/sqls/01/2ndfest/data/results.20150703171806.json')
+            ? file_get_contents(__DIR__ . '/../data/old-results/2/2015-07-03T17-18-06.json')
             : $this->fetchJsonFromNintendo();
         if (!$json || substr($json, 0, 2) === '[]' || substr($json, 0, 2) === '{}') {
             echo "failed or empty json.\n";

@@ -18,7 +18,7 @@ composer.phar:
 	curl -sS https://getcomposer.org/installer | php
 
 db/fest.sqlite:
-	sqlite3 db/fest.sqlite < db/sqls/01/table.sql
-	sqlite3 db/fest.sqlite < db/sqls/01/2ndfest.sql
+	cat db/sqls/01/table.sql | sqlite3 db/fest.sqlite
+	db/sqls/01/2ndfest.php | sqlite3 db/fest.sqlite
 
 .PHONY: all depends-install check-style fix-style clean

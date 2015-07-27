@@ -1,9 +1,10 @@
+#!/usr/bin/env php
 <?php
 date_default_timezone_set('Asia/Tokyo');
 
 $data = [];
-foreach (new DirectoryIterator(__DIR__ . '/data') as $entry) {
-    if (!$entry->isFile() || !preg_match('/^results\.(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\.json$/', $entry->getBaseName(), $match)) {
+foreach (new DirectoryIterator(__DIR__ . '/../../../data/old-results/2') as $entry) {
+    if (!$entry->isFile() || !preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2})-(\d{2})-(\d{2})\.json$/', $entry->getBaseName(), $match)) {
         continue;
     }
 
@@ -40,6 +41,7 @@ usort($data, function ($a, $b) {
     return $a->downloaded_at - $b->downloaded_at;
 });
 
+echo "BEGIN;\n";
 echo 'INSERT INTO "official_data" VALUES ' . "\n";
 foreach ($data as $i => $datum) {
     if ($i > 0) {
@@ -74,6 +76,7 @@ foreach ($data as $i => $datum) {
     );
 }
 echo ";\n";
+echo "COMMIT;\n";
 
 function e($text)
 {
