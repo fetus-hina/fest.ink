@@ -20,5 +20,6 @@ composer.phar:
 db/fest.sqlite:
 	cat db/sqls/01/table.sql | sqlite3 db/fest.sqlite
 	db/sqls/01/2ndfest.php | sqlite3 db/fest.sqlite
+	db/sqls/02/3rdfest.php | sqlite3 db/fest.sqlite
 
 .PHONY: all depends-install check-style fix-style clean
