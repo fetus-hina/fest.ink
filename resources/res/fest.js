@@ -9,16 +9,25 @@
         }
 
         var $totalRate = $('.total-rate');
+        var $sampleCount = $('.sample-count');
         var $totalProgressBar = $('.total-progressbar');
         var $rateGraph = $('.rate-graph');
         var $lastUpdatedAt = $('.last-updated-at');
         var $lastFetchedAt = $('.last-fetched-at');
-        if ($totalRate.length < 1 && $totalProgressBar.length < 1 && $rateGraph.length < 1 &&
-                $lastUpdatedAt.length < 1 && $lastFetchedAt.length < 1) {
+        if ($totalRate.length < 1 &&
+                $sampleCount.length < 1 &&
+                $totalProgressBar.length < 1 &&
+                $rateGraph.length < 1 &&
+                $lastUpdatedAt.length < 1 &&
+                $lastFetchedAt.length < 1) {
             return;
         }
 
         var update = function () {
+            var numberFormat = function(num) {
+                // http://d.hatena.ne.jp/mtoyoshi/20090321/1237723345
+                return num.toString().replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
+            };
             var calcCurrentTotal = function (json) { // {{{
                 var totalRed = 0;
                 var totalGreen = 0;
@@ -29,7 +38,9 @@
                 var totalCount = totalRed + totalGreen;
                 return {
                     'r': (totalCount > 0) ? totalRed / totalCount : NaN,
-                    'g': (totalCount > 0) ? totalGreen / totalCount : NaN
+                    'g': (totalCount > 0) ? totalGreen / totalCount : NaN,
+                    'rSum': (totalCount > 0) ? totalRed : NaN,
+                    'gSum': (totalCount > 0) ? totalGreen : NaN
                 };
             }; // }}}
             var updateRateString = function (data) { // {{{
@@ -48,6 +59,14 @@
                             : ((Math.round(rate * 1000) / 10) + "%")
                     );
                 });
+            }; // }}}
+            var updateSampleCount = function (data) { // {{{
+                console.log(data);
+                $sampleCount.text(
+                    (isNaN(data.rSum) || isNaN(data.gSum))
+                        ? '???'
+                        : numberFormat(data.rSum + data.gSum)
+                );
             }; // }}}
             var updateRateProgressBar = function (data) { // {{{
                 $totalProgressBar.each(function() {
@@ -196,6 +215,7 @@
                     var total = calcCurrentTotal(retJson);
                     updateRateString(total);
                     updateRateProgressBar(total);
+                    updateSampleCount(total);
                     updateShortGraph(retJson);
                     updateWholeGraph(retJson);
                     updateTimestampString(requestDate, retJson);
