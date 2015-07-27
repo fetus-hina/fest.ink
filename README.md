@@ -56,8 +56,9 @@ https://fest.ink/ のソースコードです。
 
     ```sh
     cd db
-    sqlite3 fest.sqlite < sqls/01/table.sql
-    sqlite3 fest.sqlite < sqls/01/2ndfest.sql
+	cat sqls/01/table.sql | sqlite3 fest.sqlite
+	sqls/01/2ndfest.php   | sqlite3 fest.sqlite
+	sqls/02/3rdfest.php   | sqlite3 fest.sqlite
     ```
 
 5. ウェブサーバとかを良い感じにセットアップするときっと動きます。
