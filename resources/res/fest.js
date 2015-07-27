@@ -61,7 +61,6 @@
                 });
             }; // }}}
             var updateSampleCount = function (data) { // {{{
-                console.log(data);
                 $sampleCount.text(
                     (isNaN(data.rSum) || isNaN(data.gSum))
                         ? '???'
