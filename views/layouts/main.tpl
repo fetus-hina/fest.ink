@@ -16,6 +16,7 @@
     <script src="/res/flot/jquery.flot.stack.min.js"></script>
     <script src="/res/flot/jquery.flot.time.min.js"></script>
     <script src="/res/fest.js" async></script>
+    <script src="/res/twitter.js" async></script>
   </head>
   <body>
     {{include '@app/views/layouts/navbar.tpl'}}
