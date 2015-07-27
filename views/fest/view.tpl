@@ -1,6 +1,33 @@
 {strip}
 <div class="container" data-fest="{{$fest->id|escape}}">
   <div class="starter-template">
+    <div class="btn-toolbar" role="toolbar">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default" id="btn-update" title="表示データを更新します">
+          <span class="glyphicon glyphicon-refresh"></span> 更新
+        </button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default" id="btn-autoupdate" title="自動更新のオンオフを切り替えます">
+          自動更新
+        </button>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" id="btn-update-interval" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            更新間隔 <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" id="dropdown-update-interval">
+            <li><a href="javascript:;" class="update-interval" data-interval="120"><span class="glyphicon glyphicon-ok"></span> 2分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="300"><span class="glyphicon glyphicon-ok"></span> 5分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="600"><span class="glyphicon glyphicon-ok"></span> 10分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="900"><span class="glyphicon glyphicon-ok"></span> 15分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="1200"><span class="glyphicon glyphicon-ok"></span> 20分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="1800"><span class="glyphicon glyphicon-ok"></span> 30分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="3600"><span class="glyphicon glyphicon-ok"></span> 60分</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <h1>
       フェス「{{$fest->name|escape}}」の勝敗レート
     </h1>

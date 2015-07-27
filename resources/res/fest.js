@@ -2,11 +2,16 @@
     "use strict";
     var $ = window.jQuery;
     var NaN = Number.NaN;
+    var defaultUpdateInterval = 10 * 60 * 1000;
     $(window.document).ready(function() {
         var festId = $('.container[data-fest]').attr('data-fest');
         if (!(festId + "").match(/^\d+$/)) {
             return;
         }
+
+        var $updateButton = $('#btn-update');
+        var $autoUpdateButton = $('#btn-autoupdate');
+        var $updateIntervalMenu = $('#dropdown-update-interval');
 
         var $totalRate = $('.total-rate');
         var $sampleCount = $('.sample-count');
@@ -14,16 +19,50 @@
         var $rateGraph = $('.rate-graph');
         var $lastUpdatedAt = $('.last-updated-at');
         var $lastFetchedAt = $('.last-fetched-at');
-        if ($totalRate.length < 1 &&
-                $sampleCount.length < 1 &&
-                $totalProgressBar.length < 1 &&
-                $rateGraph.length < 1 &&
-                $lastUpdatedAt.length < 1 &&
-                $lastFetchedAt.length < 1) {
-            return;
-        }
 
-        var update = function () {
+        var localStorage = window.localStorage;
+        var hasStorage = !!localStorage;
+
+        // 自動更新設定
+        var setAutoUpdate = function (enabled) { // {{{
+            if (!hasStorage) {
+                return;
+            }
+            localStorage.setItem("autoupdate", enabled ? "enabled" : "disabled");
+        }; // }}}
+        var getAutoUpdate = function () { // {{{
+            if (hasStorage) {
+                var value = localStorage.getItem("autoupdate");
+                if (value === "disabled") {
+                    return false;
+                }
+            }
+            return true;
+        }; // }}}
+
+        // 自動更新用のタイマIDと現在の自動更新インターバル
+        var autoUpdateTimerId = null;
+        var autoUpdateInterval = null;
+
+        // 自動更新インターバル
+        var setUpdateInterval = function (interval) { // {{{
+            if (!hasStorage) {
+                return;
+            }
+            localStorage.setItem("update-interval", ~~interval);
+        }; // }}}
+        var getUpdateInterval = function () { // {{{
+            if (hasStorage) {
+                var interval = localStorage.getItem("update-interval");
+                if ((interval + "").match(/^\d+$/)) {
+                    return ~~interval;
+                }
+            }
+            return defaultUpdateInterval;
+        }; // }}}
+
+        // fest.ink のサーバから最新情報を取ってきてページ内の情報を更新する
+        var update = function () { // {{{
             var numberFormat = function(num) {
                 // http://d.hatena.ne.jp/mtoyoshi/20090321/1237723345
                 return num.toString().replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
@@ -207,6 +246,7 @@
             }; // }}}
 
             var requestDate = new Date();
+            $updateButton.attr('disabled', 'disabled');
             $.getJSON(
                 '/' + encodeURIComponent(festId) + '.json',
                 { '_t': Math.floor(requestDate / 1000) },
@@ -218,16 +258,83 @@
                     updateShortGraph(retJson);
                     updateWholeGraph(retJson);
                     updateTimestampString(requestDate, retJson);
+                    $updateButton.removeAttr('disabled');
                 }
             );
-        };
+        }; // }}}
+
+        // 自動更新の有効化
+        var enableAutoUpdate = function () { // {{{
+            $autoUpdateButton.removeClass('btn-default').addClass('btn-primary');
+            if (autoUpdateTimerId !== null) {
+                window.clearInterval(autoUpdateTimerId);
+            }
+            autoUpdateInterval = getUpdateInterval();
+            autoUpdateTimerId = window.setInterval(update, autoUpdateInterval);
+            setAutoUpdate(true);
+        }; // }}}
+
+        // 自動更新の無効化
+        var disableAutoUpdate = function () { // {{{
+            $autoUpdateButton.addClass('btn-default').removeClass('btn-primary');
+            if (autoUpdateTimerId !== null) {
+                window.clearInterval(autoUpdateTimerId);
+            }
+            autoUpdateTimerId = null;
+            autoUpdateInterval = null;
+            setAutoUpdate(false);
+        }; // }}}
+
+        // 今すぐ更新するボタンが押されたときの処理
+        $updateButton.click(update);
+
+        // 自動更新ボタンが押された時の処理
+        $autoUpdateButton.click(function() { // {{{
+            if ($(this).hasClass('btn-primary')) {
+                disableAutoUpdate();
+            } else {
+                enableAutoUpdate();
+                update();
+            }
+        }); // }}}
+
+        if (hasStorage) {
+            // 自動更新間隔メニューが開いた時の処理
+            // 適切なところにしるしをつける
+            $updateIntervalMenu.parent().on('show.bs.dropdown', function() { // {{{
+                var interval = (autoUpdateInterval === null) ? getUpdateInterval() : autoUpdateInterval;
+                $('.update-interval', $updateIntervalMenu).each(function() {
+                    var $a = $(this);
+                    var $icon = $('.glyphicon', $a);
+                    var targetInterval = (~~$a.attr('data-interval')) * 1000;
+                    $icon.css('color', (targetInterval === interval) ? '#333' : 'rgba(0,0,0,0)');
+                });
+            }); // }}}
+
+            // 自動更新間隔を変更するときの処理 
+            $('.update-interval').click(function() { // {{{
+                var targetInterval = (~~$(this).attr('data-interval')) * 1000;
+                if (autoUpdateInterval === targetInterval) {
+                    return;
+                }
+                disableAutoUpdate();
+                setUpdateInterval(targetInterval);
+                enableAutoUpdate();
+                update();
+            }); // }}}
+        } else {
+            $('#btn-update-interval').attr('disabled', 'disabled');
+        }
+
+        // 自動更新ボタンの状態を正しくする
+        $autoUpdateButton.each(
+            getAutoUpdate()
+                ? function () { enableAutoUpdate(); }
+                : function () { disableAutoUpdate(); }
+        );
 
         window.setTimeout(function() {
                 update.call(window);
-                window.setInterval(function() {
-                        update.call(window);
-                    }, 10 * 60 * 1000
-                );
             }, 1
         );
     });
