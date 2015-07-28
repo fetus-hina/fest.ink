@@ -1,4 +1,4 @@
-{strip}
+{{strip}}
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="container">
@@ -33,4 +33,4 @@
     </div>
   </div>
 </nav>
-{/strip}
+{{/strip}}

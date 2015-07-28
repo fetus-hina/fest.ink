@@ -1,4 +1,4 @@
-{strip}
+{{strip}}
   <h1>ごちゅうい</h1>
   <ul>
     <li>
@@ -24,4 +24,4 @@
       このプログラムのソースは<a href="https://github.com/fetus-hina/fest.ink">このへんにあります</a>。
     </li>
   </ul>
-{/strip}
+{{/strip}}

@@ -1,4 +1,4 @@
-{strip}
+{{strip}}
 {{set layout="main.tpl"}}
 <div class="container">
   <div class="starter-template">
@@ -10,4 +10,4 @@
     </p>
   </div>
 </div>
-{/strip}
+{{/strip}}

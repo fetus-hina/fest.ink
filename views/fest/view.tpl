@@ -1,4 +1,4 @@
-{strip}
+{{strip}}
 <div class="container" data-fest="{{$fest->id|escape}}">
   <div class="starter-template">
     <div class="btn-toolbar" role="toolbar">
@@ -91,4 +91,4 @@
     {{include '@app/views/fest/attention.tpl'}}
   </div>
 </div>
-{/strip}
+{{/strip}}

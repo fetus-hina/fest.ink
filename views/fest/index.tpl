@@ -1,4 +1,4 @@
-{strip}
+{{strip}}
 <div class="container">
   <div class="starter-template">
     <h1>
@@ -38,4 +38,4 @@
     {{include '@app/views/fest/attention.tpl'}}
   </div>
 </div>
-{/strip}
+{{/strip}}

@@ -28,10 +28,9 @@ $config = [
                         '//smarty/',
                     ],
                     'options' => [
-                        'autoload_filters' => [
-                            'left_delimiter' => '{{',
-                            'right_delimiter' => '}}',
-                        ],
+                        'force_compile' => defined('YII_DEBUG') && YII_DEBUG,
+                        'left_delimiter' => '{{',
+                        'right_delimiter' => '}}',
                     ],
                 ],
             ],
