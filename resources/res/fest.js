@@ -12,6 +12,7 @@
         var $updateButton = $('#btn-update');
         var $autoUpdateButton = $('#btn-autoupdate');
         var $updateIntervalMenu = $('#dropdown-update-interval');
+        var $graphTypeButton = $('.btn-graphtype');
 
         var $totalRate = $('.total-rate');
         var $sampleCount = $('.sample-count');
@@ -59,6 +60,23 @@
                 }
             }
             return defaultUpdateInterval;
+        }; // }}}
+
+        // グラフ表示タイプ
+        var setGraphType = function (type) { // {{{
+            if (!hasStorage) {
+                return;
+            }
+            localStorage.setItem("graph-type", type);
+        }; // }}}
+        var getGraphType = function () { // {{{
+            if (hasStorage) {
+                var type = localStorage.getItem("graph-type");
+                if (type === "overlay") {
+                    return type;
+                }
+            }
+            return 'stack';
         }; // }}}
 
         // fest.ink のサーバから最新情報を取ってきてページ内の情報を更新する
@@ -126,7 +144,7 @@
             var getGraphOptions = function(term) { // {{{
                 return {
                     series: {
-                        stack: true,
+                        stack: getGraphType() === "stack",
                         lines: {
                             show: true,
                             fill: true,
@@ -285,6 +303,16 @@
             setAutoUpdate(false);
         }; // }}}
 
+        // グラフの種類を変更する
+        // UI の調整をするだけなので setGraphType してから呼ぶ
+        var updateGraphType = function () { // {{{
+            $graphTypeButton.addClass('btn-default').removeClass('btn-primary');
+            $graphTypeButton
+                .filter("*[data-type=" + getGraphType() + "]")
+                .addClass('btn-primary')
+                .removeClass('btn-default');
+        }; // }}}
+
         // 今すぐ更新するボタンが押されたときの処理
         $updateButton.click(update);
 
@@ -322,8 +350,20 @@
                 enableAutoUpdate();
                 update();
             }); // }}}
+
+            // グラフタイプ変更処理
+            $graphTypeButton.click(function() { // {{{
+                var $this = $(this);
+                if ($this.hasClass('btn-primary')) {
+                    return;
+                }
+                setGraphType($this.attr('data-type'));
+                updateGraphType();
+                update();
+            }); // }}}
         } else {
             $('#btn-update-interval').attr('disabled', 'disabled');
+            $graphTypeButton.attr('disabled', 'disabled');
         }
 
         // 自動更新ボタンの状態を正しくする
@@ -332,6 +372,9 @@
                 ? function () { enableAutoUpdate(); }
                 : function () { disableAutoUpdate(); }
         );
+
+        // グラフタイプボタンの状態を正しくする
+        updateGraphType();
 
         window.setTimeout(function() {
                 update.call(window);

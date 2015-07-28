@@ -26,6 +26,14 @@
           </ul>
         </div>
       </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default btn-graphtype" data-type="stack">
+          上下に並べて表示
+        </button>
+        <button type="button" class="btn btn-default btn-graphtype" data-type="overlay">
+          重ねて表示
+        </button>
+      </div>
     </div>
 
     <h1>
