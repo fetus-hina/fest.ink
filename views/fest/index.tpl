@@ -1,7 +1,7 @@
 {{strip}}
 <div class="container">
   <div class="starter-template">
-    <h1>
+    <h1 class="ikamodoki">
       イカフェスレート
     </h1>
     <p>
