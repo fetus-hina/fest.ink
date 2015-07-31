@@ -32,6 +32,35 @@
               {{/foreach}}
             </ul>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle ikamodoki" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              リンク <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="http://www.nintendo.co.jp/wiiu/agmj/">スプラトゥーン 公式サイト</a>
+              </li>
+              <li>
+                <a href="https://twitter.com/splatoonjp">
+                  <span class="fa fa-twitter"></span> スプラトゥーン 公式ツイッター
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="https://ikadenwa.ink/" class="auto-tooltip" title="フレンドマッチ中の通話に便利なサイトです">イカデンワ</a>
+              </li>
+              <li>
+                <a href="http://siome.ink/" class="auto-tooltip" title="TwitterアカウントとニンテンドーネットワークIDを登録して告知できるサイトです">siome</a>
+              </li>
+              <li>
+                <a href="http://ika.akaihako.com/unislot" class="auto-tooltip" title="サザエガチャのシミュレータです">ウニスロット</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="http://aramugi.com/?page_id=807" class="ikamodoki auto-tooltip" title="イカしたフォントです">フリーフォント イカモドキ</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
