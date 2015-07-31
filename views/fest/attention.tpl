@@ -1,5 +1,5 @@
 {{strip}}
-  <h1>ごちゅうい</h1>
+  <h1 class="ikamodoki">ごちゅうい</h1>
   <ul>
     <li>
       このページはスプラトゥーン公式（任天堂）とは一切関係がありません。個人が勝手に推計しているものです。
@@ -21,7 +21,13 @@
       通信量は大したことありませんが気になる方はお気を付けください。
     </li>
     <li>
+      ページの一部に<a href="http://aramugi.com/?page_id=807" class="ikamodoki">イカモドキ</a>フォントを利用しています。
+    </li>
+    <li>
       このプログラムのソースは<a href="https://github.com/fetus-hina/fest.ink">このへんにあります</a>。
+    </li>
+    <li>
+      連絡先: <a href="https://github.com/fetus-hina">GitHub: fetus-hina</a>, <a href="https://twitter.com/fetus_hina">Twitter: @fetus_hina</a>
     </li>
   </ul>
 {{/strip}}

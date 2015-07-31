@@ -18,3 +18,35 @@ body {
 .ikamodoki {
     font-family: 'ikamodoki', sans-serif;
 }
+
+/* トップページ / 見るボタン */
+#fest-list td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+/* トップページ / 第n回 */
+#fest-list td:nth-child(2) {
+    width: 4em;
+}
+
+/* トップページ / 開催期間 */
+#fest-list td:nth-child(4) {
+    width: 20em;
+}
+
+@media (max-width: 767px) {
+    #fest-list td:nth-child(2) {
+        display: none;
+    }
+
+    #fest-list td:nth-child(4) {
+        width: 8em;
+    }
+
+    #fest-list .fest-term-time,
+    #fest-list .fest-term-range,
+    #fest-list .fest-term-end {
+        display: none;
+    }
+}

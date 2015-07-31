@@ -7,25 +7,35 @@
     <p>
       スプラトゥーンの公式サイトで公開されているデータを基にフェスの勝率を推定するサイトです。
     </p>
-    <table class="table table-stripe">
+    <table class="table table-stripe" id="fest-list">
       <tbody>
         {{foreach $allFest as $_fest}}
           <tr>
-            <td style="width:6em">
-              <a href="{{url route="/fest/view" id=$_fest->id}}" class="btn btn-primary">
-                表示
-              </a>
+            <td>
+              {{if $_fest->id == 1}}
+                <a href="{{url route="/fest/view" id=$_fest->id}}" class="btn btn-default ikamodoki">
+                  みる
+                </a>
+              {{else}}
+                <a href="{{url route="/fest/view" id=$_fest->id}}" class="btn btn-primary ikamodoki">
+                  みる
+                </a>
+              {{/if}}
             </td>
-            <td style="width:4em">
+            <td>
               第{{$_fest->id|escape}}回
             </td>
             <td>
               {{$_fest->name|escape}}
             </td>
-            <td style="width:20em">
-              {{$_fest->start_at|date_format:'%Y-%m-%d %H:%M'|escape}}
-              &#32;～&#32;
-              {{$_fest->end_at|date_format:'%Y-%m-%d %H:%M'|escape}}
+            <td>
+              <span class="fest-term-begin">
+                <span class="fest-term-date">{{$_fest->start_at|date_format:'%Y-%m-%d'|escape}}</span>&#32;
+                <span class="fest-term-time">{{$_fest->start_at|date_format:'%H:%M'|escape}}</span>
+              </span> <span class="fest-term-range">～</span> <span class="fest-term-end">
+                <span class="fest-term-date">{{$_fest->end_at|date_format:'%Y-%m-%d'|escape}}</span>&#32;
+                <span class="fest-term-time">{{$_fest->end_at|date_format:'%H:%M'|escape}}</span>
+              </span>
             </td>
           </tr>
         {{/foreach}}

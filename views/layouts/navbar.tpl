@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle ikamodoki" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               フェス <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -22,7 +22,11 @@
               {{foreach $_allFest as $_fest}}
                 <li>
                   <a href="{{url route="/fest/view" id=$_fest->id}}">
-                    #{{$_fest->id|escape}}: {{$_fest->name|escape}}
+                    {{if $_fest->id === 1}}
+                      <del>#{{$_fest->id|escape}}: {{$_fest->name|escape}}</del>
+                    {{else}}
+                      #{{$_fest->id|escape}}: {{$_fest->name|escape}}
+                    {{/if}}
                   </a>
                 </li>
               {{/foreach}}
