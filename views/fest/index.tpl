@@ -13,7 +13,7 @@
           <tr>
             <td>
               {{if $_fest->id == 1}}
-                <a href="{{url route="/fest/view" id=$_fest->id}}" class="btn btn-default ikamodoki">
+                <a href="{{url route="/fest/view" id=$_fest->id}}" class="btn btn-default ikamodoki auto-tooltip" title="データの取得を行っていないため何も表示されません">
                   みる
                 </a>
               {{else}}

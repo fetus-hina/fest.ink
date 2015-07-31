@@ -24,10 +24,21 @@
       ページの一部に<a href="http://aramugi.com/?page_id=807" class="ikamodoki">イカモドキ</a>フォントを利用しています。
     </li>
     <li>
-      このプログラムのソースは<a href="https://github.com/fetus-hina/fest.ink">このへんにあります</a>。
+      このサイトのソースはオープンソース (MIT License) で、
+      <a href="https://github.com/fetus-hina/fest.ink" class="auto-tooltip" title="GitHubプロジェクトページ">
+        <span class="fa fa-github"></span> GitHub で開発・公開されています
+      </a>。
+      <iframe src="https://ghbtns.com/github-btn.html?user=fetus-hina&amp;repo=fest.ink&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+      <iframe src="https://ghbtns.com/github-btn.html?user=fetus-hina&amp;repo=fest.ink&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
     </li>
     <li>
-      連絡先: <a href="https://github.com/fetus-hina">GitHub: fetus-hina</a>, <a href="https://twitter.com/fetus_hina">Twitter: @fetus_hina</a>
+      連絡先:&#32;
+      <a href="https://github.com/fetus-hina" class="auto-tooltip" title="GitHub（バグ報告等はこちら）">
+        <span class="fa fa-github"></span> fetus-hina
+      </a>,&#32;
+      <a href="https://twitter.com/fetus_hina" class="auto-tooltip" title="Twitter">
+        <span class="fa fa-twitter"></span> fetus_hina
+      </a>
     </li>
   </ul>
 {{/strip}}

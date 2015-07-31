@@ -3,34 +3,34 @@
   <div class="starter-template">
     <div class="btn-toolbar" role="toolbar">
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default" id="btn-update" title="表示データを更新します">
+        <button type="button" class="btn btn-default auto-tooltip" id="btn-update" title="表示データを今すぐ更新します">
           <span class="glyphicon glyphicon-refresh"></span> 更新
         </button>
       </div>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default" id="btn-autoupdate" title="自動更新のオンオフを切り替えます">
+        <button type="button" class="btn btn-default auto-tooltip" id="btn-autoupdate" title="自動更新のオンオフを切り替えます">
           自動更新
         </button>
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default dropdown-toggle" id="btn-update-interval" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            更新間隔 <span class="caret"></span>
+          <button type="button" class="btn btn-default dropdown-toggle auto-tooltip" id="btn-update-interval" title="自動更新間隔を設定します" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" id="dropdown-update-interval">
-            <li><a href="javascript:;" class="update-interval" data-interval="120"><span class="glyphicon glyphicon-ok"></span> 2分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="300"><span class="glyphicon glyphicon-ok"></span> 5分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="600"><span class="glyphicon glyphicon-ok"></span> 10分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="900"><span class="glyphicon glyphicon-ok"></span> 15分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="1200"><span class="glyphicon glyphicon-ok"></span> 20分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="1800"><span class="glyphicon glyphicon-ok"></span> 30分</a></li>
-            <li><a href="javascript:;" class="update-interval" data-interval="3600"><span class="glyphicon glyphicon-ok"></span> 60分</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="120"><span class="glyphicon glyphicon-ok"></span> 2分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="300"><span class="glyphicon glyphicon-ok"></span> 5分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="600"><span class="glyphicon glyphicon-ok"></span> 10分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="900"><span class="glyphicon glyphicon-ok"></span> 15分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="1200"><span class="glyphicon glyphicon-ok"></span> 20分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="1800"><span class="glyphicon glyphicon-ok"></span> 30分ごと</a></li>
+            <li><a href="javascript:;" class="update-interval" data-interval="3600"><span class="glyphicon glyphicon-ok"></span> 60分ごと</a></li>
           </ul>
         </div>
       </div>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-graphtype" data-type="stack">
+        <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
           上下に並べて表示
         </button>
-        <button type="button" class="btn btn-default btn-graphtype" data-type="overlay">
+        <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を重ねて表示します" data-type="overlay">
           重ねて表示
         </button>
       </div>
