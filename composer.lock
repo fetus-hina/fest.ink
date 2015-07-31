@@ -269,16 +269,16 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "3.5.5",
+            "version": "3.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "c03749bea01b127e59cbbfcd138e87324546d91c"
+                "reference": "f26db010d5cd038417290b8daf4c45e12d473b4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/c03749bea01b127e59cbbfcd138e87324546d91c",
-                "reference": "c03749bea01b127e59cbbfcd138e87324546d91c",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/f26db010d5cd038417290b8daf4c45e12d473b4a",
+                "reference": "f26db010d5cd038417290b8daf4c45e12d473b4a",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
                 "web service",
                 "xml"
             ],
-            "time": "2015-04-24 09:30:52"
+            "time": "2015-07-29 00:48:33"
         },
         {
             "name": "smarty/smarty",
