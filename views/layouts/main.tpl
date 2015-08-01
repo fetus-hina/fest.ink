@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="/res/fest.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="/res/flot/jquery.flot.min.js"></script>
-    <script src="/res/flot/jquery.flot.stack.min.js"></script>
-    <script src="/res/flot/jquery.flot.time.min.js"></script>
+    <script src="/res/timezone-js/date.js"></script>
+    <script src="/res/flot/jquery.flot.js"></script>
+    <script src="/res/flot/jquery.flot.stack.js"></script>
+    <script src="/res/flot/jquery.flot.time.js"></script>
     <script src="/res/fest.js" async></script>
     <script src="/res/twitter.js" async></script>
   </head>

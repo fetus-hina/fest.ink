@@ -3,7 +3,16 @@
     var $ = window.jQuery;
     var NaN = Number.NaN;
     var defaultUpdateInterval = 10 * 60 * 1000;
+    var ourTimeZone = 'Asia/Tokyo';
     $(window.document).ready(function() {
+        // Setup timezone-js
+        timezoneJS.timezone.zoneFileBasePath = '/res/tz';
+        timezoneJS.timezone.init();
+
+        var date = function (millis) {
+            return new timezoneJS.Date(millis, ourTimeZone);
+        };
+
         var festId = $('.container[data-fest]').attr('data-fest');
         if ((festId + "").match(/^\d+$/)) {
             var $updateButton = $('#btn-update');
@@ -153,7 +162,7 @@
                             minTickSize: [30, "minute"],
                             timeformat: "%H:%M",
                             twelveHourClock: false,
-                            timezone: 'browser',
+                            timezone: ourTimeZone,
                             min: term.begin * 1000,
                             max: term.end * 1000
                         },
@@ -252,7 +261,7 @@
                     $lastUpdatedAt.text(
                         retJsonTimestamp < 1 || retJsonTimestamp === undefined || isNaN(retJsonTimestamp)
                             ? '???'
-                            : format(new Date(retJsonTimestamp * 1000))
+                            : format(date(retJsonTimestamp * 1000))
                     );
 
                     $lastFetchedAt.text(
@@ -272,7 +281,7 @@
                         updateSampleCount(total);
                         updateShortGraph(retJson);
                         updateWholeGraph(retJson);
-                        updateTimestampString(requestDate, retJson);
+                        updateTimestampString(date(requestDate.getTime()), retJson);
                         $updateButton.removeAttr('disabled');
                     }
                 );

@@ -8,7 +8,18 @@ https://fest.ink/ のソースコードです。
 
 * PHP 5.4+
 * SQLite3
-* https://fest.ink/ は Nginx + FastCGI + PHP-FPM で動いていますが、権限に気をつければ `mod_php` でも普通に動くとは思います。
+
+https://fest.ink/ は現在次の構成で動作しています。
+
+* CentOS 7.1.1503 (x86_64)
+* Nginx 1.9.x (mainline)
+* SQLite 3.7.17 (標準)
+* [SCL](https://www.softwarecollections.org/)
+    - [rh-php56](https://www.softwarecollections.org/en/scls/rhscl/rh-php56/)
+        - PHP 5.6.x
+        - PHP-FPM
+
+Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
 使い方
 ------
@@ -55,13 +66,25 @@ https://fest.ink/ のソースコードです。
 4. SQLite DB の準備をします。`db/fest.sqlite` ファイルはウェブサーバ経由の PHP プロセス「も」書き込めるような権限にしておいてください。
 
     ```sh
-    cd db
+    pushd db
 	cat sqls/01/table.sql | sqlite3 fest.sqlite
 	sqls/01/2ndfest.php   | sqlite3 fest.sqlite
 	sqls/02/3rdfest.php   | sqlite3 fest.sqlite
+    popd
     ```
 
-5. ウェブサーバとかを良い感じにセットアップするときっと動きます。
+5. タイムゾーンデータベースの準備をします。
+
+    ```sh
+    mkdir web/res/tz
+    pushd web/res/tz
+    wget ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
+    tar zxvf tzdata-latest.tar.gz
+    rm tzdata-latest.tar.gz
+    popd
+    ```
+
+6. ウェブサーバとかを良い感じにセットアップするときっと動きます。
 
 
 JavaScript/CSS の更新

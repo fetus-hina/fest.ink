@@ -4,8 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd25da3001a4632e34790f47d026a8bd",
+    "hash": "418026ab394db08b753fa95f32aa9782",
     "packages": [
+        {
+            "name": "bower-asset/flot",
+            "version": "v0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flot/flot.git",
+                "reference": "453b017cc5acfd75e252b93e8635f57f4196d45d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flot/flot/zipball/453b017cc5acfd75e252b93e8635f57f4196d45d",
+                "reference": "453b017cc5acfd75e252b93e8635f57f4196d45d",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
         {
             "name": "bower-asset/jquery",
             "version": "2.1.4",
@@ -127,6 +143,30 @@
                     "Gruntfile.js",
                     "node_modules",
                     "package.json"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/timezone-js",
+            "version": "v0.4.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mde/timezone-js.git",
+                "reference": "b73a871d524226f9af94a7e2fc82147db706db2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mde/timezone-js/zipball/b73a871d524226f9af94a7e2fc82147db706db2c",
+                "reference": "b73a871d524226f9af94a7e2fc82147db706db2c",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "src/date.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "components"
                 ]
             }
         },

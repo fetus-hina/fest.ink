@@ -11,6 +11,8 @@
         "ext-mbstring": "*",
         "ext-intl": "*",
         "ext-curl": "*",
+        "bower-asset/flot": "^0.8.3",
+        "bower-asset/timezone-js": "^0.4.13",
         "php-curl-class/php-curl-class": "^3.5",
         "yiisoft/yii2": "^2.0.4",
         "yiisoft/yii2-smarty": "^2.0.4"

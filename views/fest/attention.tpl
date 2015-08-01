@@ -5,6 +5,9 @@
       このページはスプラトゥーン公式（任天堂）とは一切関係がありません。個人が勝手に推計しているものです。
     </li>
     <li>
+      表示している時間はOSやブラウザの設定にかかわらず日本標準時(JST, <code>Asia/Tokyo</code>)で表示しています。
+    </li>
+    <li>
       表示しているデータは公式発表ではありません。
     </li>
     <li>
@@ -24,9 +27,9 @@
       ページの一部に<a href="http://aramugi.com/?page_id=807" class="ikamodoki">イカモドキ</a>フォントを利用しています。
     </li>
     <li>
-      このサイトのソースはオープンソース (MIT License) で、
+      このサイトのソースはオープンソース (MIT License) です。
       <a href="https://github.com/fetus-hina/fest.ink" class="auto-tooltip" title="GitHubプロジェクトページ">
-        <span class="fa fa-github"></span> GitHub で開発・公開されています
+        <span class="fa fa-github"></span> GitHub で開発・公開しています
       </a>。
       <iframe src="https://ghbtns.com/github-btn.html?user=fetus-hina&amp;repo=fest.ink&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
       <iframe src="https://ghbtns.com/github-btn.html?user=fetus-hina&amp;repo=fest.ink&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
