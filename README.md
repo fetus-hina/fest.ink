@@ -66,11 +66,7 @@ Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `d
 4. SQLite DB の準備をします。`db/fest.sqlite` ファイルはウェブサーバ経由の PHP プロセス「も」書き込めるような権限にしておいてください。
 
     ```sh
-    pushd db
-	cat sqls/01/table.sql | sqlite3 fest.sqlite
-	sqls/01/2ndfest.php   | sqlite3 fest.sqlite
-	sqls/02/3rdfest.php   | sqlite3 fest.sqlite
-    popd
+    ./yii migrate/up
     ```
 
 5. タイムゾーンデータベースの準備をします。

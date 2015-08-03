@@ -17,10 +17,9 @@ clean:
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
 
-db/fest.sqlite:
-	cat db/sqls/01/table.sql | sqlite3 db/fest.sqlite
-	db/sqls/01/2ndfest.php | sqlite3 db/fest.sqlite
-	db/sqls/02/3rdfest.php | sqlite3 db/fest.sqlite
+db/fest.sqlite: FORCE
+	./yii migrate/up --interactive=0
+	sqlite3 db/fest.sqlite VACUUM
 
 web/res/tz: runtime/tzdata-latest.tar.gz
 	mkdir web/res/tz
@@ -29,4 +28,4 @@ web/res/tz: runtime/tzdata-latest.tar.gz
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
 
-.PHONY: all depends-install check-style fix-style clean
+.PHONY: all depends-install check-style fix-style clean FORCE

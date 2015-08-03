@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe0ebb003a07f253ce6c532df787cc51",
+    "hash": "03f16846582ba98826b8718804127716",
     "packages": [
         {
             "name": "bower-asset/flot",
