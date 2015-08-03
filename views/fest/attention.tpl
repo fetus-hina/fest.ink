@@ -43,5 +43,8 @@
         <span class="fa fa-twitter"></span> fetus_hina
       </a>
     </li>
+    <li>
+      Copyright &copy; 2015 AIZAWA Hina.
+    </li>
   </ul>
 {{/strip}}
