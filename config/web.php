@@ -1,9 +1,9 @@
 <?php
-date_default_timezone_set('Asia/Tokyo');
 $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'language' => 'ja-jp',
+    'timeZone' => 'Asia/Tokyo',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
