@@ -47,6 +47,10 @@
               </li>
               <li class="divider"></li>
               <li>
+                <a href="https://splatoon.nintendo.net/">イカリング</a>
+              </li>
+              <li class="divider"></li>
+              <li>
                 <a href="https://ikadenwa.ink/" class="auto-tooltip" title="フレンドマッチ中の通話に便利なサイトです">イカデンワ</a>
               </li>
               <li>
