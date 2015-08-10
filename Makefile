@@ -1,8 +1,13 @@
 STYLE_TARGETS=actions assets commands components controllers models
+RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
+	resources/.compiled/fest.ink/fest.js \
+	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
+	resources/.compiled/ikamodoki/ikamodoki.css \
+	resources/.compiled/tz-data/tz-init.js
 
 all: composer.phar vendor node_modules config/cookie-secret.php resource db/fest.sqlite
 
-resource: clean-resource resources/.compiled
+resource: $(RESOURCE_TARGETS)
 
 vendor: composer.phar
 	php composer.phar install
@@ -25,15 +30,27 @@ clean: clean-resource
 
 clean-resource:
 	rm -rf \
-		resources/.compiled \
+		resources/.compiled/* \
 		runtime/tzdata \
 		web/assets/*
 
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
 
-resources/.compiled: node_modules runtime/tzdata
-	./node_modules/.bin/gulp
+resources/.compiled/fest.ink/fest.js: node_modules resources/fest.ink/fest.js
+	./node_modules/.bin/gulp uglify
+
+resources/.compiled/fest.ink/fest.css: node_modules resources/fest.ink/fest.less
+	./node_modules/.bin/gulp less
+
+resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js: node_modules resources/gh-fork-ribbon/gh-fork-ribbon.js
+	./node_modules/.bin/gulp gh-fork
+
+resources/.compiled/ikamodoki/ikamodoki.css: node_modules resources/ikamodoki/ikamodoki.less
+	./node_modules/.bin/gulp ikamodoki
+
+resources/.compiled/tz-data/tz-init.js: node_modules runtime/tzdata resources/tz-data/tz-init.js
+	./node_modules/.bin/gulp tz-data
 
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0
