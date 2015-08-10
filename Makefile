@@ -1,4 +1,4 @@
-STYLE_TARGETS=actions commands components controllers models
+STYLE_TARGETS=actions assets commands components controllers models
 
 all: depends-install node_modules resource db/fest.sqlite
 
