@@ -5,10 +5,6 @@
     var defaultUpdateInterval = 10 * 60 * 1000;
     var ourTimeZone = 'Asia/Tokyo';
     $(window.document).ready(function() {
-        // Setup timezone-js
-        timezoneJS.timezone.zoneFileBasePath = '/res/tz';
-        timezoneJS.timezone.init();
-
         var date = function (millis) {
             return new timezoneJS.Date(millis, ourTimeZone);
         };

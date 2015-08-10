@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+body {
+    // body 上部にはナビバーが居るので適当に
+    padding-top: 70px;
+}
+
+.rate-graph {
+    height: 500px;
+}
+
+// トップページ
+#fest-list {
+    td {
+        // 「みる」ボタン
+        &:nth-child(1) {
+            width: 100px;
+            text-align: center;
+        }
+
+        // 第n回
+        &:nth-child(2) {
+            width: 4em;
+
+            // スマホでは表示しない
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        // 開催期間
+        &:nth-child(4) {
+            width: 20em;
+
+            // スマホでは開催期間を開始日だけにするので
+            // 小さくて良い
+            @media (max-width: 767px) {
+                width: 8em;
+
+                // 開催期間の表示調整
+                .fest-term-time, .fest-term-range, .fest-term-end {
+                    display: none;
+                }
+            }
+        }
+    }
+}

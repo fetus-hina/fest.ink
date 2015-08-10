@@ -7,6 +7,20 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'assetManager' => [
+            'appendTimestamp' => true,
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js' => [ 'jquery.min.js' ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [ 'css/bootstrap.min.css' ],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => [ 'js/bootstrap.min.js' ],
+                ],
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

@@ -1,1 +1,0 @@
-!function(t){var n=t.jQuery,r=t.document;n(r).ready(function(){n(r.body).append(n("<script>").attr("src","//platform.twitter.com/widgets.js").attr("async","async"))})}(window);
