@@ -8,7 +8,6 @@ $config = [
     'bootstrap' => ['log'],
     'components' => [
         'assetManager' => [
-            'appendTimestamp' => true,
             'bundles' => [
                 'yii\web\JqueryAsset' => [
                     'js' => [ 'jquery.min.js' ]
@@ -26,9 +25,11 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
-                '<id:\d+>'      => 'fest/view',
+                '<id:\d+>' => 'fest/view',
                 '<id:\d+>.json' => 'fest/json',
-                ''              => 'fest/index',
+                'timezone/list.json' => 'timezone/json',
+                'timezone/set' => 'timezone/set',
+                '' => 'fest/index',
             ],
         ],
         'request' => [

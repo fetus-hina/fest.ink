@@ -5,7 +5,9 @@
       このページはスプラトゥーン公式（任天堂）とは一切関係がありません。個人が勝手に推計しているものです。
     </li>
     <li>
-      表示している時間はOSやブラウザの設定にかかわらず日本標準時(JST, <code>Asia/Tokyo</code>)で表示しています。
+      表示している日時は上部の「<span class="ikamodoki">タイムゾーン</span>」の設定に従っています。
+      デフォルトは日本時間(JST, <code>Asia/Tokyo</code>)です。
+      現在、<code>{{$app->getTimezone()|escape}}</code>で表示しています。
     </li>
     <li>
       表示しているデータは公式発表ではありません。

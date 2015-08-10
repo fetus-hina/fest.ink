@@ -31,10 +31,10 @@
             <td>
               <span class="fest-term-begin">
                 <span class="fest-term-date">{{$_fest->start_at|date_format:'%Y-%m-%d'|escape}}</span>&#32;
-                <span class="fest-term-time">{{$_fest->start_at|date_format:'%H:%M'|escape}}</span>
+                <span class="fest-term-time">{{$_fest->start_at|date_format:'%H:%M %Z'|escape}}</span>
               </span> <span class="fest-term-range">～</span> <span class="fest-term-end">
                 <span class="fest-term-date">{{$_fest->end_at|date_format:'%Y-%m-%d'|escape}}</span>&#32;
-                <span class="fest-term-time">{{$_fest->end_at|date_format:'%H:%M'|escape}}</span>
+                <span class="fest-term-time">{{$_fest->end_at|date_format:'%H:%M %Z'|escape}}</span>
               </span>
             </td>
           </tr>

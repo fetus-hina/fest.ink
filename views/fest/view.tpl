@@ -88,7 +88,7 @@
       表示している情報
     </h2>
     <p>
-      フェス開催期間: {{$fest->start_at|date_format:'%Y-%m-%d %H:%M'|escape}} ～ {{$fest->end_at|date_format:'%Y-%m-%d %H:%M'|escape}}
+      フェス開催期間: {{$fest->start_at|date_format:'%Y-%m-%d %H:%M %Z'|escape}} ～ {{$fest->end_at|date_format:'%Y-%m-%d %H:%M %Z'|escape}}
     </p>
     <p>
       <span title="サーバが任天堂から最後にデータを取得したタイミングです">データ最終更新: <span class="last-updated-at">(取得中)</span></span>、

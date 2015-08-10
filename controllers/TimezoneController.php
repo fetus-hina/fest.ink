@@ -5,7 +5,7 @@ use Yii;
 use app\components\web\Controller;
 use yii\filters\VerbFilter;
 
-class FestController extends Controller
+class TimezoneController extends Controller
 {
     public $layout = "main.tpl";
 
@@ -15,6 +15,7 @@ class FestController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'set' => [ 'post' ],
                     '*' => [ 'get' ],
                 ],
             ],
@@ -23,11 +24,10 @@ class FestController extends Controller
 
     public function actions()
     {
-        $prefix = 'app\actions\fest';
+        $prefix = 'app\actions\timezone';
         return [
-            'index' => [ 'class' => $prefix . '\IndexAction' ],
             'json' => [ 'class' => $prefix . '\JsonAction' ],
-            'view' => [ 'class' => $prefix . '\ViewAction' ],
+            'set' => [ 'class' => $prefix . '\SetAction' ],
         ];
     }
 }

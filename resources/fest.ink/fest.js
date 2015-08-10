@@ -5,11 +5,20 @@
     var defaultUpdateInterval = 10 * 60 * 1000;
     var ourTimeZone = 'Asia/Tokyo';
     $(window.document).ready(function() {
+        // タイムゾーン設定 // {{{
+        (function () {
+            var tz = $('meta[name=timezone]').attr('content');
+            if (tz) {
+                ourTimeZone = tz;
+            }
+        })(); // }}}
+
         var date = function (millis) {
             return new timezoneJS.Date(millis, ourTimeZone);
         };
 
         var festId = $('.container[data-fest]').attr('data-fest');
+        // フェスページのグラフやデータ {{{
         if ((festId + "").match(/^\d+$/)) {
             var $updateButton = $('#btn-update');
             var $autoUpdateButton = $('#btn-autoupdate');
@@ -243,7 +252,8 @@
                             zeroPadding(date.getMonth() + 1) + '-' +
                             zeroPadding(date.getDate()) + ' ' +
                             zeroPadding(date.getHours()) + ':' +
-                            zeroPadding(date.getMinutes());
+                            zeroPadding(date.getMinutes()) + " " +
+                            date.getTimezoneAbbreviation();
                     };
 
                     // json.wins[n].at の最大値を取得
@@ -376,7 +386,135 @@
 
             // 初回更新開始
             window.setTimeout(function() { update(); }, 1);
-        }
+        } // }}}
+
+        // タイムゾーン選択
+        (function () { // {{{
+            var $timezoneMenu = $('#timezone-list');
+            if ($timezoneMenu.length < 1) {
+                return;
+            }
+            $timezoneMenu.parent().on('show.bs.dropdown', function () {
+                var $li = $('li', $timezoneMenu);
+                var onDisplay = function () {
+                    var currentTimezone = $('meta[name=timezone]').attr('content');
+                    $('.glyphicon-ok', $timezoneMenu).each(function() {
+                        var $this = $(this);
+                        $this.css(
+                            'color',
+                            $this.parent().attr('data-timezone') === currentTimezone
+                                ? '#333'
+                                : 'rgba(0,0,0,0)'
+                        );
+                    });
+                };
+
+                var changeTimezone = function (zone) {
+                    if ($('meta[name=timezone]').attr('content') === zone) {
+                        return;
+                    }
+
+                    var params = {'zone': zone};
+                    params[$('meta[name=csrf-param]').attr('content')] = $('meta[name=csrf-token]').attr('content');
+
+                    $.post(
+                        '/timezone/set',
+                        params,
+                        function () {
+                            window.location.reload();
+                        }
+                    );
+                };
+
+                if ($li.length > 0) {
+                    onDisplay();
+                    return;
+                }
+
+                // 読み込み開始
+                $timezoneMenu.append(
+                    $('<li>').css('text-align', 'center').append(
+                        $('<span>').addClass('fa fa-spin fa-refresh')
+                    )
+                );
+
+                $.getJSON(
+                    '/timezone/list.json',
+                    { '_t': Math.floor(new Date() / 1000) },
+                    function (retJson) { // {{{
+                        var zones = retJson.zones;
+                        var currentArea = null;
+                        var $currentArea = null;
+                        var currentInitial = null;
+                        var $currentInitial = null;
+                        $timezoneMenu.empty().append(
+                            $('<li>').append(
+                                $('<a>', {'href': 'javascript:;', 'data-timezone': 'Asia/Tokyo'}).append(
+                                    $('<span>').addClass('glyphicon glyphicon-ok')
+                                ).append(
+                                    ' 日本時間'
+                                ).click(function () {
+                                    changeTimezone('Asia/Tokyo')
+                                })
+                            )
+                        ).append(
+                            $('<li>').addClass('divider')
+                        );
+                        for (var i = 0; i < zones.length; ++i) {
+                            var match = zones[i].zone.match(/^([^\/]+)\/((.).*)$/);
+                            if (match) {
+                                // "Asia"
+                                if (currentArea !== match[1]) {
+                                    currentArea = match[1];
+                                    currentInitial = null;
+                                    $currentInitial = null;
+                                    $currentArea = $('<ul>').addClass('dropdown-menu');
+                                    $timezoneMenu.append(
+                                        $('<li>').addClass('dropdown-submenu').append(
+                                            $('<a>', {'href': 'javascript:;', 'data-toggle': 'dropdown'}).text(
+                                                currentArea
+                                            )
+                                        ).append(
+                                            $currentArea
+                                        )
+                                    );
+                                }
+
+                                // Asia/"T"okyo
+                                if (currentInitial !== match[3]) {
+                                    currentInitial = match[3];
+                                    $currentInitial = $('<ul>').addClass('dropdown-menu');
+                                    $currentArea.append(
+                                        $('<li>').addClass('dropdown-submenu').append(
+                                            $('<a>', {'href': 'javascript:;', 'data-toggle': 'dropdown'}).text(
+                                                currentInitial
+                                            )
+                                        ).append(
+                                            $currentInitial
+                                        )
+                                    );
+                                }
+
+
+                                // "Asia"->"T"->"Asia/Tokyo"
+                                $currentInitial.append(
+                                    $('<li>').append(
+                                        $('<a>', {'href': 'javascript:;', 'data-timezone': match[0]}).append(
+                                            $('<span>').addClass('glyphicon glyphicon-ok')
+                                        ).append(
+                                            ' ' + match[0]
+                                        ).click(function () {
+                                            changeTimezone($(this).attr('data-timezone'));
+                                        })
+                                    )
+                                );
+                            }
+                        }
+                        onDisplay();
+                    } // }}}
+                );
+            });
+        })(); // }}}
 
         // initialize tooltip
         $('.auto-tooltip').tooltip({'container': 'body'});
