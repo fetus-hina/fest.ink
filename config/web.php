@@ -32,7 +32,7 @@ $config = [
             ],
         ],
         'request' => [
-            'cookieValidationKey' => 'mVawrUR8e91Cgx_oNrTornJ_lq-MehZ_',
+            'cookieValidationKey' => include(__DIR__ . '/cookie-secret.php'),
         ],
         'view' => [
             'renderers' => [

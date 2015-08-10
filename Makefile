@@ -1,19 +1,19 @@
 STYLE_TARGETS=actions assets commands components controllers models
 
-all: depends-install node_modules resource db/fest.sqlite
+all: composer.phar vendor node_modules config/cookie-secret.php resource db/fest.sqlite
 
 resource: clean-resource resources/.compiled
 
-depends-install: composer.phar
+vendor: composer.phar
 	php composer.phar install
 
 node_modules:
 	npm install
 
-check-style:
+check-style: vendor
 	vendor/bin/phpcs --standard=PSR2 --encoding=UTF-8 $(STYLE_TARGETS)
 
-fix-style:
+fix-style: vendor
 	vendor/bin/phpcbf --standard=PSR2 --encoding=UTF-8 $(STYLE_TARGETS)
 
 clean: clean-resource 
@@ -35,9 +35,12 @@ composer.phar:
 resources/.compiled: node_modules runtime/tzdata
 	./node_modules/.bin/gulp
 
-db/fest.sqlite: FORCE
+db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0
 	sqlite3 db/fest.sqlite VACUUM
+
+config/cookie-secret.php: vendor
+	./yii secret/cookie
 
 runtime/tzdata: runtime/tzdata-latest.tar.gz
 	mkdir runtime/tzdata || true
@@ -46,4 +49,4 @@ runtime/tzdata: runtime/tzdata-latest.tar.gz
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
 
-.PHONY: all depends-install check-style fix-style clean FORCE
+.PHONY: all resource check-style fix-style clean clean-resource FORCE
