@@ -10,7 +10,7 @@ class SecretController extends Controller
         $strong = false;
         $binary = '';
         $length = 32;
-        $binLength = ceil($length * 4 / 3);
+        $binLength = ceil($length * 3 / 4);
         if (function_exists('openssl_random_pseudo_bytes')) {
             $binary = openssl_random_pseudo_bytes($binLength, $strong);
         }
@@ -23,7 +23,7 @@ class SecretController extends Controller
         $key = substr(strtr(base64_encode($binary), '+/=', '_-.'), 0, $length);
         file_put_contents(
             __DIR__ . '/../config/cookie-secret.php',
-            sprintf("<?php\nreturn '%s';", $key)
+            sprintf("<?php\nreturn '%s';\n", $key)
         );
     }
 }
