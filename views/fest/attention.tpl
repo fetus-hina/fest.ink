@@ -46,6 +46,17 @@
       </a>
     </li>
     <li>
+      {{$_ver = \app\components\Version::getVersion()}}
+      {{$_revL = \app\components\Version::getRevision()}}
+      {{$_revS = \app\components\Version::getShortRevision()}}
+      Version <a href="https://github.com/fetus-hina/fest.ink/releases/tag/v{{$_ver|escape:url|escape}}">{{$_ver|escape}}</a>
+      {{if $_revL && $_revS}}
+        , Revision <a href="https://github.com/fetus-hina/fest.ink/commit/{{$_revL|escape:url|escape}}">{{$_revS|escape}}</a>
+      {{/if}}
+      {{$_phpv = phpversion()}}
+      , Powered by <a href="http://www.yiiframework.com/">Yii Framework {{\Yii::getVersion()|escape}}</a> with <a href="http://php.net/">PHP {{$_phpv|escape}}</a>.
+    </li>
+    <li>
       Copyright &copy; 2015 AIZAWA Hina.
     </li>
   </ul>
