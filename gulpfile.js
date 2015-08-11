@@ -22,9 +22,6 @@ gulp.task('ikamodoki', function() {
     'resources/ikamodoki/ikamodoki.less',
     'resources/.compiled/ikamodoki'
   );
-
-  gulp.src('resources/ikamodoki/font/**')
-    .pipe(gulp.dest('resources/.compiled/ikamodoki/font'));
 });
 
 gulp.task('gh-fork', function() {

@@ -9,6 +9,7 @@ https://fest.ink/ のソースコードです。
 * PHP 5.4+
 * SQLite3
 * Node.js (`npm`)
+* [webify](https://github.com/ananthakumaran/webify)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
@@ -25,6 +26,23 @@ Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `d
 
 使い方
 ------
+
+### PREREQUIREMENTS ###
+
+イカモドキのウェブフォント生成のために `webify` コマンドが必要です。
+
+[webifyのリリース](https://github.com/ananthakumaran/webify/releases)からコンパイル済みバイナリを取得するか、
+`cabal install webify` で webify をインストールしてください。
+
+CentOS 7 で EPEL が有効なら、こんな感じでインストールできるみたいです。
+
+```sh
+sudo yum install cabal-install
+cabal update
+cabal install webify
+```
+
+`webify` の実行ファイルへパスを通すことを忘れずに。(`~/.cabal/bin` あたり)
 
 ### EASY WAY ###
 
