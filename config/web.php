@@ -1,7 +1,7 @@
 <?php
 $params = require(__DIR__ . '/params.php');
 $config = [
-    'version' => '1.6.2',
+    'version' => '1.6.3',
     'id' => 'basic',
     'language' => 'ja-jp',
     'timeZone' => 'Asia/Tokyo',
