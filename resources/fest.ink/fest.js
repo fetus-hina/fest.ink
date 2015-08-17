@@ -4,6 +4,7 @@
     var NaN = Number.NaN;
     var defaultUpdateInterval = 10 * 60 * 1000;
     var ourTimeZone = 'Asia/Tokyo';
+    var defaultInks = { r: 'd9435f', g: '5cb85c' };
     $(window.document).ready(function() {
         // タイムゾーン設定 // {{{
         (function () {
@@ -24,6 +25,7 @@
             var $autoUpdateButton = $('#btn-autoupdate');
             var $updateIntervalMenu = $('#dropdown-update-interval');
             var $graphTypeButton = $('.btn-graphtype');
+            var $inkColorbutton = $('#btn-ink-color');
 
             var $totalRate = $('.total-rate');
             var $sampleCount = $('.sample-count');
@@ -90,6 +92,23 @@
                 return 'stack';
             }; // }}}
 
+            // グラフ表示色
+            var setUseInkColor = function (use) { // {{{
+                if (!hasStorage) {
+                    return;
+                }
+                localStorage.setItem("graph-ink", use ? "use" : "not use");
+            }; // }}}
+            var getUseInkColor = function () { // {{{
+                if (hasStorage) {
+                    var use = localStorage.getItem("graph-ink");
+                    if (use === 'not use') {
+                        return false;
+                    }
+                }
+                return true;
+            }; // }}}
+
             // fest.ink のサーバから最新情報を取ってきてページ内の情報を更新する
             var update = function () { // {{{
                 var numberFormat = function(num) {
@@ -135,7 +154,7 @@
                             : numberFormat(data.rSum + data.gSum)
                     );
                 }; // }}}
-                var updateRateProgressBar = function (data) { // {{{
+                var updateRateProgressBar = function (data, inks) { // {{{
                     $totalProgressBar.each(function() {
                         var $this = $(this);
                         var rate = (function() {
@@ -145,14 +164,27 @@
                                 default:        return NaN;
                             }
                         })();
+                        var color = (function() {
+                            switch($this.attr('data-team')) {
+                                case 'red':     return inks.r;
+                                case 'green':   return inks.g;
+                                default:        return null;
+                            }
+                        })();
                         $this.width(
                             (rate === undefined || isNaN(rate))
                                 ? '0%'
                                 : ((rate * 100) + "%")
                         );
+                        $this.css(
+                            'background-color',
+                            (getUseInkColor() && color !== null)
+                                ? ('#' + color)
+                                : ''
+                        );
                     });
                 }; // }}}
-                var getGraphOptions = function(term) { // {{{
+                var getGraphOptions = function(term, inks) { // {{{
                     return {
                         series: {
                             stack: getGraphType() === "stack",
@@ -176,7 +208,8 @@
                             max: 100
                         },
                         colors: [
-                            '#d9435f', '#5cb85c'
+                            '#' + (getUseInkColor() ? inks.r : defaultInks.r),
+                            '#' + (getUseInkColor() ? inks.g : defaultInks.g)
                         ]
                     };
                 }; // }}}
@@ -202,7 +235,7 @@
                         $targets.each(function() {
                             var $area = $(this);
                             $area.empty();
-                            $.plot($area, [red, green], getGraphOptions(json.term));
+                            $.plot($area, [red, green], getGraphOptions(json.term, json.inks));
                         });
                     }
                 }; // }}}
@@ -237,7 +270,7 @@
                         $targets.each(function() {
                             var $area = $(this);
                             $area.empty();
-                            $.plot($area, [red, green], getGraphOptions(json.term));
+                            $.plot($area, [red, green], getGraphOptions(json.term, json.inks));
                         });
                     }
                 }; // }}}
@@ -283,7 +316,7 @@
                     function (retJson) {
                         var total = calcCurrentTotal(retJson);
                         updateRateString(total);
-                        updateRateProgressBar(total);
+                        updateRateProgressBar(total, retJson.inks);
                         updateSampleCount(total);
                         updateShortGraph(retJson);
                         updateWholeGraph(retJson);
@@ -373,9 +406,22 @@
                     updateGraphType();
                     update();
                 }); // }}}
+
+                // インク色を使うか設定を変更するボタンが押された時の処理
+                $inkColorbutton.click(function() { // {{{
+                    if ($(this).hasClass('btn-primary')) {
+                        setUseInkColor(false);
+                        $(this).removeClass('btn-primary').addClass('btn-default');
+                    } else {
+                        setUseInkColor(true);
+                        $(this).removeClass('btn-default').addClass('btn-primary');
+                    }
+                    update();
+                }); // }}}
             } else {
                 $('#btn-update-interval').attr('disabled', 'disabled');
                 $graphTypeButton.attr('disabled', 'disabled');
+                $inkColorbutton.attr('disabled', 'disabled');
             }
 
             // 自動更新ボタンの状態を正しくする
@@ -383,6 +429,11 @@
 
             // グラフタイプボタンの状態を正しくする
             updateGraphType();
+
+            // インク色を使うかどうかのボタンを正しくする
+            $inkColorbutton
+                .removeClass('btn-default')
+                .addClass(getUseInkColor() ? 'btn-primary' : 'btn-default');
 
             // 初回更新開始
             window.setTimeout(function() { update(); }, 1);

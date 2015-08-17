@@ -11,6 +11,7 @@ use Yii;
  * @property integer $color_id
  * @property string $name
  * @property string $keyword
+ * @property string $ink_color
  *
  * @property Color $color
  * @property Fest $fest
@@ -34,6 +35,7 @@ class Team extends \yii\db\ActiveRecord
             [['fest_id', 'color_id', 'name', 'keyword'], 'required'],
             [['fest_id', 'color_id'], 'integer'],
             [['name', 'keyword'], 'string'],
+            [['ink_color'], 'string', 'max' => 6],
             [['fest_id', 'color_id'], 'unique', 'targetAttribute' => ['fest_id', 'color_id'],
                 'message' => 'The combination of Fest ID and Color ID has already been taken.']
         ];
@@ -49,6 +51,7 @@ class Team extends \yii\db\ActiveRecord
             'color_id' => 'Color ID',
             'name' => 'Name',
             'keyword' => 'Keyword',
+            'ink_color' => 'Ink Color',
         ];
     }
 

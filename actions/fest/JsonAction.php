@@ -30,6 +30,10 @@ class JsonAction extends BaseAction
                 'r' => $fest->redTeam->name,
                 'g' => $fest->greenTeam->name,
             ],
+            'inks' => [
+                'r' => $fest->redTeam->ink_color,
+                'g' => $fest->greenTeam->ink_color,
+            ],
             'wins'   => array_map(
                 function (OfficialData $data) {
                     $red = $data->red;

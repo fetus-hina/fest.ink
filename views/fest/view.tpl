@@ -4,12 +4,12 @@
     <div class="btn-toolbar" role="toolbar">
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-default auto-tooltip" id="btn-update" title="表示データを今すぐ更新します">
-          <span class="glyphicon glyphicon-refresh"></span> 更新
+          <span class="glyphicon glyphicon-refresh"></span>
         </button>
       </div>
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-default auto-tooltip" id="btn-autoupdate" title="自動更新のオンオフを切り替えます">
-          自動更新
+          <span class="glyphicon glyphicon-time"></span>
         </button>
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default dropdown-toggle auto-tooltip" id="btn-update-interval" title="自動更新間隔を設定します" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,10 +28,15 @@
       </div>
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
-          上下に並べて表示
+          <span class="fa fa-area-chart"></span> 上下
         </button>
         <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を重ねて表示します" data-type="overlay">
-          重ねて表示
+          <span class="fa fa-area-chart"></span> 重ね
+        </button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default auto-tooltip" id="btn-ink-color" title="インク色の使用有無を切り替えます">
+          <span class="glyphicon glyphicon-tint"></span>
         </button>
       </div>
     </div>
