@@ -1,6 +1,7 @@
 fest.ink
 ========
 
+[![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 [![MIT License](https://img.shields.io/github/license/fetus-hina/fest.ink.svg)](https://github.com/fetus-hina/fest.ink/blob/master/LICENSE)
 [![Dependency Status](https://www.versioneye.com/user/projects/55d469e7265ff60022000dc9/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d469e7265ff60022000dc9)
 [![Dependency Status](https://www.versioneye.com/user/projects/55d469e9265ff6001a000e50/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d469e9265ff6001a000e50)
