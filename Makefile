@@ -59,6 +59,7 @@ resources/.compiled/ikamodoki/font/ikamodoki1_0.woff: resources/.compiled/ikamod
 resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf: runtime/ikamodoki1.zip
 	mkdir -p resources/.compiled/ikamodoki/font || true
 	unzip -j runtime/ikamodoki1.zip ikamodoki/ikamodoki1_0.ttf -d resources/.compiled/ikamodoki/font
+	touch resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf
 
 runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
