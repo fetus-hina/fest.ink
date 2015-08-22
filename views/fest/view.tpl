@@ -50,7 +50,10 @@
     </p>
 
     <div>
-      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の勝敗レート" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" href="https://twitter.com/intent/tweet">Tweet</a>
+      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の勝敗レート" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
+    </div>
+    <div>
+      <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
     </div>
 
     <h2>
