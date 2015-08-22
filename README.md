@@ -49,7 +49,7 @@ cabal install webify
 
 `webify` の実行ファイルへパスを通すことを忘れずに。(`~/.cabal/bin` あたり)
 
-### EASY WAY ###
+### SETUP ###
 
 1. `git clone` します
 
@@ -67,17 +67,49 @@ cabal install webify
 3. ウェブサーバとかを良い感じにセットアップするときっと動きます。
 
 
-### MANUAL ###
+### TWITTER ###
 
-`Makefile` を見て頑張ってください
+Twitter 連携機能を有効にするには次のように設定します。
 
+1. 必要であれば新規 Twitter アカウントを取得します。
+2. 取得したアカウント、または、あなたのアカウントで新しいアプリを申請し、 `consumer key` と `consumer secret` を取得します。
+3. `config/twitter.php` を開き、`consumerKey` と `consumerSecret` にそれぞれ取得した値を設定します。 `userToken` と `userSecret` はこの時点では空にしておきます。
+4. コマンドラインで認証を行います。
+
+    ```sh
+    ./yii twitter/auth
+    ```
+
+5. 表示される指示に従って URL にアクセスし、取得したアカウントで認証します。認証すると PIN コードが表示されますのでコマンドラインにそのまま打ち込みます。
+6. PIN コードの確認が行われた後、 `userToken` と `userSecret` に設定するべき値が表示されますので、 `config/twitter.php` に設定します。
+7. データを収集したあと次のように実行すればツイートされます。実際には `cron` 等を設定することになります。ツイート内容は現在固定です。 `commands/TwitterController.php` を開いて該当箇所を確認してください。
+
+    ```sh
+    ./yii twitter/update
+    ```
 
 
 ライセンス
 ----------
 
-see `LICENSE` file.
+The MIT License (MIT)
 
-Copyright (C) 2015 AIZAWA Hina.
+Copyright (c) 2015 AIZAWA Hina \<hina@bouhime.com\>
 
-各モジュールの著作権は著作権者に帰属します。
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
