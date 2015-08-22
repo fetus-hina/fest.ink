@@ -21,7 +21,8 @@
         "php-curl-class/php-curl-class": "^4.6",
         "yiisoft/yii2": "^2.0.6",
         "yiisoft/yii2-bootstrap": "2.0.*",
-        "yiisoft/yii2-smarty": "2.0.*"
+        "yiisoft/yii2-smarty": "2.0.*",
+        "abraham/twitteroauth": "^0.5.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.3",

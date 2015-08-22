@@ -4,6 +4,7 @@
 .project
 .settings
 /config/cookie-secret.php
+/config/twitter.php
 /node_modules
 /phpunit.xml
 /resources/.compiled

@@ -7,7 +7,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/powered/yii.svg \
 	resources/.compiled/tz-data/tz-init.js
 
-all: composer.phar vendor node_modules config/cookie-secret.php resource db/fest.sqlite
+all: composer.phar vendor node_modules config/cookie-secret.php config/twitter.php resource db/fest.sqlite
 
 resource: $(RESOURCE_TARGETS)
 
@@ -82,6 +82,9 @@ db/fest.sqlite: vendor runtime/tzdata FORCE
 
 config/cookie-secret.php: vendor
 	./yii secret/cookie
+
+config/twitter.php:
+	cp config/twitter.php.sample config/twitter.php
 
 runtime/tzdata: runtime/tzdata-latest.tar.gz
 	mkdir runtime/tzdata || true
