@@ -50,7 +50,7 @@
     </p>
 
     <div>
-      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の勝敗レート" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon" data-count="horizontal" href="https://twitter.com/intent/tweet">Tweet</a>
+      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の勝敗レート" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" href="https://twitter.com/intent/tweet">Tweet</a>
     </div>
 
     <h2>
