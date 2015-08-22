@@ -53,8 +53,20 @@
       {{if $_revL && $_revS}}
         , Revision <a href="https://github.com/fetus-hina/fest.ink/commit/{{$_revL|escape:url|escape}}">{{$_revS|escape}}</a>
       {{/if}}
-      {{$_phpv = phpversion()}}
-      , Powered by <a href="http://www.yiiframework.com/">Yii Framework {{\Yii::getVersion()|escape}}</a> with <a href="http://php.net/">PHP {{$_phpv|escape}}</a>.
+    </li>
+    <li>
+      {{\app\assets\PoweredAsset::register($this)|@void}}
+      {{$_am = $this->getAssetManager()}}
+      {{$_imgUrlYii = $_am->getAssetUrl($_am->getBundle('app\assets\PoweredAsset', false), 'yii.svg')}}
+      {{$_imgUrlPhp = $_am->getAssetUrl($_am->getBundle('app\assets\PoweredAsset', false), 'php-power-micro.png')}}
+      <a href="http://www.yiiframework.com/" title="Powered by Yii Framework {{\Yii::getVersion()|escape}}">
+        <img src="{{$_imgUrlYii|escape}}" alt="Powered by Yii" title="">
+      </a>
+      &#32;
+      {{$_phpv = phpversion()}}{{* PHP コード開始タグと解釈される問題があるので一回変数に入れる *}}
+      <a href="http://php.net/" title="Powered by PHP {{$_phpv|escape}}">
+        <img src="{{$_imgUrlPhp|escape}}" alt="Powered by PHP" title=""> 
+      </a>
     </li>
     <li>
       Copyright &copy; 2015 AIZAWA Hina.
