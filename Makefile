@@ -5,7 +5,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/ikamodoki/ikamodoki.css \
 	resources/.compiled/tz-data/tz-init.js
 
-all: composer.phar vendor node_modules config/cookie-secret.php config/twitter.php config/google-analytics.php resource db/fest.sqlite
+all: composer.phar vendor node_modules config/google-analytics.php config/twitter.php config/cookie-secret.php resource db/fest.sqlite
 
 resource: $(RESOURCE_TARGETS)
 
