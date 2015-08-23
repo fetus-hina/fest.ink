@@ -67,7 +67,7 @@ runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
 
 resources/.compiled/powered/yii.svg:
-	wget -O resources/.compiled/powered/yii.svg 'https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat'
+	wget -O resources/.compiled/powered/yii.svg 'https://img.shields.io/badge/powered_by-Yii_Framework-green.svg?style=flat'
 
 resources/.compiled/powered/php-power-micro.png: runtime/php-power-micro.png
 	mkdir -p resources/.compiled/powered || true
