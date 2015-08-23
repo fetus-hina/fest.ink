@@ -4,6 +4,7 @@
 .project
 .settings
 /config/cookie-secret.php
+/config/google-analytics.php
 /config/twitter.php
 /node_modules
 /phpunit.xml

@@ -1,6 +1,7 @@
 <?php
 $params = require(__DIR__ . '/params.php');
 $config = [
+    'name' => 'イカフェスレート',
     'version' => '1.8.1',
     'id' => 'basic',
     'language' => 'ja-jp',
@@ -30,6 +31,7 @@ $config = [
                 '<id:\d+>.json' => 'fest/json',
                 'timezone/list.json' => 'timezone/json',
                 'timezone/set' => 'timezone/set',
+                '<action:\w+>' => 'site/<action>',
                 '' => 'fest/index',
             ],
         ],

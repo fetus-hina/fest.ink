@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dff1acc13c7f5b07864c5485accc4e98",
+    "hash": "991797a6ab804b6c5ca61d39fbda6aa2",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -441,6 +441,47 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:28:07"
+        },
+        {
+            "name": "cybercog/yii2-google-analytics",
+            "version": "0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cybercog/yii2-google-analytics.git",
+                "reference": "70a765c5f2a52a061679cc14875668c4b59991b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cybercog/yii2-google-analytics/zipball/70a765c5f2a52a061679cc14875668c4b59991b3",
+                "reference": "70a765c5f2a52a061679cc14875668c4b59991b3",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "cybercog\\yii\\googleanalytics\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Komarev",
+                    "email": "ell@cybercog.su"
+                }
+            ],
+            "description": "Google Analytics extension for the Yii2 framework",
+            "keywords": [
+                "analytics",
+                "google",
+                "yii2"
+            ],
+            "time": "2015-07-30 10:17:50"
         },
         {
             "name": "ezyang/htmlpurifier",

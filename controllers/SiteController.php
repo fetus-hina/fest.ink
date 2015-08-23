@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -14,11 +13,10 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
                 'view' => 'error.tpl',
             ],
+            'privacy' => [
+                'class' => 'app\actions\site\SimpleAction',
+                'view' => 'privacy.tpl',
+            ],
         ];
-    }
-
-    public function actionIndex()
-    {
-        return $this->render('index');
     }
 }

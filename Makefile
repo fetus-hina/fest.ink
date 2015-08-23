@@ -3,11 +3,9 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
 	resources/.compiled/ikamodoki/ikamodoki.css \
-	resources/.compiled/powered/php-power-micro.png \
-	resources/.compiled/powered/yii.svg \
 	resources/.compiled/tz-data/tz-init.js
 
-all: composer.phar vendor node_modules config/cookie-secret.php config/twitter.php resource db/fest.sqlite
+all: composer.phar vendor node_modules config/cookie-secret.php config/twitter.php config/google-analytics.php resource db/fest.sqlite
 
 resource: $(RESOURCE_TARGETS)
 
@@ -66,16 +64,6 @@ resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf: runtime/ikamodoki1.zip
 runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
 
-resources/.compiled/powered/yii.svg:
-	wget -O resources/.compiled/powered/yii.svg 'https://img.shields.io/badge/powered_by-Yii_Framework-green.svg?style=flat'
-
-resources/.compiled/powered/php-power-micro.png: runtime/php-power-micro.png
-	mkdir -p resources/.compiled/powered || true
-	pngcrush -rem alla -brute runtime/php-power-micro.png resources/.compiled/powered/php-power-micro.png
-
-runtime/php-power-micro.png:
-	wget -O runtime/php-power-micro.png http://php.net/images/logos/php-power-micro.png
-
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0
 	sqlite3 db/fest.sqlite VACUUM
@@ -85,6 +73,10 @@ config/cookie-secret.php: vendor
 
 config/twitter.php:
 	cp config/twitter.php.sample config/twitter.php
+
+config/google-analytics.php:
+	echo '<?php' > config/google-analytics.php
+	echo 'return "";' >> config/google-analytics.php
 
 runtime/tzdata: runtime/tzdata-latest.tar.gz
 	mkdir runtime/tzdata || true

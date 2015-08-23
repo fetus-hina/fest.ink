@@ -9,13 +9,19 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="timezone" content="{{$app->timeZone|escape}}">
       {{\yii\helpers\Html::csrfMetaTags()}}
-      <title>イカフェスレート</title>
+      <title>{{$this->title|default:$app->name|default:'イカフェスレート'|escape}}</title>
       {{$this->head()}}
     </head>
     <body>
       {{$this->beginBody()|@void}}
         {{include '@app/views/layouts/navbar.tpl'}}
         {{$content}}
+        {{include '@app/views/layouts/footer.tpl'}}
+
+        {{if $app->params.googleAnalytics != ''}}
+          {{use class="\cybercog\yii\googleanalytics\widgets\GATracking" type="function"}}
+          {{GATracking trackingId=$app->params.googleAnalytics}}
+        {{/if}}
       {{$this->endBody()|@void}}
     </body>
   </html>
