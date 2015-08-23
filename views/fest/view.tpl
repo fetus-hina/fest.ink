@@ -1,4 +1,7 @@
 {{strip}}
+
+{{title}}{{$app->name|escape}} | フェス「{{$fest->name|escape}}」の推定勝率{{/title}}
+
 <div class="container" data-fest="{{$fest->id|escape}}">
   <div class="starter-template">
     <div class="btn-toolbar" role="toolbar">
@@ -42,7 +45,7 @@
     </div>
 
     <h1>
-      フェス「{{$fest->name|escape}}」の勝敗レート
+      フェス「{{$fest->name|escape}}」の推定勝率
     </h1>
     <p>
       スプラトゥーンの公式サイトで公開されているデータを基に推計したデータです。
@@ -50,7 +53,7 @@
     </p>
 
     <div>
-      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の勝敗レート" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
+      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
     </div>
     <div>
       <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
