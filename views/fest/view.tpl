@@ -59,7 +59,7 @@
       <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
     </div>
 
-    <h2>
+    <h2 id="rate">
       推定勝率: <span class="total-rate" data-team="red">(取得中)</span> vs <span class="total-rate" data-team="green">(取得中)</span>
     </h2>
     <p>
@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <h2>
+    <h2 id="graph-short">
       短期的勝率グラフ
     </h2>
     <p>
@@ -86,7 +86,7 @@
     <div class="rate-graph rate-graph-short">
     </div>
 
-    <h2>
+    <h2 id="graph-whole">
       長期的勝率グラフ
     </h2>
     <p>
@@ -95,7 +95,16 @@
     <div class="rate-graph rate-graph-whole">
     </div>
 
-    <h2>
+    <h2 id="graph-win">
+      勝利数グラフ
+    </h2>
+    <p>
+      数値はサンプリングされたものです。全数のどのくらいの割合で取得できているのかはわかりません。（サンプル数: <span class="sample-count">(取得中)</span>）
+    </p>
+    <div class="rate-graph rate-graph-win-count">
+    </div>
+
+    <h2 id="about-data">
       表示している情報
     </h2>
     <p>

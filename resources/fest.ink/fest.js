@@ -274,6 +274,50 @@
                         });
                     }
                 }; // }}}
+                var updateWinCountGraph = function (json) { // {{{
+                    var $targets = $rateGraph.filter('.rate-graph-win-count');
+                    if ($targets.length > 0) {
+                        var wins = json.wins.slice(0);
+                        wins.sort(function(a, b) {
+                            return a.at - b.at;
+                        });
+
+                        var redTotal = 0;
+                        var greenTotal = 0;
+                        var red = [];
+                        var green = [];
+                        for (var i = 0; i < wins.length; ++i) {
+                            var tmp = wins[i];
+                            redTotal += tmp.r;
+                            greenTotal += tmp.g;
+                            if (redTotal + greenTotal > 0) {
+                                red.push([
+                                    tmp.at * 1000,
+                                    redTotal
+                                ]);
+                                green.push([
+                                    tmp.at * 1000,
+                                    greenTotal
+                                ]);
+                            }
+                        }
+
+                        // 通常のグラフ描画オプションだと都合が悪いので
+                        // 重ね合わせ描画の強制オフと、
+                        // Y軸の数値の変更を行う
+                        var options = getGraphOptions(json.term, json.inks);
+                        options.series.stack = false;
+                        options.yaxis.minTickSize = 100;
+                        options.yaxis.tickDecimals = 0;
+                        delete options.yaxis.max; // Y軸の最大を自動に
+
+                        $targets.each(function() {
+                            var $area = $(this);
+                            $area.empty();
+                            $.plot($area, [red, green], options);
+                        });
+                    }
+                }; // }}}
                 var updateTimestampString = function (requestDate, json) { // {{{
                     var format = function (date) {
                         var zeroPadding = function (num) {
@@ -320,6 +364,7 @@
                         updateSampleCount(total);
                         updateShortGraph(retJson);
                         updateWholeGraph(retJson);
+                        updateWinCountGraph(retJson);
                         updateTimestampString(date(requestDate.getTime()), retJson);
                         $updateButton.removeAttr('disabled');
                     }
