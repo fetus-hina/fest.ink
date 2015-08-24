@@ -41,7 +41,7 @@
                     var minScale = 0.2000; // 最小の時間帯は最大の時間帯のn%の試合数と想定
 
                     // 時間関係
-                    var timeInDay = (time - 32400) % 86400; // 32400 = 9時間, 日本時間のずれ(日本時間00:00を0としたい)
+                    var timeInDay = (time + 32400) % 86400; // 32400 = 9時間, 日本時間のずれ(日本時間00:00を0としたい)
                     var timeIndex1 = Math.floor(timeInDay / 1800); // scaleMap の index。30分ごと。
                     var timeIndex2 = (timeIndex1 + 1) % 48;
                     var scaleOffset = (timeInDay % 1800) / 1800;
