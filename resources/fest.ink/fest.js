@@ -5,6 +5,7 @@
     var defaultUpdateInterval = 10 * 60 * 1000;
     var ourTimeZone = 'Asia/Tokyo';
     var defaultInks = { r: 'd9435f', g: '5cb85c' };
+
     $(window.document).ready(function() {
         // タイムゾーン設定 // {{{
         (function () {
@@ -18,6 +19,47 @@
             return new timezoneJS.Date(millis, ourTimeZone);
         };
 
+        var createScaler = function (isEnabled) {
+            return isEnabled
+                ? function (value, time) { // 一般的なアクセス傾向のデータを利用して補正する {{{
+                    //  一般的なアクセス傾向のデータ
+                    var scaleMap = [
+                        1.0000, 1.0000, 1.0000, 0.7778, // 00:00 - 01:30 JST
+                        0.5556, 0.3333, 0.1296, 0.2315, // 02:00
+                        0.0278, 0.0000, 0.0000, 0.0000, // 04:00
+                        0.0833, 0.1667, 0.1667, 0.1667, // 06:00
+                        0.1667, 0.2083, 0.2500, 0.2917, // 08:00
+                        0.3333, 0.3333, 0.3333, 0.3333, // 10:00
+                        0.3333, 0.3556, 0.3778, 0.4000, // 12:00
+                        0.4222, 0.4444, 0.4444, 0.4444, // 14:00
+                        0.4444, 0.3819, 0.4028, 0.4236, // 16:00
+                        0.3611, 0.2917, 0.2222, 0.2222, // 18:00
+                        0.2222, 0.3333, 0.4444, 0.5556, // 20:00
+                        0.6667, 0.7778, 0.8889, 1.0000, // 22:00 - 23:30 JST
+                    ];
+                    // 最大値(1.0000)に対してscaleMapの0.0000は実際にはどれだけ試合があったと想定するか
+                    var minScale = 0.2000; // 最小の時間帯は最大の時間帯のn%の試合数と想定
+
+                    // 時間関係
+                    var timeInDay = (time - 32400) % 86400; // 32400 = 9時間, 日本時間のずれ(日本時間00:00を0としたい)
+                    var timeIndex1 = Math.floor(timeInDay / 1800); // scaleMap の index。30分ごと。
+                    var timeIndex2 = (timeIndex1 + 1) % 48;
+                    var scaleOffset = (timeInDay % 1800) / 1800;
+
+                    var scale1 = scaleMap[timeIndex1] * (1 - minScale) + minScale;
+                    var scale2 = scaleMap[timeIndex2] * (1 - minScale) + minScale;
+
+                    // scale1 と scale2 の間を線形補間して scaleOffset の位置に相当する値(minScale～1.0000)
+                    var scale = (scale1 * (1 - scaleOffset)) + (scale2 * scaleOffset);
+
+                    // 適当に10倍して計算する
+                    return Math.round(value * 10 * scale);
+                } // }}}
+                : function (value, time) { // 生のデータを使う {{{
+                    return value;
+                }; // }}}
+        };
+
         var festId = $('.container[data-fest]').attr('data-fest');
         // フェスページのグラフやデータ {{{
         if ((festId + "").match(/^\d+$/)) {
@@ -25,7 +67,8 @@
             var $autoUpdateButton = $('#btn-autoupdate');
             var $updateIntervalMenu = $('#dropdown-update-interval');
             var $graphTypeButton = $('.btn-graphtype');
-            var $inkColorbutton = $('#btn-ink-color');
+            var $inkColorButton = $('#btn-ink-color');
+            var $scaleButton = $('#btn-scale');
 
             var $totalRate = $('.total-rate');
             var $sampleCount = $('.sample-count');
@@ -109,25 +152,51 @@
                 return true;
             }; // }}}
 
+            // 試合数補正機能の使用有無
+            var setUseScale = function (use) { // {{{
+                if (!hasStorage) {
+                    return;
+                }
+                localStorage.setItem("graph-scale", use ? "use" : "not use");
+            }; // }}}
+            var getUseScale = function () { // {{{
+                if (hasStorage) {
+                    var use = localStorage.getItem("graph-scale");
+                    if (use === 'not use') {
+                        return false;
+                    }
+                }
+                return true;
+            }; // }}}
+
             // fest.ink のサーバから最新情報を取ってきてページ内の情報を更新する
             var update = function () { // {{{
                 var numberFormat = function(num) {
                     // http://d.hatena.ne.jp/mtoyoshi/20090321/1237723345
                     return num.toString().replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
                 };
+
+                var scale = createScaler(getUseScale());
+
                 var calcCurrentTotal = function (json) { // {{{
                     var totalRed = 0;
                     var totalGreen = 0;
+                    var totalRedRaw = 0;
+                    var totalGreenRaw = 0;
                     for (var i = 0; i < json.wins.length; ++i) {
-                        totalRed += json.wins[i].r;
-                        totalGreen += json.wins[i].g;
+                        totalRed += scale(json.wins[i].r, json.wins[i].at);
+                        totalGreen += scale(json.wins[i].g, json.wins[i].at);
+                        totalRedRaw += json.wins[i].r;
+                        totalGreenRaw += json.wins[i].g;
                     }
                     var totalCount = totalRed + totalGreen;
                     return {
                         'r': (totalCount > 0) ? totalRed / totalCount : NaN,
                         'g': (totalCount > 0) ? totalGreen / totalCount : NaN,
                         'rSum': (totalCount > 0) ? totalRed : NaN,
-                        'gSum': (totalCount > 0) ? totalGreen : NaN
+                        'gSum': (totalCount > 0) ? totalGreen : NaN,
+                        'rSumRaw': (totalCount > 0) ? totalRedRaw: NaN,
+                        'gSumRaw': (totalCount > 0) ? totalGreenRaw: NaN
                     };
                 }; // }}}
                 var updateRateString = function (data) { // {{{
@@ -149,9 +218,9 @@
                 }; // }}}
                 var updateSampleCount = function (data) { // {{{
                     $sampleCount.text(
-                        (isNaN(data.rSum) || isNaN(data.gSum))
+                        (isNaN(data.rSumRaw) || isNaN(data.gSumRaw))
                             ? '???'
-                            : numberFormat(data.rSum + data.gSum)
+                            : numberFormat(data.rSumRaw + data.gSumRaw)
                     );
                 }; // }}}
                 var updateRateProgressBar = function (data, inks) { // {{{
@@ -220,15 +289,12 @@
                         var green = [];
                         for (var i = 0; i < json.wins.length; ++i) {
                             var tmp = json.wins[i];
-                            if (tmp.r + tmp.g > 0) {
-                                red.push([
-                                    tmp.at * 1000,
-                                    tmp.r * 100 / (tmp.r + tmp.g)
-                                ]);
-                                green.push([
-                                    tmp.at * 1000,
-                                    tmp.g * 100 / (tmp.r + tmp.g)
-                                ]);
+                            var tmpR = scale(tmp.r, tmp.at);
+                            var tmpG = scale(tmp.g, tmp.at);
+                            var sum = tmpR + tmpG;
+                            if (sum > 0) {
+                                red.push([tmp.at * 1000, tmpR * 100 / sum]);
+                                green.push([tmp.at * 1000, tmpG * 100 / sum]);
                             }
                         }
 
@@ -253,8 +319,10 @@
                         var green = [];
                         for (var i = 0; i < wins.length; ++i) {
                             var tmp = wins[i];
-                            redTotal += tmp.r;
-                            greenTotal += tmp.g;
+                            var tmpR = scale(tmp.r, tmp.at);
+                            var tmpG = scale(tmp.g, tmp.at);
+                            redTotal += tmpR;
+                            greenTotal += tmpG;
                             if (redTotal + greenTotal > 0) {
                                 red.push([
                                     tmp.at * 1000,
@@ -288,8 +356,8 @@
                         var green = [];
                         for (var i = 0; i < wins.length; ++i) {
                             var tmp = wins[i];
-                            redTotal += tmp.r;
-                            greenTotal += tmp.g;
+                            redTotal += scale(tmp.r, tmp.at);
+                            greenTotal += scale(tmp.g, tmp.at);
                             if (redTotal + greenTotal > 0) {
                                 red.push([
                                     tmp.at * 1000,
@@ -301,20 +369,32 @@
                                 ]);
                             }
                         }
+                        var maxTotal = Math.max(redTotal, greenTotal);
+                        if (maxTotal < 1) {
+                            return;
+                        }
 
-                        // 通常のグラフ描画オプションだと都合が悪いので
-                        // 重ね合わせ描画の強制オフと、
-                        // Y軸の数値の変更を行う
+                        // 常に重ね合わせる
                         var options = getGraphOptions(json.term, json.inks);
                         options.series.stack = false;
-                        options.yaxis.minTickSize = 100;
-                        options.yaxis.tickDecimals = 0;
-                        delete options.yaxis.max; // Y軸の最大を自動に
 
                         $targets.each(function() {
                             var $area = $(this);
                             $area.empty();
-                            $.plot($area, [red, green], options);
+                            $.plot(
+                                $area,
+                                [
+                                    red.map(function(val) {
+                                        val[1] = val[1] * 100 / maxTotal;
+                                        return val;
+                                    }),
+                                    green.map(function(val) {
+                                        val[1] = val[1] * 100 / maxTotal;
+                                        return val;
+                                    })
+                                ],
+                                options
+                            );
                         });
                     }
                 }; // }}}
@@ -453,7 +533,7 @@
                 }); // }}}
 
                 // インク色を使うか設定を変更するボタンが押された時の処理
-                $inkColorbutton.click(function() { // {{{
+                $inkColorButton.click(function() { // {{{
                     if ($(this).hasClass('btn-primary')) {
                         setUseInkColor(false);
                         $(this).removeClass('btn-primary').addClass('btn-default');
@@ -463,10 +543,23 @@
                     }
                     update();
                 }); // }}}
+
+                // 試合数補正機能を使うか設定を変更するボタンが押された時の処理
+                $scaleButton.click(function() { // {{{
+                    if ($(this).hasClass('btn-primary')) {
+                        setUseScale(false);
+                        $(this).removeClass('btn-primary').addClass('btn-default');
+                    } else {
+                        setUseScale(true);
+                        $(this).removeClass('btn-default').addClass('btn-primary');
+                    }
+                    update();
+                }); // }}}
             } else {
                 $('#btn-update-interval').attr('disabled', 'disabled');
                 $graphTypeButton.attr('disabled', 'disabled');
-                $inkColorbutton.attr('disabled', 'disabled');
+                $inkColorButton.attr('disabled', 'disabled');
+                $scaleButton.attr('disabled', 'disabled');
             }
 
             // 自動更新ボタンの状態を正しくする
@@ -476,9 +569,14 @@
             updateGraphType();
 
             // インク色を使うかどうかのボタンを正しくする
-            $inkColorbutton
+            $inkColorButton
                 .removeClass('btn-default')
                 .addClass(getUseInkColor() ? 'btn-primary' : 'btn-default');
+
+            // 試合数補正を使うかどうかのボタンを正しくする
+            $scaleButton
+                .removeClass('btn-default')
+                .addClass(getUseScale() ? 'btn-primary' : 'btn-default');
 
             // 初回更新開始
             window.setTimeout(function() { update(); }, 1);

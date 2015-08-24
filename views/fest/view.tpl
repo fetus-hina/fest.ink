@@ -41,6 +41,9 @@
         <button type="button" class="btn btn-default auto-tooltip" id="btn-ink-color" title="インク色の使用有無を切り替えます">
           <span class="glyphicon glyphicon-tint"></span>
         </button>
+        <button type="button" class="btn btn-default auto-tooltip" id="btn-scale" title="試合開催数を推定し、補正して表示します（実験的）">
+          <span class="glyphicon glyphicon-adjust"></span>
+        </button>
       </div>
     </div>
 
