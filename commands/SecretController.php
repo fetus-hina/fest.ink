@@ -2,11 +2,13 @@
 namespace app\commands;
 
 use yii\console\Controller;
+use yii\helpers\Console;
 
 class SecretController extends Controller
 {
     public function actionCookie()
     {
+        $this->stdout("Creating secret key file \"config/cookie-secret.php\"... ", Console::FG_YELLOW);
         $length = 32;
         $binLength = (int)ceil($length * 3 / 4);
         $binary = random_bytes($binLength); // PHP 7 native random_bytes() or compat-lib's one
@@ -15,5 +17,6 @@ class SecretController extends Controller
             __DIR__ . '/../config/cookie-secret.php',
             sprintf("<?php\nreturn '%s';\n", $key)
         );
+        $this->stdout("Done.\n", Console::FG_GREEN);
     }
 }

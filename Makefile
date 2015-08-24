@@ -69,7 +69,7 @@ db/fest.sqlite: vendor runtime/tzdata FORCE
 	sqlite3 db/fest.sqlite VACUUM
 
 config/cookie-secret.php: vendor
-	./yii secret/cookie
+	test -f config/cookie-secret.php || ./yii secret/cookie
 
 config/twitter.php:
 	cp config/twitter.php.sample config/twitter.php
