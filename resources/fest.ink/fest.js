@@ -1,3 +1,4 @@
+/*! Copyright (C) 2015 AIZAWA Hina | MIT License */
 (function(window, undefined) {
     "use strict";
     var $ = window.jQuery;
@@ -162,11 +163,11 @@
             var getUseScale = function () { // {{{
                 if (hasStorage) {
                     var use = localStorage.getItem("graph-scale");
-                    if (use === 'not use') {
-                        return false;
+                    if (use === 'use') {
+                        return true;
                     }
                 }
-                return true;
+                return false;
             }; // }}}
 
             // fest.ink のサーバから最新情報を取ってきてページ内の情報を更新する
