@@ -26,8 +26,10 @@
         "yiisoft/yii2-smarty": "2.0.*"
     },
     "require-dev": {
+        "phpcq/author-validation": "^1.1",
         "squizlabs/php_codesniffer": "^2.3",
-        "yiisoft/yii2-gii": "2.0.*"
+        "yiisoft/yii2-gii": "2.0.*",
+        "symfony/yaml": "^2.7"
     },
     "extra": {
         "asset-installer-paths": {

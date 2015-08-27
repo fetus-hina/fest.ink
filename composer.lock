@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6e6bab1370c6af8dae4a55361accbbeb",
+    "hash": "e9bd1de7e41db874d098e72855ebd457",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -916,6 +916,94 @@
     ],
     "packages-dev": [
         {
+            "name": "bit3/git-php",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bit3/git-php.git",
+                "reference": "0bcd0373458d7d05ab5469138f156c5ec3db10dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bit3/git-php/zipball/0bcd0373458d7d05ab5469138f156c5ec3db10dc",
+                "reference": "0bcd0373458d7d05ab5469138f156c5ec3db10dc",
+                "shasum": ""
+            },
+            "require": {
+                "bit3/no-op-logger": "~1.0",
+                "php": ">=5.3",
+                "symfony/process": "~2.3"
+            },
+            "require-dev": {
+                "monolog/monolog": "~1.0",
+                "phpcq/all-tasks": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "symfony/filesystem": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev",
+                    "dev-develop": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bit3\\GitPhp\\": "src",
+                    "Bit3\\GitPhp\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Easy to use GIT wrapper for PHP.",
+            "time": "2015-08-05 19:13:08"
+        },
+        {
+            "name": "bit3/no-op-logger",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bit3/no-op-logger.git",
+                "reference": "e659e85674a1d584a937e5d113c49083e4a2933b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bit3/no-op-logger/zipball/e659e85674a1d584a937e5d113c49083e4a2933b",
+                "reference": "e659e85674a1d584a937e5d113c49083e4a2933b",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bit3\\NoOpLogger\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tristan Lins",
+                    "email": "tristan@lins.io",
+                    "homepage": "https://tristan.lins.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A no-operation PSR-3 logger.",
+            "time": "2014-12-29 15:01:01"
+        },
+        {
             "name": "bower-asset/typeahead.js",
             "version": "v0.10.5",
             "source": {
@@ -941,6 +1029,66 @@
             "extra": {
                 "bower-asset-main": "dist/typeahead.bundle.js"
             }
+        },
+        {
+            "name": "phpcq/author-validation",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpcq/author-validation.git",
+                "reference": "c0847ed86df5b86a04be4494f785f691039c64e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpcq/author-validation/zipball/c0847ed86df5b86a04be4494f785f691039c64e2",
+                "reference": "c0847ed86df5b86a04be4494f785f691039c64e2",
+                "shasum": ""
+            },
+            "require": {
+                "bit3/git-php": "~1.0",
+                "php": ">=5.3.4",
+                "phpspec/php-diff": "~1.0",
+                "symfony/console": "~2.3",
+                "symfony/finder": "~2.3"
+            },
+            "require-dev": {
+                "phpcq/all-tasks": "~1.0",
+                "phpcq/coding-standard": "~1.0"
+            },
+            "bin": [
+                "bin/check-author.php"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpCodeQuality\\AuthorValidation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Schiffler",
+                    "email": "c.schiffler@cyberspectrum.de",
+                    "homepage": "http://www.cyberspectrum.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tristan Lins",
+                    "email": "tristan@lins.io",
+                    "homepage": "https://tristan.lins.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Check if all authors of a particular file are mentioned in the copyright header.",
+            "time": "2015-08-01 01:09:23"
         },
         {
             "name": "phpspec/php-diff",
@@ -975,6 +1123,44 @@
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
             "time": "2013-11-01 13:02:21"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -1049,6 +1235,210 @@
                 "standards"
             ],
             "time": "2015-06-24 03:16:23"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/d6cf02fe73634c96677e428f840704bfbcaec29e",
+                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-28 15:18:12"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Finder.git",
+                "reference": "ae0f363277485094edc04c9f3cbe595b183b78e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/ae0f363277485094edc04c9f3cbe595b183b78e4",
+                "reference": "ae0f363277485094edc04c9f3cbe595b183b78e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-09 16:07:40"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process.git",
+                "reference": "48aeb0e48600321c272955132d7606ab0a49adb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/48aeb0e48600321c272955132d7606ab0a49adb3",
+                "reference": "48aeb0e48600321c272955132d7606ab0a49adb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-01 11:25:50"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "71340e996171474a53f3d29111d046be4ad8a0ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/71340e996171474a53f3d29111d046be4ad8a0ff",
+                "reference": "71340e996171474a53f3d29111d046be4ad8a0ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-28 14:07:07"
         },
         {
             "name": "yiisoft/yii2-gii",
