@@ -1,6 +1,5 @@
 {
     "name": "jp3cki/inkfest",
-    "version": "1.9.0-alpha4",
     "description": "https://fest.ink/",
     "homepage": "https://fest.ink/",
     "type": "project",
@@ -28,8 +27,8 @@
     "require-dev": {
         "phpcq/author-validation": "^1.1",
         "squizlabs/php_codesniffer": "^2.3",
-        "yiisoft/yii2-gii": "2.0.*",
-        "symfony/yaml": "^2.7"
+        "symfony/yaml": "^2.7",
+        "yiisoft/yii2-gii": "2.0.*"
     },
     "extra": {
         "asset-installer-paths": {
