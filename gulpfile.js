@@ -49,10 +49,15 @@ gulp.task('less', function() {
 });
 
 gulp.task('uglify', function() {
-  doUglify(
-    'resources/fest.ink/*.js',
-    'resources/.compiled/fest.ink'
-  );
+  gulp.src('resources/fest.ink/fest.js/*.js')
+    .pipe($.concat('fest.js', {newLine:';'}))
+    .pipe(uglify({
+      preserveComments: 'some',
+      output: {
+        ascii_only: true,
+      },
+    }))
+    .pipe(gulp.dest('resources/.compiled/fest.ink'));
 });
 
 gulp.task('default', [

@@ -19,6 +19,10 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" id="dropdown-update-interval">
+            {{if false}}
+              <li><a href="javascript:;" class="update-interval" data-interval="5"><span class="glyphicon glyphicon-ok"></span> 5秒ごと</a></li>
+              <li><a href="javascript:;" class="update-interval" data-interval="10"><span class="glyphicon glyphicon-ok"></span> 10秒ごと</a></li>
+            {{/if}}
             <li><a href="javascript:;" class="update-interval" data-interval="120"><span class="glyphicon glyphicon-ok"></span> 2分ごと</a></li>
             <li><a href="javascript:;" class="update-interval" data-interval="300"><span class="glyphicon glyphicon-ok"></span> 5分ごと</a></li>
             <li><a href="javascript:;" class="update-interval" data-interval="600"><span class="glyphicon glyphicon-ok"></span> 10分ごと</a></li>

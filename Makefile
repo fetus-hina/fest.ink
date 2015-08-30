@@ -1,4 +1,5 @@
 STYLE_TARGETS=actions assets commands components controllers models
+JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
 RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
@@ -39,7 +40,7 @@ clean-resource:
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
 
-resources/.compiled/fest.ink/fest.js: node_modules resources/fest.ink/fest.js
+resources/.compiled/fest.ink/fest.js: node_modules $(JS_SRCS)
 	./node_modules/.bin/gulp uglify
 
 resources/.compiled/fest.ink/fest.css: node_modules resources/fest.ink/fest.less
