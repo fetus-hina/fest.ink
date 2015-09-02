@@ -8,6 +8,18 @@
             return;
         }
         var $event = $('#event');
+        var previous = null;
+        var draw = function () {
+            var options = window.fest.getGraphOptions(previous.term, previous.inks);
+            options.series.stack = false;
+
+            $('.rate-graph.rate-graph-win-count').each(function () {
+                var $area = $(this);
+                $area.empty();
+                $.plot($area, previous.data, options);
+            });
+        };
+
         $event.on('receiveUpdateData', function (ev, data_) {
             // data.date, data.json, data.summary
             var json = data_.json;
@@ -40,20 +52,25 @@
                 maxTotal = 1;
             }
 
-            // 常に重ね合わせる
-            var options = window.fest.getGraphOptions(json.term, json.inks);
-            options.series.stack = false;
-
             var toPercentage = function (val) {
                 val[1] = val[1] * 100 / maxTotal;
                 return val;
             };
 
-            $targets.each(function () {
-                var $area = $(this);
-                $area.empty();
-                $.plot($area, [red.map(toPercentage), green.map(toPercentage)], options);
-            });
+            previous = {
+                data: [red.map(toPercentage), green.map(toPercentage)],
+                term: json.term,
+                inks: json.inks,
+            };
+            draw();
+        });
+
+        $event.on('updateConfigGraphInk', function () {
+            if (!previous) {
+                $event.trigger('requestUpdateData');
+                return;
+            }
+            draw();
         });
     });
 })(window);

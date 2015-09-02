@@ -8,6 +8,15 @@
             return;
         }
         var $event = $('#event');
+        var previous = null;
+        var draw = function () {
+            $('.rate-graph.rate-graph-whole').each(function () {
+                var $area = $(this);
+                $area.empty();
+                $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.inks));
+            });
+        };
+
         $event.on('receiveUpdateData', function (ev, data_) {
             // data.date, data.json, data.summary
             var json = data_.json;
@@ -43,12 +52,20 @@
                     ]);
                 }
             }
+            previous = {
+                data: [red, green],
+                term: json.term,
+                inks: json.inks,
+            };
+            draw();
+        });
 
-            $targets.each(function() {
-                var $area = $(this);
-                $area.empty();
-                $.plot($area, [red, green], window.fest.getGraphOptions(json.term, json.inks));
-            });
+        $event.on('updateConfigGraphType updateConfigGraphInk', function () {
+            if (!previous) {
+                $event.trigger('requestUpdateData');
+                return;
+            }
+            draw();
         });
     });
 })(window);
