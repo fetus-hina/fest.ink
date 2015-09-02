@@ -8,7 +8,7 @@
         }
         var $event = $('#event');
         $event.on('updateConfigGraphScale', function () {
-            $event.trigger('requestUpdateData');
+            $event.trigger('requestRetriggerUpdateEvent');
         });
     });
 })(window);
