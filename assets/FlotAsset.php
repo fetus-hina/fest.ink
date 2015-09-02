@@ -16,6 +16,7 @@ class FlotAsset extends AssetBundle
         'jquery.flot.js',
         'jquery.flot.stack.js',
         'jquery.flot.time.js',
+        'jquery.flot.resize.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
