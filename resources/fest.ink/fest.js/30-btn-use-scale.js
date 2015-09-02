@@ -6,7 +6,6 @@
         if (!window.fest.isFestPage()) {
             return;
         }
-        var festId = window.fest.getFestId();
         var $button = $('#btn-scale');
         var $event = $('#event');
         var onChange = function() {

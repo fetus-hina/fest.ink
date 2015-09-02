@@ -28,7 +28,6 @@
             colors = [json.inks.r, json.inks.g];
             $('.total-progressbar').each(function () {
                 var $this = $(this);
-                var team = $this.attr('data-team');
                 var rate = (function () {
                     switch ($this.attr('data-team')) {
                         case 'red':

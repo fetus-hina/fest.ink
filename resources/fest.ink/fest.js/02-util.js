@@ -65,7 +65,7 @@
                 // 適当に10倍して計算する
                 return Math.round(value * 10 * scale);
             }; // }}}
-            var asIsScaler = function (value, time) {
+            var asIsScaler = function (value/*, time*/) {
                 return value;
             };
             return fest.conf.useGraphScale.get()

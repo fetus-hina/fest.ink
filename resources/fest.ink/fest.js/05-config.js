@@ -1,5 +1,5 @@
 // Copyright (C) 2015 AIZAWA Hina | MIT License
-(function(window, undefined) {
+(function (window) {
     "use strict";
     var $ = window.jQuery;
     var localStorage = window.localStorage;
@@ -39,19 +39,6 @@
             if (!checker || checker.call(window, value)) {
                 return value;
             }
-        }
-        return defaultValue;
-    }; // }}}
-    var loadString = function (key, defaultValue, checker) { // {{{
-        if (!localStorage) {
-            return defaultValue;
-        }
-        var value = localStorage.getItem(key);
-        if (value === undefined || value === null) {
-            return defaultValue;
-        }
-        if (!checker || checker.call(window, value)) {
-            return value;
         }
         return defaultValue;
     }; // }}}
