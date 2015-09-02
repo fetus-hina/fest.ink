@@ -1,6 +1,5 @@
 // Copyright (C) 2015 AIZAWA Hina | MIT License
-(function (window) {
-    var $ = window.jQuery;
+(function () {
     var localStorage = window.localStorage;
     var isEventFiredMyself = false; // IEでは自分自身でイベントが起動する
     var eventTestValue = (function () {
@@ -109,7 +108,7 @@
         }, // }}}
     };
 
-    $(window.document).ready(function() {
+    $(document).ready(function () {
         var map = {
             'autoupdate':       'updateConfigAutoUpdate',
             'update-interval':  'updateConfigUpdateInterval',
@@ -137,4 +136,4 @@
         // 自分自身にイベントが飛んでくるブラウザかテストする
         save('event-test', eventTestValue);
     });
-})(window);
+})();
