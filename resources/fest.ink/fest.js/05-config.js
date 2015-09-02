@@ -1,6 +1,5 @@
 // Copyright (C) 2015 AIZAWA Hina | MIT License
 (function (window) {
-    "use strict";
     var $ = window.jQuery;
     var localStorage = window.localStorage;
     var isEventFiredMyself = false; // IEでは自分自身でイベントが起動する

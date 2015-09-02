@@ -1,5 +1,4 @@
 (function (window) {
-    'use strict';
     var $ = window.jQuery;
     $(window.document).ready(function () {
         var $graph = $('.rate-graph');

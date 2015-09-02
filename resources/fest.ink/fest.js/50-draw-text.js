@@ -1,6 +1,5 @@
 // Copyright (C) 2015 AIZAWA Hina | MIT License
 (function(window) {
-    "use strict";
     var $ = window.jQuery;
     var NaN = Number.NaN;
     $(window.document).ready(function() {
