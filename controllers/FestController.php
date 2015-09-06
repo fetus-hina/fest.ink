@@ -31,9 +31,10 @@ class FestController extends Controller
     {
         $prefix = 'app\actions\fest';
         return [
-            'index' => [ 'class' => $prefix . '\IndexAction' ],
-            'json' => [ 'class' => $prefix . '\JsonAction' ],
-            'view' => [ 'class' => $prefix . '\ViewAction' ],
+            'index'         => [ 'class' => $prefix . '\IndexAction' ],
+            'index-json'    => [ 'class' => $prefix . '\IndexJsonAction' ],
+            'view'          => [ 'class' => $prefix . '\ViewAction' ],
+            'view-json'     => [ 'class' => $prefix . '\ViewJsonAction' ],
         ];
     }
 }

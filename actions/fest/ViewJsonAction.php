@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 use app\models\Fest;
 use app\models\OfficialData;
 
-class JsonAction extends BaseAction
+class ViewJsonAction extends BaseAction
 {
     public function run()
     {

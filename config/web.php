@@ -28,10 +28,11 @@ $config = [
             'enableStrictParsing' => true,
             'rules' => [
                 '<id:\d+>' => 'fest/view',
-                '<id:\d+>.json' => 'fest/json',
+                '<id:\d+>.json' => 'fest/view-json',
                 'timezone/list.json' => 'timezone/json',
                 'timezone/set' => 'timezone/set',
                 '<action:\w+>' => 'site/<action>',
+                'index.json' => 'fest/index-json',
                 '' => 'fest/index',
             ],
         ],
