@@ -22,6 +22,8 @@
         <a href="{{path route="/site/api"}}">API</a>
         &#32;|&#32;
         <a href="{{path route="/site/privacy"}}">プライバシーポリシー</a>
+        &#32;|&#32;
+        <a href="{{path route="/site/license"}}">オープンソースライセンス</a>
       </div>
       <div class="footer-notice">
         このサイトは非公式(unofficial)サービスです。任天堂株式会社とは一切関係ありません。<br>

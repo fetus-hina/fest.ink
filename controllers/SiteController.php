@@ -22,6 +22,9 @@ class SiteController extends Controller
             'api' => [
                 'class' => 'app\actions\site\ApiDocAction',
             ],
+            'license' => [
+                'class' => 'app\actions\site\LicenseAction',
+            ],
             'privacy' => [
                 'class' => 'app\actions\site\SimpleAction',
                 'view' => 'privacy.tpl',
