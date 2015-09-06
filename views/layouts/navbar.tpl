@@ -21,7 +21,7 @@
               {{$_allFest = \app\models\Fest::find()->orderBy("id DESC")->all()}}
               {{foreach $_allFest as $_fest}}
                 <li>
-                  <a href="{{url route="/fest/view" id=$_fest->id}}">
+                  <a href="{{path route="/fest/view" id=$_fest->id}}">
                     {{if $_fest->id === 1}}
                       <del class="auto-tooltip" title="データの取得を行っていないため何も表示されません">#{{$_fest->id|escape}}: {{$_fest->name|escape}}</del>
                     {{else}}

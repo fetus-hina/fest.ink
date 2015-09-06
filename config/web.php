@@ -43,9 +43,6 @@ $config = [
             'renderers' => [
                 'tpl' => [
                     'class' => 'yii\smarty\ViewRenderer',
-                    'pluginDirs' => [
-                        '//smarty/',
-                    ],
                     'options' => [
                         'force_compile' => defined('YII_DEBUG') && YII_DEBUG,
                         'left_delimiter' => '{{',
