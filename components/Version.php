@@ -7,21 +7,50 @@
 
 namespace app\components;
 
+use Exception;
+use Yii;
+
 class Version
 {
+    private static $revision = null;
+    private static $shortRevision = null;
+
     public static function getVersion()
     {
-        return \Yii::$app->version;
+        return Yii::$app->version;
     }
 
     public static function getRevision()
     {
-        return self::getGitLog('%H');
+        self::fetchRevision();
+        return self::$revision;
     }
 
     public static function getShortRevision()
     {
-        return self::getGitLog('%h');
+        self::fetchRevision();
+        return self::$shortRevision;
+    }
+
+    private static function fetchRevision()
+    {
+        if (self::$revision !== null && self::$shortRevision !== null) {
+            return;
+        }
+        try {
+            if (!$line = self::getGitLog('%H:%h')) {
+                throw new Exception();
+            }
+            $revisions = explode(':', $line);
+            if (count($revisions) !== 2) {
+                throw new Exception();
+            }
+            self::$revision = $revisions[0];
+            self::$shortRevision = $revisions[1];
+        } catch (Exception $e) {
+            self::$revision = false;
+            self::$shortRevision = false;
+        }
     }
 
     private static function getGitLog($format)
