@@ -12,9 +12,10 @@ use yii\web\ViewAction as BaseAction;
 class SimpleAction extends BaseAction
 {
     public $view = false;
+    public $params = [];
 
     public function run()
     {
-        return $this->controller->render($this->view);
+        return $this->controller->render($this->view, $this->params);
     }
 }
