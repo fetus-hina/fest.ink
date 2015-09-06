@@ -34,12 +34,12 @@ class m150803_090004_second_fest_data extends Migration
                 [
                     'data_id' => $id,
                     'color_id' => 1,
-                    'count' => $winCount->red,
+                    'count' => $winCount->alpha,
                 ],
                 [
                     'data_id' => $id,
                     'color_id' => 2,
-                    'count' => $winCount->green,
+                    'count' => $winCount->bravo,
                 ],
             ]);
         }

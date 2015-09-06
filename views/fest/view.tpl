@@ -67,20 +67,20 @@
     </div>
 
     <h2 id="rate">
-      推定勝率: <span class="total-rate" data-team="red">(取得中)</span> vs <span class="total-rate" data-team="green">(取得中)</span>
+      推定勝率: <span class="total-rate" data-team="alpha">(取得中)</span> vs <span class="total-rate" data-team="bravo">(取得中)</span>
     </h2>
     <p>
-      {{$fest->redTeam->name|escape}}チーム: <span class="total-rate" data-team="red">(取得中)</span>
+      {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">(取得中)</span>
     </p>
     <div class="progress">
-      <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar" style="width:0%" data-team="red">
+      <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar" style="width:0%" data-team="alpha">
       </div>
     </div>
     <p>
-      {{$fest->greenTeam->name|escape}}チーム: <span class="total-rate" data-team="green">(取得中)</span>
+      {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate" data-team="bravo">(取得中)</span>
     </p>
     <div class="progress">
-      <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar" style="width:0%" data-team="green">
+      <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar" style="width:0%" data-team="bravo">
       </div>
     </div>
 

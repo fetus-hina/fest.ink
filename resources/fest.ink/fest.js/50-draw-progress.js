@@ -9,7 +9,7 @@ $(document).ready(function () {
     var updateColor = function () {
         $('.total-progressbar').each(function () {
             var $this = $(this);
-            var color = colors[$this.attr('data-team') === 'red' ? 0 : 1];
+            var color = colors[$this.attr('data-team') === 'alpha' ? 0 : 1];
             $this.css(
                 'background-color',
                 (window.fest.conf.useInkColor.get() && color !== null)
@@ -22,21 +22,14 @@ $(document).ready(function () {
     $event.on('receiveUpdateData', function (ev, data_) {
         var json = data_.json;
         var summary = data_.summary;
-        colors = [json.inks.r, json.inks.g];
+        colors = [
+            json.teams.alpha.ink,
+            json.teams.bravo.ink,
+        ];
         $('.total-progressbar').each(function () {
             var $this = $(this);
-            var rate = (function () {
-                switch ($this.attr('data-team')) {
-                    case 'red':
-                        return summary.r;
-                    
-                    case 'green':
-                        return summary.g;
-                    
-                    default:
-                        return NaN;
-                }
-            })();
+            var teamId = ($this.attr('data-team') + "").substr(0, 1);
+            var rate = summary[teamId] ? summary[teamId] : NaN;
             $this.width(
                 (rate === undefined || isNaN(rate))
                     ? '0%'

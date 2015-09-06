@@ -32,7 +32,7 @@ class OfficialDataController extends Controller
         }
 
         $ret = $obj->getWinCounts();
-        foreach (['red' => 38, 'green' => 57] as $color => $expect) {
+        foreach (['alpha' => 38, 'bravo' => 57] as $color => $expect) {
             if ($ret->$color !== $expect) {
                 echo "WinCount mismatch ($color)\n";
                 echo "  Expect: " . $expect . "\n";
@@ -72,7 +72,7 @@ class OfficialDataController extends Controller
         $this->saveJson($fest, $json, $now);
 
         $winCounts = $jsonObj->getWinCounts();
-        if ($winCounts->red < 1 && $winCounts->green < 1) {
+        if ($winCounts->alpha < 1 && $winCounts->bravo < 1) {
             echo "winCounts error\n";
             return 1;
         }
@@ -92,18 +92,18 @@ class OfficialDataController extends Controller
             $modelWinData = new OfficialWinData();
             $modelWinData->data_id = $modelOfficialData->id;
             $modelWinData->color_id = 1;
-            $modelWinData->count = $winCounts->red;
+            $modelWinData->count = $winCounts->alpha;
             if (!$modelWinData->save()) {
-                echo "official_win_data save failed (red)\n";
+                echo "official_win_data save failed (alpha)\n";
                 throw new \Exception();
             }
 
             $modelWinData = new OfficialWinData();
             $modelWinData->data_id = $modelOfficialData->id;
             $modelWinData->color_id = 2;
-            $modelWinData->count = $winCounts->green;
+            $modelWinData->count = $winCounts->bravo;
             if (!$modelWinData->save()) {
-                echo "official_win_data save failed (green)\n";
+                echo "official_win_data save failed (bravo)\n";
                 throw new \Exception();
             }
 

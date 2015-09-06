@@ -73,13 +73,13 @@ class Fest extends \yii\db\ActiveRecord
         return $this->hasMany(Team::className(), ['fest_id' => 'id']);
     }
 
-    public function getRedTeam()
+    public function getAlphaTeam()
     {
         return $this->hasOne(Team::className(), ['fest_id' => 'id'])
             ->andWhere('team.color_id = 1');
     }
 
-    public function getGreenTeam()
+    public function getBravoTeam()
     {
         return $this->hasOne(Team::className(), ['fest_id' => 'id'])
             ->andWhere('team.color_id = 2');

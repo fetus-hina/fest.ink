@@ -6,7 +6,7 @@ $(document).ready(function () {
     var $event = $('#event');
     var previous = null;
     var draw = function () {
-        var options = window.fest.getGraphOptions(previous.term, previous.inks);
+        var options = window.fest.getGraphOptions(previous.term, previous.teams);
         options.series.stack = false;
 
         $('.rate-graph.rate-graph-win-count').each(function () {
@@ -30,20 +30,20 @@ $(document).ready(function () {
         });
 
         var scale = window.fest.getTimeBasedScaler();
-        var redTotal = 0;
-        var greenTotal = 0;
-        var red = [];
-        var green = [];
+        var alphaTotal = 0;
+        var bravoTotal = 0;
+        var alpha = [];
+        var bravo = [];
         for (var i = 0; i < wins.length; ++i) {
             var tmp = wins[i];
-            redTotal += scale(tmp.r, tmp.at);
-            greenTotal += scale(tmp.g, tmp.at);
-            if (redTotal + greenTotal > 0) {
-                red.push([tmp.at * 1000, redTotal]);
-                green.push([tmp.at * 1000, greenTotal]);
+            alphaTotal += scale(tmp.alpha, tmp.at);
+            bravoTotal += scale(tmp.bravo, tmp.at);
+            if (alphaTotal + bravoTotal > 0) {
+                alpha.push([tmp.at * 1000, alphaTotal]);
+                bravo.push([tmp.at * 1000, bravoTotal]);
             }
         }
-        var maxTotal = Math.max(redTotal, greenTotal);
+        var maxTotal = Math.max(alphaTotal, bravoTotal);
         if (maxTotal < 1) {
             maxTotal = 1;
         }
@@ -54,9 +54,9 @@ $(document).ready(function () {
         };
 
         previous = {
-            data: [red.map(toPercentage), green.map(toPercentage)],
+            data: [alpha.map(toPercentage), bravo.map(toPercentage)],
             term: json.term,
-            inks: json.inks,
+            teams: json.teams,
         };
         draw();
     });

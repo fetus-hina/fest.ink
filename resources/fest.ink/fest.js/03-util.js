@@ -69,8 +69,8 @@ window.fest = {
             ? scaledScaler
             : asIsScaler;
     }, // }}}
-    getGraphOptions: function (term, inks) { // {{{
-        var defaultInks = { r: 'd9435f', g: '5cb85c' };
+    getGraphOptions: function (term, teams) { // {{{
+        var defaultInks = { alpha: 'd9435f', bravo: '5cb85c' };
         var useInkColor = window.fest.conf.useInkColor.get();
         return {
             series: {
@@ -95,8 +95,8 @@ window.fest = {
                 max: 100
             },
             colors: [
-                '#' + (useInkColor ? inks.r : defaultInks.r),
-                '#' + (useInkColor ? inks.g : defaultInks.g)
+                '#' + (useInkColor ? teams.alpha.ink : defaultInks.alpha),
+                '#' + (useInkColor ? teams.bravo.ink : defaultInks.bravo)
             ]
         };
     }, // }}}

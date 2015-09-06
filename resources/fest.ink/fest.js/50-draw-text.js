@@ -28,18 +28,8 @@ $(document).ready(function () {
 
         $('.total-rate').each(function () { // {{{
             var $this = $(this);
-            var rate = (function () {
-                switch ($this.attr('data-team')) {
-                    case 'red':
-                        return summary.r;
-
-                    case 'green':
-                        return summary.g;
-
-                    default:
-                        return NaN;
-                }
-            })();
+            var teamId = ($this.attr('data-team') + "").substr(0, 1);
+            var rate = summary[teamId] ? summary[teamId] : NaN;
             $this.text(
                 (rate === undefined || isNaN(rate))
                     ? '???'
@@ -47,9 +37,9 @@ $(document).ready(function () {
             );
         }); // }}}
         $('.sample-count').text(
-            (isNaN(summary.rSumRaw) || isNaN(summary.gSumRaw))
+            (isNaN(summary.aSumRaw) || isNaN(summary.bSumRaw))
                 ? '???'
-                : window.fest.numberFormat(summary.rSumRaw + summary.gSumRaw)
+                : window.fest.numberFormat(summary.aSumRaw + summary.bSumRaw)
         );
         $('.last-updated-at').text(
             lastUpdatedTimestamp < 1 || lastUpdatedTimestamp === undefined || isNaN(lastUpdatedTimestamp)

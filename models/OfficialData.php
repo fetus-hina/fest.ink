@@ -72,13 +72,13 @@ class OfficialData extends \yii\db\ActiveRecord
         return $this->hasMany(OfficialWinData::className(), ['data_id' => 'id']);
     }
 
-    public function getRed()
+    public function getAlpha()
     {
         return $this->hasOne(OfficialWinData::className(), ['data_id' => 'id'])
             ->andWhere('official_win_data.color_id = 1');
     }
 
-    public function getGreen()
+    public function getBravo()
     {
         return $this->hasOne(OfficialWinData::className(), ['data_id' => 'id'])
             ->andWhere('official_win_data.color_id = 2');

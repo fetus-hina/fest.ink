@@ -9,25 +9,25 @@ $(document).ready(function () {
     var previous = null;
     var makeSummary = function (json) { // {{{
         var NaN = Number.NaN;
-        var totalRed = 0;
-        var totalGreen = 0;
-        var totalRedRaw = 0;
-        var totalGreenRaw = 0;
+        var totalAlpha = 0;
+        var totalBravo = 0;
+        var totalAlphaRaw = 0;
+        var totalBravoRaw = 0;
         var scale = window.fest.getTimeBasedScaler();
         for (var i = 0; i < json.wins.length; ++i) {
-            totalRed += scale(json.wins[i].r, json.wins[i].at);
-            totalGreen += scale(json.wins[i].g, json.wins[i].at);
-            totalRedRaw += json.wins[i].r;
-            totalGreenRaw += json.wins[i].g;
+            totalAlpha += scale(json.wins[i].alpha, json.wins[i].at);
+            totalBravo += scale(json.wins[i].bravo, json.wins[i].at);
+            totalAlphaRaw += json.wins[i].alpha;
+            totalBravoRaw += json.wins[i].bravo;
         }
-        var totalCount = totalRed + totalGreen;
+        var totalCount = totalAlpha + totalBravo;
         return {
-            'r': (totalCount > 0) ? totalRed / totalCount : NaN,
-            'g': (totalCount > 0) ? totalGreen / totalCount : NaN,
-            'rSum': (totalCount > 0) ? totalRed : NaN,
-            'gSum': (totalCount > 0) ? totalGreen : NaN,
-            'rSumRaw': (totalCount > 0) ? totalRedRaw: NaN,
-            'gSumRaw': (totalCount > 0) ? totalGreenRaw: NaN
+            'a':        (totalCount > 0) ? totalAlpha / totalCount : NaN,
+            'b':        (totalCount > 0) ? totalBravo / totalCount : NaN,
+            'aSum':     (totalCount > 0) ? totalAlpha : NaN,
+            'bSum':     (totalCount > 0) ? totalBravo : NaN,
+            'aSumRaw':  (totalCount > 0) ? totalAlphaRaw: NaN,
+            'bSumRaw':  (totalCount > 0) ? totalBravoRaw: NaN
         };
     }; // }}}
     $event.on('requestUpdateData', function () {

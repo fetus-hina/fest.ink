@@ -9,7 +9,7 @@ $(document).ready(function () {
         $('.rate-graph.rate-graph-whole').each(function () {
             var $area = $(this);
             $area.empty();
-            $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.inks));
+            $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.teams));
         });
     };
 
@@ -27,31 +27,31 @@ $(document).ready(function () {
         });
 
         var scale = window.fest.getTimeBasedScaler();
-        var redTotal = 0;
-        var greenTotal = 0;
-        var red = [];
-        var green = [];
+        var alphaTotal = 0;
+        var bravoTotal = 0;
+        var alpha = [];
+        var bravo = [];
         for (var i = 0; i < wins.length; ++i) {
             var tmp = wins[i];
-            var tmpR = scale(tmp.r, tmp.at);
-            var tmpG = scale(tmp.g, tmp.at);
-            redTotal += tmpR;
-            greenTotal += tmpG;
-            if (redTotal + greenTotal > 0) {
-                red.push([
+            var tmpA = scale(tmp.alpha, tmp.at);
+            var tmpB = scale(tmp.bravo, tmp.at);
+            alphaTotal += tmpA;
+            bravoTotal += tmpB;
+            if (alphaTotal + bravoTotal > 0) {
+                alpha.push([
                     tmp.at * 1000,
-                    redTotal * 100 / (redTotal + greenTotal)
+                    alphaTotal * 100 / (alphaTotal + bravoTotal)
                 ]);
-                green.push([
+                bravo.push([
                     tmp.at * 1000,
-                    greenTotal * 100 / (redTotal + greenTotal)
+                    bravoTotal * 100 / (alphaTotal + bravoTotal)
                 ]);
             }
         }
         previous = {
-            data: [red, green],
+            data: [alpha, bravo],
             term: json.term,
-            inks: json.inks,
+            teams: json.teams,
         };
         draw();
     });

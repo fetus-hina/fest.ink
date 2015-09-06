@@ -25,6 +25,8 @@ class ViewJsonAction extends BaseAction
         }
 
         Yii::$app->getResponse()->format = 'json';
+        $alpha = $fest->alphaTeam;
+        $bravo = $fest->bravoTeam;
         return [
             'id'    => $fest->id,
             'name'  => $fest->name,
@@ -33,21 +35,23 @@ class ViewJsonAction extends BaseAction
                 'end'   => $fest->end_at,
             ],
             'teams'  => [
-                'r' => $fest->redTeam->name,
-                'g' => $fest->greenTeam->name,
-            ],
-            'inks' => [
-                'r' => $fest->redTeam->ink_color,
-                'g' => $fest->greenTeam->ink_color,
+                'alpha' => [
+                    'name' => $alpha->name,
+                    'ink' => $alpha->ink_color,
+                ],
+                'bravo' => [
+                    'name' => $bravo->name,
+                    'ink' => $bravo->ink_color,
+                ],
             ],
             'wins'   => array_map(
                 function (OfficialData $data) {
-                    $red = $data->red;
-                    $green = $data->green;
+                    $alpha = $data->alpha;
+                    $bravo = $data->bravo;
                     return [
                         'at'    => $data->downloaded_at,
-                        'r'     => $red ? $red->count : 0,
-                        'g'     => $green ? $green->count : 0,
+                        'alpha' => $alpha ? $alpha->count : 0,
+                        'bravo' => $bravo ? $bravo->count : 0,
                     ];
                 },
                 $fest->officialDatas

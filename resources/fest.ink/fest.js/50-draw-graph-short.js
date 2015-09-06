@@ -9,12 +9,11 @@ $(document).ready(function () {
         $('.rate-graph.rate-graph-short').each(function () {
             var $area = $(this);
             $area.empty();
-            $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.inks));
+            $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.teams));
         });
     };
 
     $event.on('receiveUpdateData', function (ev, data_) {
-        // data.date, data.json, data.summary
         var json = data_.json;
         var $targets = $('.rate-graph.rate-graph-short');
         if ($targets.length < 1) {
@@ -22,22 +21,22 @@ $(document).ready(function () {
         }
 
         var scale = window.fest.getTimeBasedScaler();
-        var red = [];
-        var green = [];
+        var alpha = [];
+        var bravo = [];
         for (var i = 0; i < json.wins.length; ++i) {
             var tmp = json.wins[i];
-            var tmpR = scale(tmp.r, tmp.at);
-            var tmpG = scale(tmp.g, tmp.at);
-            var sum = tmpR + tmpG;
+            var tmpA = scale(tmp.alpha, tmp.at);
+            var tmpB = scale(tmp.bravo, tmp.at);
+            var sum = tmpA + tmpB;
             if (sum > 0) {
-                red.push([tmp.at * 1000, tmpR * 100 / sum]);
-                green.push([tmp.at * 1000, tmpG * 100 / sum]);
+                alpha.push([tmp.at * 1000, tmpA * 100 / sum]);
+                bravo.push([tmp.at * 1000, tmpB * 100 / sum]);
             }
         }
         previous = {
-            data: [red, green],
+            data: [alpha, bravo],
             term: json.term,
-            inks: json.inks,
+            teams: json.teams,
         };
         draw();
     });

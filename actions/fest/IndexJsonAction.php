@@ -31,8 +31,8 @@ class IndexJsonAction extends BaseAction
             ],
             'fests' => array_map(
                 function ($fest) use ($now) {
-                    $alpha = $fest->redTeam;
-                    $bravo = $fest->greenTeam;
+                    $alpha = $fest->alphaTeam;
+                    $bravo = $fest->bravoTeam;
                     return [
                         'id'    => (int)$fest->id,
                         'name'  => $fest->name,

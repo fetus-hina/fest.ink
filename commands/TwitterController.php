@@ -81,41 +81,41 @@ class TwitterController extends Controller
 
         $query = (new \yii\db\Query())
             ->select([
-                'SUM({{win_r}}.[[count]]) AS [[total_win_r]]',
-                'SUM({{win_g}}.[[count]]) AS [[total_win_g]]',
+                'SUM({{win_a}}.[[count]]) AS [[total_win_a]]',
+                'SUM({{win_b}}.[[count]]) AS [[total_win_b]]',
                 'MAX({{official_data}}.[[downloaded_at]]) AS [[last_updated_at]]',
             ])
             ->from('{{official_data}}')
             ->innerJoin(
-                '{{official_win_data}} AS {{win_r}}',
-                '{{official_data}}.[[id]] = {{win_r}}.[[data_id]]'
+                '{{official_win_data}} AS {{win_a}}',
+                '{{official_data}}.[[id]] = {{win_a}}.[[data_id]]'
             )
             ->innerJoin(
-                '{{official_win_data}} AS {{win_g}}',
-                '{{official_data}}.[[id]] = {{win_g}}.[[data_id]]'
+                '{{official_win_data}} AS {{win_b}}',
+                '{{official_data}}.[[id]] = {{win_b}}.[[data_id]]'
             )
             ->andWhere([
                 '{{official_data}}.[[fest_id]]' => $fest->id,
-                '{{win_r}}.[[color_id]]' => 1,
-                '{{win_g}}.[[color_id]]' => 2,
+                '{{win_a}}.[[color_id]]' => 1,
+                '{{win_b}}.[[color_id]]' => 2,
             ]);
         if (!$sum = $query->createCommand()->queryOne()) {
             return false;
         }
-        if ($sum['total_win_r'] == 0 || $sum['total_win_g'] == 0) {
+        if ($sum['total_win_a'] == 0 || $sum['total_win_b'] == 0) {
             return false;
         }
-        $redWinPercent = round($sum['total_win_r'] * 1000 / ($sum['total_win_r'] + $sum['total_win_g'])) / 10;
+        $alphaWinPercent = round($sum['total_win_a'] * 1000 / ($sum['total_win_a'] + $sum['total_win_b'])) / 10;
         $lastUpdated = new \DateTime('@' . $sum['last_updated_at']);
         $lastUpdated->setTimezone(new \DateTimeZone("Asia/Tokyo"));
         $status = sprintf(
             "フェス\"%s\"の推定勝率(%s現在)\n%sチーム: %.1f%%\n%sチーム: %.1f%%\n",
             $fest->name,
             $lastUpdated->format('Y-m-d H:i T'),
-            $fest->redTeam->name,
-            $redWinPercent,
-            $fest->greenTeam->name,
-            100 - $redWinPercent
+            $fest->alphaTeam->name,
+            $alphaWinPercent,
+            $fest->bravoTeam->name,
+            100 - $alphaWinPercent
         );
         $count = mb_strlen($status, 'UTF-8');
         if (140 - $count >= 23) {

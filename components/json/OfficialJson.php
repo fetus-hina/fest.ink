@@ -31,22 +31,22 @@ class OfficialJson extends Component
 
     public function getWinCounts()
     {
-        $rTeam = $this->fest->redTeam;
-        $gTeam = $this->fest->greenTeam;
-        $rCount = 0;
-        $gCount = 0;
+        $aTeam = $this->fest->alphaTeam;
+        $bTeam = $this->fest->bravoTeam;
+        $aCount = 0;
+        $bCount = 0;
         foreach ($this->json as $battle) {
             $winTeamName = $battle['win_team_name'];
-            if (strpos($winTeamName, $rTeam->keyword) !== false) {
-                ++$rCount;
+            if (strpos($winTeamName, $aTeam->keyword) !== false) {
+                ++$aCount;
             }
-            if (strpos($winTeamName, $gTeam->keyword) !== false) {
-                ++$gCount;
+            if (strpos($winTeamName, $bTeam->keyword) !== false) {
+                ++$bCount;
             }
         }
         return (object)[
-            'red' => $rCount,
-            'green' => $gCount,
+            'alpha' => $aCount,
+            'bravo' => $bCount,
         ];
     }
 }
