@@ -19,12 +19,16 @@ $(document).ready(function () {
 
     var startAutoUpdate = function () {
         currentInterval = window.fest.conf.updateInterval.get();
+
+        var rand = Math.random() * 0.1 - 0.05; // -0.05～+0.05
+        var randomizedInterval = currentInterval * (rand + 1); // 負荷対策として 95%～105% でランダムな間隔にする
+
         currentTimerId = window.setInterval(
             function () {
                 updateByTimer = true;
                 $event.trigger('requestUpdateData');
             },
-            currentInterval
+            randomizedInterval
         );
     };
 
