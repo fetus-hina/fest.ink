@@ -18,7 +18,7 @@
         "bower-asset/jquery": "^2.1",
         "bower-asset/timezone-js": "^0.4.13",
         "cybercog/yii2-google-analytics": "^0.3.1",
-        "paragonie/random_compat": "^0.9.5",
+        "paragonie/random_compat": "^1.0",
         "php-curl-class/php-curl-class": "^4.6",
         "yiisoft/yii2": "^2.0.6",
         "yiisoft/yii2-bootstrap": "2.0.*",

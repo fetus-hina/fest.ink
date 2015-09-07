@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6dd49166252989dad745c7a72bd6e4a2",
+    "hash": "f69a69cfa612938d41f43f1c5ac39e17",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -529,17 +529,20 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v0.9.7",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "f3419a01144c55acbb2c4ab86bdc55e65f23cfed"
+                "reference": "a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/f3419a01144c55acbb2c4ab86bdc55e65f23cfed",
-                "reference": "f3419a01144c55acbb2c4ab86bdc55e65f23cfed",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1",
+                "reference": "a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
             },
             "type": "library",
             "autoload": {
@@ -564,7 +567,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-09-01 06:49:33"
+            "time": "2015-09-07 01:49:23"
         },
         {
             "name": "php-curl-class/php-curl-class",
