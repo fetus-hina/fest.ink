@@ -16,7 +16,7 @@ class IndexJsonAction extends BaseAction
 {
     public function run()
     {
-        $now = isset($_SERVER['REQUEST_TIME']) ? (int)$_SERVER['REQUEST_TIME'] : time();
+        $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
         Yii::$app->getResponse()->format = 'json';
         return [
             'now' => $now,
@@ -39,7 +39,7 @@ class IndexJsonAction extends BaseAction
                         'term'  => [
                             'begin' => (int)$fest->start_at,
                             'end'   => (int)$fest->end_at,
-                            'in_session' => ((int)$fest->start_at <= $now && $now <= (int)$fest->end_at),
+                            'in_session' => ((int)$fest->start_at <= $now && $now < (int)$fest->end_at),
                         ],
                         'teams' => [
                             'alpha' => [
@@ -53,7 +53,7 @@ class IndexJsonAction extends BaseAction
                         ],
                     ];
                 },
-                Fest::find()->orderBy('fest.id DESC')->all()
+                Fest::find()->orderBy('{{fest}}.[[id]] DESC')->all()
             ),
         ];
     }

@@ -25,14 +25,17 @@ class ViewJsonAction extends BaseAction
         }
 
         Yii::$app->getResponse()->format = 'json';
+        $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
         $alpha = $fest->alphaTeam;
         $bravo = $fest->bravoTeam;
         return [
+            'now'   => $now,
             'id'    => $fest->id,
             'name'  => $fest->name,
             'term'  => [
                 'begin' => $fest->start_at,
                 'end'   => $fest->end_at,
+                'in_session' => ((int)$fest->start_at <= $now && $now < (int)$fest->end_at),
             ],
             'teams'  => [
                 'alpha' => [
