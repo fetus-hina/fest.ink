@@ -3,28 +3,41 @@
 // apple-mobile-web-app-capable が yes の時、JavaScript で制御されたリンクを踏むと
 // スタンドアロンモードが継続するらしいので、同一オリジンの時は location.href で移動するようにする
 $(document).ready(function () {
-    var navigator = window.navigator;
-    if (!navigator || !navigator.standalone) {
+    var getOrigin = function (href) {
+        var match = (href + "").match(/^(https?):\/\/[^\/:]+(:\d+)?/i); // スキームからパスの直前まで
+        if (!match) {
+            return null;
+        }
+
+        var origin = match[0];
+        if (!match[2]) { // ポートなし
+            var scheme = match[1].toLowerCase();
+            if (scheme === 'http') {
+                origin += ':80';
+            } else if(scheme === 'https') {
+                origin += ':443';
+            }
+        }
+        return origin;
+    };
+
+    var myOrigin = getOrigin(window.location.href);
+    if (!myOrigin) {
         return;
     }
 
-    document.addEventListener(
-        'click',
-        function (ev) {
-            var target = ev.target;
-            while (target.nodeName !== 'A' && target.nodeName !== 'HTML') {
-                target = target.parentNode;
-            }
-
-            if (target.nodeName === 'A' &&
-                    target.href &&
-                    target.href.match(/^https?:/i) &&
-                    target.href.indexOf(document.location.host) >= 0
-            ) {
-                ev.preventDefault();
-                document.location.href = target.href;
-            }
-        },
-        false
-    );
+    $('a[href]').each(function() {
+        var self = this;
+        var $this = $(self);
+        if ($this.attr('rel') || $this.attr('target')) {
+            return;
+        }
+        var linkOrigin = getOrigin(self.href);
+        if (linkOrigin && linkOrigin === myOrigin) {
+            $this.click(function (e) {
+                e.preventDefault();
+                window.location.href = self.href;
+            });
+        }
+    });
 });
