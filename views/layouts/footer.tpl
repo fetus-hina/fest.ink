@@ -16,6 +16,12 @@
           <span class="fa fa-twitter"></span>
         </a>&#32;<a href="https://github.com/fetus-hina" title="GitHub: fetus-hina" class="auto-tooltip">
           <span class="fa fa-github"></span>
+        </a><br>
+        Illustrator: ちょまど.&#32;
+        <a href="https://twitter.com/chomado" title="Twitter: chomado" class="auto-tooltip">
+          <span class="fa fa-twitter"></span>
+        </a>&#32;<a href="https://github.com/chomado" title="GitHub: chomado" class="auto-tooltip">
+          <span class="fa fa-github"></span>
         </a>
       </div>
       <div class="footer-nav">
@@ -28,7 +34,7 @@
       <div class="footer-notice">
         このサイトは非公式(unofficial)サービスです。任天堂株式会社とは一切関係ありません。<br>
         このサイトの内容は無保証です。必ず公式情報をお確かめください。<br>
-        このサイトのソースコードは<a href="https://github.com/fetus-hina/fest.ink">オープンソース(MIT License)です</a>。<br>
+        このサイトのソースコードは<a href="https://github.com/fetus-hina/fest.ink">オープンソース(MIT License)です</a>。（※イラストを除く）<br>
         バグの報告・改善の提案などがありましたら、
           <a href="https://github.com/fetus-hina/fest.ink"><span class="fa fa-github"></span> GitHubのプロジェクト</a>に報告・提案するか、
           <a href="https://twitter.com/fetus_hina"><span class="fa fa-twitter"></span> @fetus_hina</a>にご連絡ください。<br>

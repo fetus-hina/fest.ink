@@ -7,10 +7,11 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">= 5.4.0",
-        "ext-pcre": "*",
-        "ext-mbstring": "*",
-        "ext-intl": "*",
         "ext-curl": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-mcrypt": "*",
+        "ext-pcre": "*",
         "abraham/twitteroauth": "^0.5.4",
         "bower-asset/flot": "^0.8.3",
         "bower-asset/fontawesome": "^4.4",
@@ -22,7 +23,8 @@
         "php-curl-class/php-curl-class": "^4.6",
         "yiisoft/yii2": "^2.0.6",
         "yiisoft/yii2-bootstrap": "2.0.*",
-        "yiisoft/yii2-smarty": "2.0.*"
+        "yiisoft/yii2-smarty": "2.0.*",
+        "zendframework/zend-crypt": "^2.5"
     },
     "require-dev": {
         "phpcq/author-validation": "^1.1",

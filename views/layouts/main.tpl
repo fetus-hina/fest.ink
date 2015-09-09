@@ -1,5 +1,6 @@
 {{strip}}
 {{\app\assets\AppAsset::register($this)|@void}}
+{{\app\assets\FaviconAsset::register($this)|@void}}
 {{$this->beginPage()|@void}}
   <!DOCTYPE html>
   <html lang="ja">

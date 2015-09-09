@@ -1,5 +1,12 @@
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
+
+FAVICON_TARGETS=resources/.compiled/favicon/favicon.ico \
+	resources/.compiled/favicon/76x76-precomposed.png \
+	resources/.compiled/favicon/120x120-precomposed.png \
+	resources/.compiled/favicon/152x152-precomposed.png \
+	resources/.compiled/favicon/180x180-precomposed.png
+
 RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
@@ -7,6 +14,8 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/tz-data/tz-init.js
 
 all: composer.phar vendor node_modules config/google-analytics.php config/twitter.php config/cookie-secret.php resource db/fest.sqlite
+
+favicon: $(FAVICON_TARGETS)
 
 resource: $(RESOURCE_TARGETS)
 
@@ -27,6 +36,7 @@ clean: clean-resource
 	rm -rf \
 		composer.phar \
 		node_modules \
+		runtime/favicon \
 		runtime/ikamodoki1.zip \
 		runtime/tzdata-latest.tar.gz \
 		vendor
@@ -37,8 +47,53 @@ clean-resource:
 		runtime/tzdata \
 		web/assets/*
 
+clean-favicon:
+	rm -rf \
+		resources/.compiled/favicon \
+		runtime/favicon
+
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
+
+resources/.compiled/favicon/favicon.ico: runtime/favicon/face-320x320.png
+	mkdir -p resources/.compiled/favicon || true
+	convert runtime/favicon/face-320x320.png \
+		\( -clone 0 -resize 16x16 -sharpen 0x1.0 \) \
+		\( -clone 0 -resize 32x32 -sharpen 0x.4 \) \
+		\( -clone 0 -resize 48x48 \) \
+		\( -clone 0 -resize 64x64 \) \
+		-delete 0 -alpha off -colors 256 resources/.compiled/favicon/favicon.ico
+
+resources/.compiled/favicon/76x76-precomposed.png: runtime/favicon/bust-500x500.png
+	mkdir -p resources/.compiled/favicon || true
+	convert runtime/favicon/bust-500x500.png -resize 76x76 -sharpen 0x.4 runtime/favicon/bust-76x76.png
+	pngcrush -rem allb -brute runtime/favicon/bust-76x76.png resources/.compiled/favicon/76x76-precomposed.png
+
+resources/.compiled/favicon/120x120-precomposed.png: runtime/favicon/bust-500x500.png
+	mkdir -p resources/.compiled/favicon || true
+	convert runtime/favicon/bust-500x500.png -resize 120x120 runtime/favicon/bust-120x120.png
+	pngcrush -rem allb -brute runtime/favicon/bust-120x120.png resources/.compiled/favicon/120x120-precomposed.png
+
+resources/.compiled/favicon/152x152-precomposed.png: runtime/favicon/bust-500x500.png
+	mkdir -p resources/.compiled/favicon || true
+	convert runtime/favicon/bust-500x500.png -resize 152x152 runtime/favicon/bust-152x152.png
+	pngcrush -rem allb -brute runtime/favicon/bust-152x152.png resources/.compiled/favicon/152x152-precomposed.png
+
+resources/.compiled/favicon/180x180-precomposed.png: runtime/favicon/bust-500x500.png
+	mkdir -p resources/.compiled/favicon || true
+	convert runtime/favicon/bust-500x500.png -resize 180x180 runtime/favicon/bust-180x180.png
+	pngcrush -rem allb -brute runtime/favicon/bust-180x180.png resources/.compiled/favicon/180x180-precomposed.png
+
+runtime/favicon/face-320x320.png: data/favicon/ikagirl.png
+	mkdir -p runtime/favicon || true
+	convert data/favicon/ikagirl.png -crop 320x320+225+112 runtime/favicon/face-320x320.png
+
+runtime/favicon/bust-500x500.png: data/favicon/ikagirl.png
+	mkdir -p runtime/favicon || true
+	convert data/favicon/ikagirl.png -crop 500x500+86+107 runtime/favicon/bust-500x500.png
+
+data/favicon/ikagirl.png: vendor data/favicon/ikagirl.dat
+	./yii favicon/decrypt
 
 resources/.compiled/fest.ink/fest.js: node_modules $(JS_SRCS)
 	./node_modules/.bin/gulp uglify
@@ -88,4 +143,4 @@ runtime/tzdata: runtime/tzdata-latest.tar.gz
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
 
-.PHONY: all resource check-style fix-style clean clean-resource FORCE
+.PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE

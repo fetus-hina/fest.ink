@@ -66,6 +66,21 @@ cabal install webify
 
 3. ウェブサーバとかを良い感じにセットアップするときっと動きます。
 
+### FAVICON ###
+
+fest.ink の favicon はフリーライセンスではありません。
+利用許可を得ている場合は次のように生成できます。
+
+1. ライセンスキーを受け取ります
+
+2. `make favicon` します
+
+    ```sh
+    make favicon
+    ```
+
+3. ライセンスキーを入力すればアイコンが生成されます。
+
 
 ### TWITTER ###
 
@@ -113,3 +128,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+ライセンス（イラスト）
+----------------------
+
+Copyright (C) 2015 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (C) 2015 Chomado
+
+The artwork of Inkling-Girl is NON-FREE License.
+Please contact us if you want to get a license.

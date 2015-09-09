@@ -63,6 +63,12 @@ $requirements = array(
         'by' => 'All DB-related classes',
         'memo' => 'Required for SQLite database.',
     ),
+    array(
+        'name' => 'Mcrypt extension',
+        'mandatory' => false,
+        'condition' => extension_loaded('mcrypt'),
+        'by' => 'Favicon generator',
+    ),
     // array(
     //     'name' => 'PDO MySQL extension',
     //     'mandatory' => false,
