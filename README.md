@@ -82,6 +82,11 @@ fest.ink の favicon はフリーライセンスではありません。
 3. ライセンスキーを入力すればアイコンが生成されます。
 
 
+### FETCH DATA ###
+
+任天堂から新しいデータを取得するには、定期的に `/path/to/yii official-data/update` を実行します。フェスが開催されていないときは何もしません。
+
+
 ### TWITTER ###
 
 Twitter 連携機能を有効にするには次のように設定します。
@@ -102,6 +107,13 @@ Twitter 連携機能を有効にするには次のように設定します。
     ```sh
     ./yii twitter/update
     ```
+
+
+API
+---
+
+fest.ink からデータを取得する API は次のページを参照してください。
+[https://fest.ink/api](https://fest.ink/api)
 
 
 ライセンス
