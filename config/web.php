@@ -10,6 +10,7 @@ $config = [
     'bootstrap' => ['log'],
     'components' => [
         'assetManager' => [
+            'appendTimestamp' => true,
             'bundles' => [
                 'yii\web\JqueryAsset' => [
                     'js' => [ 'jquery.min.js' ]
