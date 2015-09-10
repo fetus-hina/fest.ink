@@ -11,6 +11,7 @@ fest.inkと同等のサイトを構築できるであろうAPIを公開してい
     - このAPIにクライアントのブラウザから直接アクセスするのは避けてください。
         - ある程度キャッシュすることで負荷軽減にご協力ください。データはそれほど頻繁には更新されません。
         - 現在のところ `Access-Control-Allow-Origin` の設定など、CORSに対応する設定を行うことは考えていません。
+* 単にTwitterに勝率をながすだけなら、[@ikafest](https://twitter.com/ikafest) があります。
 
 日時型は、UNIX時間を秒精度で整数型に格納して表します。ほとんどのプログラミング言語ではUNIX時間を取り扱えるはずです。
 JavaScriptで取り扱う場合は、1000倍してください。（例：`new Date(at * 1000)`、JavaScriptではミリ秒単位のため）
@@ -99,3 +100,12 @@ JavaScriptで取り扱う場合は、1000倍してください。（例：`new D
 ```
 
 要素の出現順は一致しない可能性があります。また、`wins`配列の中身は順不同と想定してください。（時系列で何かしたければ`at`を使用して並び替えてください）
+
+なお、fest.ink のフェスページで表示している推定勝率は、
+
+```
+ALPHA = TOTAL(wins.alpha) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
+BRAVO = TOTAL(wins.bravo) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
+```
+
+です。
