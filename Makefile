@@ -7,6 +7,22 @@ FAVICON_TARGETS=resources/.compiled/favicon/favicon.ico \
 	resources/.compiled/favicon/152x152-precomposed.png \
 	resources/.compiled/favicon/180x180-precomposed.png
 
+STARTUP_TARGETS=\
+	resources/.compiled/apple-startup/p-768x1024@2x.png \
+	resources/.compiled/apple-startup/p-768x1024@1x.png \
+	resources/.compiled/apple-startup/p-414x736@3x.png \
+	resources/.compiled/apple-startup/p-375x667@2x.png \
+	resources/.compiled/apple-startup/p-320x568@2x.png \
+	resources/.compiled/apple-startup/p-320x480@2x.png \
+	resources/.compiled/apple-startup/p-320x480@1x.png \
+	resources/.compiled/apple-startup/l-768x1024@2x.png \
+	resources/.compiled/apple-startup/l-768x1024@1x.png \
+	resources/.compiled/apple-startup/l-414x736@3x.png \
+	resources/.compiled/apple-startup/l-375x667@2x.png \
+	resources/.compiled/apple-startup/l-320x568@2x.png \
+	resources/.compiled/apple-startup/l-320x480@2x.png \
+	resources/.compiled/apple-startup/l-320x480@1x.png
+
 RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
@@ -14,9 +30,20 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/pixiv/chomado.gif \
 	resources/.compiled/tz-data/tz-init.js
 
-all: composer.phar vendor node_modules config/google-analytics.php config/twitter.php config/cookie-secret.php resource db/fest.sqlite
+all: \
+	composer.phar \
+	vendor \
+	node_modules \
+	config/google-analytics.php \
+	config/twitter.php \
+	config/cookie-secret.php \
+	resource \
+	apple-startup \
+	db/fest.sqlite
 
 favicon: $(FAVICON_TARGETS)
+
+apple-startup: $(STARTUP_TARGETS)
 
 resource: $(RESOURCE_TARGETS)
 
@@ -33,7 +60,7 @@ check-style: vendor
 fix-style: vendor
 	vendor/bin/phpcbf --standard=PSR2 --encoding=UTF-8 $(STYLE_TARGETS)
 
-clean: clean-resource 
+clean: clean-resource clean-apple-startup
 	rm -rf \
 		composer.phar \
 		node_modules \
@@ -52,6 +79,9 @@ clean-favicon:
 	rm -rf \
 		resources/.compiled/favicon \
 		runtime/favicon
+
+clean-apple-startup:
+	rm -rf $(STARTUP_TARGETS)
 
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php
@@ -148,4 +178,15 @@ runtime/tzdata: runtime/tzdata-latest.tar.gz
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
 
-.PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE
+PATH_COMPILED_APPLE_STARTUP=resources/.compiled/apple-startup
+PATH_RUNTIME_APPLE_STARTUP=runtime/apple-startup
+
+$(PATH_COMPILED_APPLE_STARTUP)/%.png: $(PATH_RUNTIME_APPLE_STARTUP)/%.png
+	mkdir $(PATH_COMPILED_APPLE_STARTUP) || true
+	pngcrush -rem allb -l 9 $< $@
+
+$(PATH_RUNTIME_APPLE_STARTUP)/%.png: resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf config/console.php
+	mkdir $(PATH_RUNTIME_APPLE_STARTUP) || true
+	./yii apple-startup/create --ttf=resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf $@
+
+.PHONY: all favicon apple-startup resource check-style fix-style clean clean-resource clean-favicon FORCE

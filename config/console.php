@@ -5,6 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
 return [
+    'name' => 'イカフェスレート',
     'id' => 'basic-console',
     'timeZone' => 'Asia/Tokyo',
     'basePath' => dirname(__DIR__),
