@@ -1,4 +1,7 @@
 {{strip}}
+  {{\app\assets\PixivBannerAsset::register($this)|@void}}
+  {{$assetManager = $app->assetManager}}
+  {{$pixivAsset = $assetManager->getBundle('app\assets\PixivBannerAsset')}}
   <footer class="footer">
     <div class="container text-muted">
       <div class="footer-version">
@@ -22,6 +25,8 @@
           <span class="fa fa-twitter"></span>
         </a>&#32;<a href="https://github.com/chomado" title="GitHub: chomado" class="auto-tooltip">
           <span class="fa fa-github"></span>
+        </a>&#32;<a href="http://www.pixiv.net/member.php?id=6783972" title="Pixiv: #6783972" class="auto-tooltip">
+          <img src="{{$assetManager->getAssetUrl($pixivAsset, 'chomado.gif')|escape}}" style="height:1em;width:auto">
         </a>
       </div>
       <div class="footer-nav">

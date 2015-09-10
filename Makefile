@@ -11,6 +11,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
 	resources/.compiled/ikamodoki/ikamodoki.css \
+	resources/.compiled/pixiv/chomado.gif \
 	resources/.compiled/tz-data/tz-init.js
 
 all: composer.phar vendor node_modules config/google-analytics.php config/twitter.php config/cookie-secret.php resource db/fest.sqlite
@@ -120,6 +121,10 @@ resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf: runtime/ikamodoki1.zip
 
 runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
+
+resources/.compiled/pixiv/chomado.gif:
+	mkdir -p resources/.compiled/pixiv || true
+	wget -O resources/.compiled/pixiv/chomado.gif --referer='http://www.pixiv.net/profile.php' 'http://www.pixiv.net/profile_banner.php?id=6783972'
 
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0
