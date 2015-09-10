@@ -79,5 +79,4 @@ class FaviconController extends Controller
         $engine->setPbkdf2HashAlgorithm('sha256');
         return $engine;
     }
-
 }
