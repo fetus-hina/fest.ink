@@ -8,7 +8,7 @@
         {{$_ver = \app\components\Version::getVersion()}}
         {{$_revL = \app\components\Version::getRevision()}}
         {{$_revS = \app\components\Version::getShortRevision()}}
-        イカフェスレート Version <a href="https://github.com/fetus-hina/fest.ink/releases/tag/v{{$_ver|escape:url|escape}}">{{$_ver|escape}}</a>
+        {{$app->name|escape}} Version <a href="https://github.com/fetus-hina/fest.ink/releases/tag/v{{$_ver|escape:url|escape}}">{{$_ver|escape}}</a>
         {{if $_revL && $_revS}}
           , Revision <a href="https://github.com/fetus-hina/fest.ink/commit/{{$_revL|escape:url|escape}}">{{$_revS|escape}}</a>
         {{/if}}
@@ -25,6 +25,8 @@
           <span class="fa fa-twitter"></span>
         </a>&#32;<a href="https://github.com/chomado" title="GitHub: chomado" class="auto-tooltip">
           <span class="fa fa-github"></span>
+        </a>&#32;<a href="http://chomado.com/" title="ちょまど帳" class="auto-tooltip">
+          <span class="fa fa-globe"></span>
         </a>&#32;<a href="http://www.pixiv.net/member.php?id=6783972" title="Pixiv: #6783972" class="auto-tooltip">
           <img src="{{$assetManager->getAssetUrl($pixivAsset, 'chomado.gif')|escape}}" style="height:1em;width:auto">
         </a>
