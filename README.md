@@ -11,7 +11,7 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 5.4+
+* PHP 5.4+ (2015-09-12～13のフェス終了後、v2.0.0 とともに 5.5+ になる予定です)
 * SQLite3
 * Node.js (`npm`)
 * [webify](https://github.com/ananthakumaran/webify)
@@ -146,7 +146,9 @@ SOFTWARE.
 ----------------------
 
 Copyright (C) 2015 AIZAWA Hina \<hina@bouhime.com\>
+
 Copyright (C) 2015 Chomado
 
 The artwork of Inkling-Girl is NON-FREE License.
+
 Please contact us if you want to get a license.
