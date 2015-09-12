@@ -529,16 +529,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1"
+                "reference": "fdc471fc186e13c8ac5aa8bd90fb3f4f8853637c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1",
-                "reference": "a1d9f267eb8b8ad560e54e397a5ed1e3b78097d1",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/fdc471fc186e13c8ac5aa8bd90fb3f4f8853637c",
+                "reference": "fdc471fc186e13c8ac5aa8bd90fb3f4f8853637c",
                 "shasum": ""
             },
             "require": {
@@ -567,7 +567,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-09-07 01:49:23"
+            "time": "2015-09-10 18:40:52"
         },
         {
             "name": "php-curl-class/php-curl-class",
