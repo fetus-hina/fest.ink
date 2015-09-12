@@ -27,7 +27,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
 	resources/.compiled/ikamodoki/ikamodoki.css \
-	resources/.compiled/pixiv/chomado.gif \
+	resources/.compiled/pixiv/pixiv_logo.png \
 	resources/.compiled/tz-data/tz-init.js
 
 all: \
@@ -152,9 +152,20 @@ resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf: runtime/ikamodoki1.zip
 runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
 
-resources/.compiled/pixiv/chomado.gif:
+resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
 	mkdir -p resources/.compiled/pixiv || true
-	wget -O resources/.compiled/pixiv/chomado.gif --referer='http://www.pixiv.net/profile.php' 'http://www.pixiv.net/profile_banner.php?id=6783972'
+	pngcrush -rem allb -l 9 runtime/pixiv_logo/pixiv_logo.png resources/.compiled/pixiv/pixiv_logo.png
+
+runtime/pixiv_logo/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.svg
+	convert runtime/pixiv_logo/pixiv_logo.svg -resize 77x30 runtime/pixiv_logo/pixiv_logo.png
+
+runtime/pixiv_logo/pixiv_logo.svg: runtime/pixiv_logo/pixiv_logo.zip
+	unzip -j runtime/pixiv_logo/pixiv_logo.zip pixiv_logo/pixiv_logo.svg -d runtime/pixiv_logo
+	touch runtime/pixiv_logo/pixiv_logo.svg
+
+runtime/pixiv_logo/pixiv_logo.zip:
+	mkdir -p runtime/pixiv_logo || true
+	wget -O runtime/pixiv_logo/pixiv_logo.zip 'http://source.pixiv.net/www/images/pixiv_logo.zip'
 
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0
