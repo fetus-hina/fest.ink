@@ -27,6 +27,8 @@
           <span class="fa fa-github"></span>
         </a>&#32;<a href="http://chomado.com/" title="ちょまど帳" class="auto-tooltip">
           <span class="fa fa-globe"></span>
+        </a>&#32;<a href="http://www.amazon.co.jp/%E3%81%A1%E3%82%87%E3%81%BE%E3%81%A9/e/B00WPPKOV8/?_encoding=UTF8&amp;camp=247&amp;creative=1211&amp;linkCode=ur2&amp;tag=fetusjp-22" title="Amazon: 著者ページ" class="auto-tooltip">
+          <span class="fa fa-amazon"></span>
         </a>&#32;<a href="http://www.pixiv.net/member.php?id=6783972" title="Pixiv: #6783972" class="auto-tooltip">
           <img src="{{$assetManager->getAssetUrl($pixivAsset, 'chomado.gif')|escape}}" style="height:1em;width:auto">
         </a>
