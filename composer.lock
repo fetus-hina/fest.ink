@@ -4,26 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f8bca62cdea324458d4900da529e77be",
-    "content-hash": "e3e793f2b026b0fe81ec29b5922b7157",
+    "hash": "b17a89335b04ac7fac2bfd5f2e69190a",
+    "content-hash": "7026917ccc96ed22826644ced92736a4",
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "0.5.4",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "1c05f38b7780c9e6d3938b3f2ac2f3fd9d810825"
+                "reference": "e87fe829f28043a809dc764b0591d273014ac862"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/1c05f38b7780c9e6d3938b3f2ac2f3fd9d810825",
-                "reference": "1c05f38b7780c9e6d3938b3f2ac2f3fd9d810825",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/e87fe829f28043a809dc764b0591d273014ac862",
+                "reference": "e87fe829f28043a809dc764b0591d273014ac862",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.4.0"
+                "php": ">=5.5.0"
             },
             "require-dev": {
                 "phpmd/phpmd": "2.2.*",
@@ -59,7 +59,7 @@
                 "social",
                 "twitter"
             ],
-            "time": "2015-08-18 15:56:04"
+            "time": "2015-09-08 17:28:41"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -1741,7 +1741,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">= 5.4.0",
+        "php": ">= 5.5.0",
         "ext-curl": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
