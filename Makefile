@@ -157,7 +157,7 @@ resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
 	pngcrush -rem allb -l 9 runtime/pixiv_logo/pixiv_logo.png resources/.compiled/pixiv/pixiv_logo.png
 
 runtime/pixiv_logo/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.svg
-	convert runtime/pixiv_logo/pixiv_logo.svg -resize 77x30 runtime/pixiv_logo/pixiv_logo.png
+	convert -background none runtime/pixiv_logo/pixiv_logo.svg -resize 77x30 runtime/pixiv_logo/pixiv_logo.png
 
 runtime/pixiv_logo/pixiv_logo.svg: runtime/pixiv_logo/pixiv_logo.zip
 	unzip -j runtime/pixiv_logo/pixiv_logo.zip pixiv_logo/pixiv_logo.svg -d runtime/pixiv_logo
