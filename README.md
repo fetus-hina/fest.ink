@@ -11,7 +11,7 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 5.4+ (2015-09-12～13のフェス終了後、v2.0.0 とともに 5.5+ になる予定です)
+* PHP 5.5+
 * SQLite3
 * Node.js (`npm`)
 * [webify](https://github.com/ananthakumaran/webify)
@@ -24,10 +24,21 @@ https://fest.ink/ は現在次の構成で動作しています。
 * Node.js 0.10.36 ([EPEL](https://fedoraproject.org/wiki/EPEL))
 * [SCL](https://www.softwarecollections.org/)
     - [rh-php56](https://www.softwarecollections.org/en/scls/rhscl/rh-php56/)
-        - PHP 5.6.x
+        - PHP 5.6.*
+            - `rh-php56-php-cli`
+            - `rh-php56-php-gd`
+            - `rh-php56-php-mbstring`
+            - `rh-php56-php-pdo`
         - PHP-FPM
+            - `rh-php56-php-fpm`
+    - [php56more](https://www.softwarecollections.org/en/scls/remi/php56more/)
+        - Mcrypt
+            - `more-php56-php-mcrypt`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
+
+CentOS 7 の標準 PHP は 5.4.16 です。このバージョンでは動作しません。
+
 
 使い方
 ------
