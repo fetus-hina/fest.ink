@@ -40,6 +40,9 @@ $config = [
         'request' => [
             'cookieValidationKey' => include(__DIR__ . '/cookie-secret.php'),
         ],
+        'response' => [
+            'class' => 'app\components\web\Response',
+        ],
         'view' => [
             'renderers' => [
                 'tpl' => [
