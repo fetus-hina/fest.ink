@@ -49,7 +49,7 @@ class AssetConverter extends Component implements AssetConverterInterface
             $this->error(__METHOD__, "AssetConverter failed to read input file: {$inPath}");
             return false;
         }
-        $wrote = file_put_contents($outPath, gzencode($inText, 9 , FORCE_GZIP), LOCK_EX);
+        $wrote = file_put_contents($outPath, gzencode($inText, 9, FORCE_GZIP), LOCK_EX);
         if ($wrote === false) {
             $this->error(__METHOD__, "AssetConvert failed to write output file: {$outPath}");
             return false;
