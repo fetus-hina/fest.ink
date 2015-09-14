@@ -22,6 +22,9 @@ $config = [
                     'js' => [ 'js/bootstrap.min.js' ],
                 ],
             ],
+            'converter' => [
+                'class' => 'app\components\web\AssetConverter',
+            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
