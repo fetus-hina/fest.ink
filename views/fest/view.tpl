@@ -66,17 +66,17 @@
   </div>
 
   <h2 id="rate">
-    推定勝率: <span class="ikamodoki"><span class="total-rate ikamodoki" data-team="alpha">シュトクチュウ</span> VS <span class="total-rate ikamodoki" data-team="bravo">シュトクチュウ</span></span>
+    推定勝率: <span class="ikamodoki"><span class="total-rate" data-team="alpha">シュトクチュウ</span> VS <span class="total-rate" data-team="bravo">シュトクチュウ</span></span>
   </h2>
   <p>
-    {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate ikamodoki" data-team="alpha">シュトクチュウ</span>
+    {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>
   </p>
   <div class="progress">
     <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar" style="width:0%" data-team="alpha">
     </div>
   </div>
   <p>
-    {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate ikamodoki" data-team="bravo">シュトクチュウ</span>
+    {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate" data-team="bravo">取得中</span>
   </p>
   <div class="progress">
     <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar" style="width:0%" data-team="bravo">

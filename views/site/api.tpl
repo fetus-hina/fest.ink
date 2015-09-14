@@ -4,4 +4,5 @@
 <div class="container">
   {{$content}}
 </div>
+<script>$(function(){window.fest.headingIkamodoki()})</script>
 {{/strip}}
