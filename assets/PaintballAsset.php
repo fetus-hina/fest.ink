@@ -9,13 +9,10 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class IkamodokiAsset extends AssetBundle
+class PaintballAsset extends AssetBundle
 {
-    public $sourcePath = '@app/resources/.compiled/ikamodoki';
+    public $sourcePath = '@app/resources/.compiled/paintball';
     public $css = [
-        'ikamodoki.css',
-    ];
-    public $depends = [
-        'app\assets\PaintballAsset',
+        'paintball.css',
     ];
 }

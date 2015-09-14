@@ -11,6 +11,14 @@ gulp.task('ikamodoki', function() {
     .pipe(gulp.dest('resources/.compiled/ikamodoki'))
 });
 
+gulp.task('paintball', function() {
+  gulp.src('resources/paintball/paintball.less')
+    .pipe($.less())
+    .pipe($.minifyCss({keepBreaks:true}))
+    .pipe($.gzip({gzipOptions:{level:9}}))
+    .pipe(gulp.dest('resources/.compiled/paintball'))
+});
+
 gulp.task('gh-fork', function() {
   gulp.src('resources/gh-fork-ribbon/gh-fork-ribbon.js')
     .pipe(uglify({
@@ -65,5 +73,6 @@ gulp.task('default', [
   'fest-ink-js',
   'gh-fork',
   'ikamodoki',
+  'paintball',
   'tz-data',
 ]);

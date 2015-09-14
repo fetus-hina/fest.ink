@@ -27,6 +27,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css.gz \
 	resources/.compiled/fest.ink/fest.js.gz \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz \
 	resources/.compiled/ikamodoki/ikamodoki.css.gz \
+	resources/.compiled/paintball/paintball.css.gz \
 	resources/.compiled/pixiv/pixiv_logo.png \
 	resources/.compiled/tz-data/tz-init.js.gz
 
@@ -151,6 +152,20 @@ resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf: runtime/ikamodoki1.zip
 
 runtime/ikamodoki1.zip:
 	wget -O runtime/ikamodoki1.zip http://aramugi.com/wp-content/uploads/2015/07/ikamodoki1.zip
+
+resources/.compiled/paintball/paintball.css.gz: node_modules resources/.compiled/paintball/font/paintball.woff resources/paintball/paintball.less
+	./node_modules/.bin/gulp paintball
+
+resources/.compiled/paintball/font/paintball.woff: resources/.compiled/paintball/font/paintball.ttf
+	webify resources/.compiled/paintball/font/paintball.ttf
+
+resources/.compiled/paintball/font/paintball.ttf: runtime/paintball/paintball.ttf
+	mkdir -p resources/.compiled/paintball/font || true
+	cp runtime/paintball/paintball.ttf resources/.compiled/paintball/font/paintball.ttf
+
+runtime/paintball/paintball.ttf:
+	mkdir -p runtime/paintball || true
+	wget -O runtime/paintball/paintball.ttf http://download1474.mediafire.com/q35sqe1n8qxg/6zxa6x11hqb6o3h/Paintball_Beta_3.ttf
 
 resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
 	mkdir -p resources/.compiled/pixiv || true
