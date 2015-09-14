@@ -39,14 +39,10 @@ class AppleStartupController extends Controller
     
         // calc font size
         $textTargetWidth = min($options->imageWidth * 0.75, 400 * $options->pixelRatio);
-        echo "target: $textTargetWidth\n";
         for ($fontSize = 64 * $options->pixelRatio; $fontSize > 1; --$fontSize) {
-            echo "font size={$fontSize}\n";
             $bbox = imagettfbbox($fontSize, 0, $this->ttf, Yii::$app->name);
             $bboxWidth = $bbox[2] - $bbox[0];
             $bboxHeight = $bbox[1] - $bbox[5];
-            echo "  width:  {$bboxWidth}\n";
-            echo "  height: {$bboxHeight}\n";
             if ($bboxWidth <= $textTargetWidth) {
                 break;
             }
