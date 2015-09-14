@@ -56,10 +56,9 @@ $(document).ready(function () {
             );
 
             $.getJSON(
-                '/timezone/list.json',
+                '/timezone.json',
                 { '_': Math.floor(new Date() / 1000) },
-                function (retJson) { // {{{
-                    var zones = retJson.zones;
+                function (zones) { // {{{
                     var currentArea = null;
                     var $currentArea = null;
                     var currentInitial = null;
@@ -78,7 +77,7 @@ $(document).ready(function () {
                         $('<li>').addClass('divider')
                     );
                     for (var i = 0; i < zones.length; ++i) {
-                        var match = zones[i].zone.match(/^([^\/]+)\/((.).*)$/);
+                        var match = zones[i].id.match(/^([^\/]+)\/((.).*)$/);
                         if (match) {
                             // "Asia"
                             if (currentArea !== match[1]) {

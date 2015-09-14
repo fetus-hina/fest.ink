@@ -7,6 +7,8 @@
 
 namespace app\actions\timezone;
 
+use DateTime;
+use DateTimeZone;
 use Yii;
 use yii\web\ViewAction as BaseAction;
 use app\models\Timezone;
@@ -15,16 +17,21 @@ class JsonAction extends BaseAction
 {
     public function run()
     {
+        $now = new DateTime(
+            sprintf('@%d', isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time())
+        );
         Yii::$app->getResponse()->format = 'json';
-        return [
-            'zones' => array_map(
-                function (Timezone $tz) {
-                    return [
-                        'zone' => $tz->zone,
-                    ];
-                },
-                Timezone::find()->all()
-            ),
-        ];
+        return array_map(
+            function (Timezone $tz) use ($now) {
+                $tzInfo = new DateTimeZone($tz->zone);
+                $offset = $tzInfo->getOffset($now);
+                return [
+                    'id' => $tz->zone,
+                    'offset' => $now->setTimeZone($tzInfo)->format('P'),
+                    'location' => $tzInfo->getLocation(),
+                ];
+            },
+            Timezone::find()->all()
+        );
     }
 }

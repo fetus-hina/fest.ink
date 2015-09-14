@@ -183,23 +183,42 @@ BRAVO = TOTAL(wins.bravo) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
 
 ----
 
-## GET /timezone/list.json ##
+## GET /timezone.json ##
 
-[`GET https://fest.ink/timezone/list.json`](https://fest.ink/timezone/list.json)
+[`GET https://fest.ink/timezone.json`](https://fest.ink/timezone.json)
 
 各 API に指定することができるタイムゾーン設定のリストです。
 
-省略しているタイムゾーンがあります。また、そもそも利用することを想定した仕組みではないためレスポンスの構成は適当です。
-ユーザフレンドリーな都市名表記を行いたい場合は自前で頑張ってください（例えば `Asia/Tokyo` を "東京" と表示するなど）。
+省略しているタイムゾーンがあります。
+`東京`等、ユーザフレンドリーな都市名表記を行いたい場合は自前で頑張ってください。
 
 ```js
-{
-  "zones":[
-    {"zone":"Africa/Abidjan"},
-    {"zone":"Africa/Accra"},
-    {"zone":"Africa/Addis_Ababa"},
-    {"zone":"Africa/Algiers"},
-    //...
-  ]
-}
+[
+    // ...
+    {
+        // クエリパラメータ "tz" はこの識別子を渡します。地域/都市名になっています。
+        "id":"Asia/Tokyo",
+        
+        // UTC からのオフセットが分単位で示されます。表示基準時間は「今」です。
+        // 夏時間等の関係で常に同じ値になるとは限りません。
+        "offset":"+09:00",
+        
+        // 位置情報します。
+        // 中身は関知せずに取得できたものをそのまま吐き出します。
+        // see: http://php.net/manual/ja/datetimezone.getlocation.php
+        "location":
+            // おそらく ISO 3166-1 alpha-2 の国コード
+            "country_code":"JP",
+
+            // どこか適当な地点の緯度経度
+            // この例では東京都港区芝公園・赤羽橋駅あたりを指すようです。
+            "latitude":35.65444,
+            "longitude":139.74472,
+
+            // 謎のコメント
+            "comments":""
+        }
+    },
+    // ...
+]
 ```
