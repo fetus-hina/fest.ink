@@ -36,11 +36,29 @@ $(document).ready(function () {
                     : ((rate * 100).toFixed(1) + '%')
             );
         }); // }}}
-        $('.sample-count').text(
-            (isNaN(summary.aSumRaw) || isNaN(summary.bSumRaw))
-                ? '???'
-                : window.fest.numberFormat(summary.aSumRaw + summary.bSumRaw)
-        );
+        $('.sample-count').each(function () { // {{{
+            var $this = $(this);
+            if (isNaN(summary.aSumRaw) || isNaN(summary.bSumRaw)) {
+                $this.text('???');
+                return;
+            }
+
+            switch ($this.attr('data-team')) {
+                case 'alpha':
+                    $this.text(window.fest.numberFormat(summary.aSumRaw));
+                    break;
+
+                case 'bravo':
+                    $this.text(window.fest.numberFormat(summary.bSumRaw));
+                    break;
+
+                default:
+                    $this.text(
+                        window.fest.numberFormat(summary.aSumRaw + summary.bSumRaw)
+                    );
+                    break;
+            }
+        }); // }}}
         $('.last-updated-at').text(
             lastUpdatedTimestamp < 1 || lastUpdatedTimestamp === undefined || isNaN(lastUpdatedTimestamp)
                 ? '???'
