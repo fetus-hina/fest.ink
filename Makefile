@@ -23,12 +23,12 @@ STARTUP_TARGETS=\
 	resources/.compiled/apple-startup/l-320x480@2x.png \
 	resources/.compiled/apple-startup/l-320x480@1x.png
 
-RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css \
-	resources/.compiled/fest.ink/fest.js \
-	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
-	resources/.compiled/ikamodoki/ikamodoki.css \
+RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css.gz \
+	resources/.compiled/fest.ink/fest.js.gz \
+	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz \
+	resources/.compiled/ikamodoki/ikamodoki.css.gz \
 	resources/.compiled/pixiv/pixiv_logo.png \
-	resources/.compiled/tz-data/tz-init.js
+	resources/.compiled/tz-data/tz-init.js.gz
 
 all: \
 	composer.phar \
@@ -98,22 +98,22 @@ resources/.compiled/favicon/favicon.ico: runtime/favicon/face-320x320.png
 resources/.compiled/favicon/76x76-precomposed.png: runtime/favicon/bust-500x500.png
 	mkdir -p resources/.compiled/favicon || true
 	convert runtime/favicon/bust-500x500.png -resize 76x76 -sharpen 0x.4 runtime/favicon/bust-76x76.png
-	pngcrush -rem allb -brute runtime/favicon/bust-76x76.png resources/.compiled/favicon/76x76-precomposed.png
+	pngcrush -rem allb -l 9 runtime/favicon/bust-76x76.png resources/.compiled/favicon/76x76-precomposed.png
 
 resources/.compiled/favicon/120x120-precomposed.png: runtime/favicon/bust-500x500.png
 	mkdir -p resources/.compiled/favicon || true
 	convert runtime/favicon/bust-500x500.png -resize 120x120 runtime/favicon/bust-120x120.png
-	pngcrush -rem allb -brute runtime/favicon/bust-120x120.png resources/.compiled/favicon/120x120-precomposed.png
+	pngcrush -rem allb -l 9 runtime/favicon/bust-120x120.png resources/.compiled/favicon/120x120-precomposed.png
 
 resources/.compiled/favicon/152x152-precomposed.png: runtime/favicon/bust-500x500.png
 	mkdir -p resources/.compiled/favicon || true
 	convert runtime/favicon/bust-500x500.png -resize 152x152 runtime/favicon/bust-152x152.png
-	pngcrush -rem allb -brute runtime/favicon/bust-152x152.png resources/.compiled/favicon/152x152-precomposed.png
+	pngcrush -rem allb -l 9 runtime/favicon/bust-152x152.png resources/.compiled/favicon/152x152-precomposed.png
 
 resources/.compiled/favicon/180x180-precomposed.png: runtime/favicon/bust-500x500.png
 	mkdir -p resources/.compiled/favicon || true
 	convert runtime/favicon/bust-500x500.png -resize 180x180 runtime/favicon/bust-180x180.png
-	pngcrush -rem allb -brute runtime/favicon/bust-180x180.png resources/.compiled/favicon/180x180-precomposed.png
+	pngcrush -rem allb -l 9 runtime/favicon/bust-180x180.png resources/.compiled/favicon/180x180-precomposed.png
 
 runtime/favicon/face-320x320.png: data/favicon/ikagirl.png
 	mkdir -p runtime/favicon || true
@@ -126,19 +126,19 @@ runtime/favicon/bust-500x500.png: data/favicon/ikagirl.png
 data/favicon/ikagirl.png: vendor data/favicon/ikagirl.dat
 	./yii favicon/decrypt
 
-resources/.compiled/fest.ink/fest.js: node_modules $(JS_SRCS)
-	./node_modules/.bin/gulp uglify
+resources/.compiled/fest.ink/fest.js.gz: node_modules $(JS_SRCS)
+	./node_modules/.bin/gulp fest-ink-js
 
-resources/.compiled/fest.ink/fest.css: node_modules resources/fest.ink/fest.less
-	./node_modules/.bin/gulp less
+resources/.compiled/fest.ink/fest.css.gz: node_modules resources/fest.ink/fest.less
+	./node_modules/.bin/gulp fest-ink-css
 
-resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js: node_modules resources/gh-fork-ribbon/gh-fork-ribbon.js
+resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz: node_modules resources/gh-fork-ribbon/gh-fork-ribbon.js
 	./node_modules/.bin/gulp gh-fork
 
-resources/.compiled/ikamodoki/ikamodoki.css: node_modules resources/.compiled/ikamodoki/font/ikamodoki1_0.woff resources/ikamodoki/ikamodoki.less
+resources/.compiled/ikamodoki/ikamodoki.css.gz: node_modules resources/.compiled/ikamodoki/font/ikamodoki1_0.woff resources/ikamodoki/ikamodoki.less
 	./node_modules/.bin/gulp ikamodoki
 
-resources/.compiled/tz-data/tz-init.js: node_modules runtime/tzdata resources/tz-data/tz-init.js
+resources/.compiled/tz-data/tz-init.js.gz: node_modules runtime/tzdata resources/tz-data/tz-init.js
 	./node_modules/.bin/gulp tz-data
 
 resources/.compiled/ikamodoki/font/ikamodoki1_0.woff: resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf
