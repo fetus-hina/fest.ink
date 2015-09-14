@@ -68,10 +68,23 @@ gulp.task('fest-ink-js', function() {
     .pipe(gulp.dest('resources/.compiled/fest.ink'));
 });
 
+gulp.task('heading-ikamodoki', function() {
+  gulp.src('resources/heading-ikamodoki/heading-ikamodoki.js')
+    .pipe(uglify({
+      preserveComments: 'some',
+      output: {
+        ascii_only: true,
+      },
+    }))
+    .pipe($.gzip({gzipOptions:{level:9}}))
+    .pipe(gulp.dest('resources/.compiled/heading-ikamodoki'));
+});
+
 gulp.task('default', [
   'fest-ink-css',
   'fest-ink-js',
   'gh-fork',
+  'heading-ikamodoki',
   'ikamodoki',
   'paintball',
   'tz-data',

@@ -26,6 +26,7 @@ STARTUP_TARGETS=\
 RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css.gz \
 	resources/.compiled/fest.ink/fest.js.gz \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz \
+	resources/.compiled/heading-ikamodoki/heading-ikamodoki.js.gz \
 	resources/.compiled/ikamodoki/ikamodoki.css.gz \
 	resources/.compiled/paintball/paintball.css.gz \
 	resources/.compiled/pixiv/pixiv_logo.png \
@@ -141,6 +142,9 @@ resources/.compiled/ikamodoki/ikamodoki.css.gz: node_modules resources/.compiled
 
 resources/.compiled/tz-data/tz-init.js.gz: node_modules runtime/tzdata resources/tz-data/tz-init.js
 	./node_modules/.bin/gulp tz-data
+
+resources/.compiled/heading-ikamodoki/heading-ikamodoki.js.gz: node_modules resources/heading-ikamodoki/heading-ikamodoki.js
+	./node_modules/.bin/gulp heading-ikamodoki
 
 resources/.compiled/ikamodoki/font/ikamodoki1_0.woff: resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf
 	webify resources/.compiled/ikamodoki/font/ikamodoki1_0.ttf
