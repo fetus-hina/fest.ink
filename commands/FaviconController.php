@@ -16,7 +16,10 @@ class FaviconController extends Controller
 {
     public function actionEncrypt()
     {
-        $licenseKey = $this->readLicenseKey();
+        if (!$licenseKey = $this->readLicenseKey()) {
+            $this->stdout("Favicon artwork license key is not exist (or broken).\n", Console::FG_RED);
+            return 2;
+        }
         $engine = $this->createCryptEngine();
         $engine->setKey($licenseKey);
         $status = $engine->encrypt(
@@ -33,10 +36,8 @@ class FaviconController extends Controller
 
     public function actionDecrypt()
     {
-        $licenseKey = $this->readLicenseKey(true);
-        if ($licenseKey === null) {
-            touch(Yii::getAlias('@app/data/favicon/ikagirl.png'));
-            $this->stdout("SKIPPED\n", Console::FG_YELLOW);
+        if (!$licenseKey = $this->readLicenseKey()) {
+            $this->stdout("SKIPPED (Favicon artwork license key is not exist or broken.)\n", Console::FG_YELLOW);
             return;
         }
         @unlink(Yii::getAlias('@app/data/favicon/ikagirl.png'));
@@ -54,23 +55,6 @@ class FaviconController extends Controller
         $this->stdout("Created ikagirl.png\n", Console::FG_GREEN);
     }
 
-    private function readLicenseKey($allowEmpty = false)
-    {
-        while (true) {
-            $this->stdout("Please input favicon license key");
-            if ($allowEmpty) {
-                $this->stdout("(empty if unlicensed)", Console::FG_YELLOW);
-            }
-            $this->stdout(":\n    ");
-            $line = trim(fgets(STDIN));
-            if (preg_match('/^[!-~]{32}$/', $line)) {
-                return $line;
-            } elseif ($line == '' && $allowEmpty) {
-                return null;
-            }
-        }
-    }
-
     private function createCryptEngine()
     {
         $engine = new FileCipher();
@@ -78,5 +62,18 @@ class FaviconController extends Controller
         $engine->setHashAlgorithm('sha256');
         $engine->setPbkdf2HashAlgorithm('sha256');
         return $engine;
+    }
+
+    private function readLicenseKey()
+    {
+        $path = Yii::getAlias('@app/config/favicon.license.txt');
+        if (!file_exists($path) || !is_readable($path)) {
+            return false;
+        }
+        $key = trim(file_get_contents($path, false, null));
+        if (!preg_match('/^[!-~]{32}$/', $key)) {
+            return false;
+        }
+        return $key;
     }
 }

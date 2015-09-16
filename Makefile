@@ -40,10 +40,14 @@ all: \
 	config/twitter.php \
 	config/cookie-secret.php \
 	resource \
+	favicon-maybe \
 	apple-startup \
 	db/fest.sqlite
 
 favicon: $(FAVICON_TARGETS)
+
+favicon-maybe:
+	test -f config/favicon.license.txt && make favicon || true
 
 apple-startup: $(STARTUP_TARGETS)
 

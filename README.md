@@ -84,14 +84,13 @@ fest.ink の favicon はフリーライセンスではありません。
 
 1. ライセンスキーを受け取ります
 
-2. `make favicon` します
+2. `config/favicon.license.txt` を作成し、ライセンスキーだけをその中に記載し保存します
+
+3. `make` あるいは `make favicon` します
 
     ```sh
-    make favicon
+    make
     ```
-
-3. ライセンスキーを入力すればアイコンが生成されます。
-
 
 ### FETCH DATA ###
 
