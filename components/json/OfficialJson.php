@@ -49,4 +49,24 @@ class OfficialJson extends Component
             'bravo' => $bCount,
         ];
     }
+
+    public function getMvpList()
+    {
+        $aTeam = $this->fest->alphaTeam;
+        $bTeam = $this->fest->bravoTeam;
+        foreach ($this->json as $battle) {
+            $winTeamName = $battle['win_team_name'];
+            if (strpos($winTeamName, $aTeam->keyword) !== false) {
+                yield array_merge(
+                    $battle,
+                    ['x_win_team_side' => 'alpha']
+                );
+            } elseif (strpos($winTeamName, $bTeam->keyword) !== false) {
+                yield array_merge(
+                    $battle,
+                    ['x_win_team_side' => 'bravo']
+                );
+            }
+        }
+    }
 }

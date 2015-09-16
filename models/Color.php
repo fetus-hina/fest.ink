@@ -20,6 +20,7 @@ use Yii;
  * @property OfficialData[] $datas
  * @property Team[] $teams
  * @property Fest[] $fests
+ * @property Mvp[] $mvps
  */
 class Color extends \yii\db\ActiveRecord
 {
@@ -85,5 +86,13 @@ class Color extends \yii\db\ActiveRecord
     public function getFests()
     {
         return $this->hasMany(Fest::className(), ['id' => 'fest_id'])->viaTable('team', ['color_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMvps()
+    {
+        return $this->hasMany(Mvp::className(), ['color_id' => 'id']);
     }
 }

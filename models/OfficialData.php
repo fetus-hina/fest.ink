@@ -20,6 +20,7 @@ use Yii;
  * @property Fest $fest
  * @property OfficialWinData[] $officialWinDatas
  * @property Color[] $colors
+ * @property Mvp[] $mvps
  */
 class OfficialData extends \yii\db\ActiveRecord
 {
@@ -91,5 +92,23 @@ class OfficialData extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Color::className(), ['id' => 'color_id'])
             ->viaTable('official_win_data', ['data_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMvps()
+    {
+        return $this->hasMany(Mvp::className(), ['data_id' => 'id']);
+    }
+
+    public function getAlphaMvps()
+    {
+        return $this->getMvps()->andWhere('{{mvp}}.[[color_id]] = 1');
+    }
+
+    public function getBravoMvps()
+    {
+        return $this->getMvps()->andWhere('{{mvp}}.[[color_id]] = 2');
     }
 }
