@@ -17,7 +17,9 @@ class PrettyJsonResponseFormatter extends JsonResponseFormatter
      */
     protected function formatJson($response)
     {
-        $response->getHeaders()->set('Content-Type', 'application/json; charset=UTF-8');
+        $response->getHeaders()
+            ->set('Content-Type', 'application/json; charset=UTF-8')
+            ->set('Access-Control-Allow-Origin', '*');
         if ($response->data !== null) {
             $response->content = Json::encode($response->data, JSON_PRETTY_PRINT);
         }

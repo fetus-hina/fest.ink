@@ -24,6 +24,10 @@ class IndexJsonAction extends BaseAction
         if (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz])) {
             $tz = Yii::$app->timeZone;
         }
+        $callback = $request->get('callback');
+        if (!is_scalar($callback) || !preg_match('/^[A-Za-z0-9_.]+$/', $callback)) {
+            $callback = null;
+        }
 
         $time2str = function ($time) use ($tz) {
             $t1 = (int)floor((float)$time); // time の整数部
@@ -40,8 +44,7 @@ class IndexJsonAction extends BaseAction
         };
 
         $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
-        Yii::$app->getResponse()->format = 'json';
-        return [
+        $data = [ // {{{
             'now' => $now,
             'now_s' => $time2str($now),
             'source' => [
@@ -89,6 +92,16 @@ class IndexJsonAction extends BaseAction
                 },
                 Fest::find()->orderBy('{{fest}}.[[id]] DESC')->all()
             ),
-        ];
+        ]; // }}}
+        if ($callback !== null) {
+            Yii::$app->getResponse()->format = 'jsonp';
+            return [
+                'data' => $data,
+                'callback' => $callback,
+            ];
+        } else {
+            Yii::$app->getResponse()->format = 'json';
+            return $data;
+        }
     }
 }

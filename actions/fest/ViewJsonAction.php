@@ -30,6 +30,10 @@ class ViewJsonAction extends BaseAction
         if (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz])) {
             $tz = Yii::$app->timeZone;
         }
+        $callback = $request->get('callback');
+        if (!is_scalar($callback) || !preg_match('/^[A-Za-z0-9_.]+$/', $callback)) {
+            $callback = null;
+        }
 
         $time2str = function ($time) use ($tz) {
             $t1 = (int)floor((float)$time); // time の整数部
@@ -45,7 +49,6 @@ class ViewJsonAction extends BaseAction
                 : $dateTime->format('Y-m-d\TH:i:sP');
         };
 
-        Yii::$app->getResponse()->format = 'json';
         $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
         if ((int)$fest->start_at > $now) {
             $state = 'scheduled';
@@ -56,7 +59,7 @@ class ViewJsonAction extends BaseAction
         }
         $alpha = $fest->alphaTeam;
         $bravo = $fest->bravoTeam;
-        return [
+        $data = [
             'now'   => $now,
             'now_s' => $time2str($now),
             'id'    => $fest->id,
@@ -93,5 +96,15 @@ class ViewJsonAction extends BaseAction
                 $fest->officialDatas
             ),
         ];
+        if ($callback !== null) {
+            Yii::$app->getResponse()->format = 'jsonp';
+            return [
+                'data' => $data,
+                'callback' => $callback,
+            ];
+        } else {
+            Yii::$app->getResponse()->format = 'json';
+            return $data;
+        }
     }
 }
