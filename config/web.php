@@ -46,6 +46,9 @@ $config = [
         ],
         'response' => [
             'class' => 'app\components\web\Response',
+            'formatters' => [
+                'json' => 'app\components\web\PrettyJsonResponseFormatter',
+            ],
         ],
         'view' => [
             'renderers' => [
