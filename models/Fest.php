@@ -18,6 +18,7 @@ use Yii;
  * @property integer $end_at
  *
  * @property OfficialData[] $officialDatas
+ * @property OfficialResult $officialResult
  * @property Team[] $teams
  * @property Color[] $colors
  */
@@ -63,6 +64,14 @@ class Fest extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OfficialData::className(), ['fest_id' => 'id'])
             ->orderBy('official_data.downloaded_at ASC');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOfficialResult()
+    {
+        return $this->hasOne(OfficialResult::className(), ['fest_id' => 'id']);
     }
 
     /**

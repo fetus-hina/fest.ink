@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use app\models\Fest;
 use app\models\Mvp;
 use app\models\OfficialData;
+use app\models\OfficialResult;
 use app\models\Timezone;
 
 class ViewJsonAction extends BaseAction
@@ -59,12 +60,27 @@ class ViewJsonAction extends BaseAction
         };
 
         $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
+        $officialResult = null;
         if ((int)$fest->start_at > $now) {
             $state = 'scheduled';
         } elseif ((int)$fest->end_at > $now) {
             $state = 'in session';
         } else {
             $state = 'closed';
+            if ($fest->officialResult) {
+                $officialResult = [
+                    'vote' => [
+                        'alpha' => (int)$fest->officialResult->alpha_people,
+                        'bravo' => (int)$fest->officialResult->bravo_people,
+                        'multiply' => 1,
+                    ],
+                    'win' => [
+                        'alpha' => (int)$fest->officialResult->alpha_win,
+                        'bravo' => (int)$fest->officialResult->bravo_win,
+                        'multiply' => (int)$fest->officialResult->win_rate_times,
+                    ],
+                ];
+            }
         }
         $alpha = $fest->alphaTeam;
         $bravo = $fest->bravoTeam;
@@ -111,6 +127,7 @@ class ViewJsonAction extends BaseAction
                 },
                 $fest->officialDatas
             ),
+            'result' => $officialResult,
         ];
         if ($callback !== null) {
             Yii::$app->getResponse()->format = 'jsonp';

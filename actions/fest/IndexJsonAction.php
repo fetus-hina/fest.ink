@@ -60,12 +60,27 @@ class IndexJsonAction extends BaseAction
                 function ($fest) use ($now, $time2str) {
                     $alpha = $fest->alphaTeam;
                     $bravo = $fest->bravoTeam;
+                    $officialResult = null;
                     if ((int)$fest->start_at > $now) {
                         $state = 'scheduled';
                     } elseif ((int)$fest->end_at > $now) {
                         $state = 'in session';
                     } else {
                         $state = 'closed';
+                        if ($fest->officialResult) {
+                            $officialResult = [
+                                'vote' => [
+                                    'alpha' => (int)$fest->officialResult->alpha_people,
+                                    'bravo' => (int)$fest->officialResult->bravo_people,
+                                    'multiply' => 1,
+                                ],
+                                'win' => [
+                                    'alpha' => (int)$fest->officialResult->alpha_win,
+                                    'bravo' => (int)$fest->officialResult->bravo_win,
+                                    'multiply' => (int)$fest->officialResult->win_rate_times,
+                                ],
+                            ];
+                        }
                     }
                     return [
                         'id'    => (int)$fest->id,
@@ -88,6 +103,7 @@ class IndexJsonAction extends BaseAction
                                 'ink' => $bravo->ink_color,
                             ],
                         ],
+                        'result' => $officialResult,
                     ];
                 },
                 Fest::find()->orderBy('{{fest}}.[[id]] DESC')->all()
