@@ -11,6 +11,7 @@ use Curl\Curl;
 use Yii;
 use app\components\json\OfficialJson;
 use app\models\Fest;
+use app\models\Mvp;
 use app\models\OfficialData;
 use app\models\OfficialWinData;
 use yii\console\Controller;
@@ -41,12 +42,34 @@ class OfficialDataController extends Controller
             }
         }
 
+        $expect = [
+            [ '赤いきつね', 'こうないえん', 'alpha' ],
+            [ '緑のたぬき', 'フレアだんい', 'bravo' ],
+            [ '緑のたぬき', 'ヨッシー', 'bravo' ],
+            [ '緑のたぬき', 'ひびき', 'bravo' ],
+        ];
+        foreach ($obj->getMvpList() as $i => $row) {
+            if ($i >= count($expect)) {
+                break;
+            }
+            foreach (['win_team_name', 'win_team_mvp', 'x_win_team_side'] as $j => $column) {
+                if ($expect[$i][$j] !== $row[$column]) {
+                    echo "MVPList mismatch:\n";
+                    echo "Expect:\n";
+                    var_dump($expect[$i]);
+                    echo "Actual:\n";
+                    var_dump($row);
+                    exit(1);
+                }
+            }
+        }
+
         echo "OK\n";
     }
 
     public function actionUpdate()
     {
-        $debug = false;
+        $debug = true;
 
         $now = $debug ? strtotime('2015-07-03 17:18:06+9') : time();
         $fest = $this->getCurrentFest($now);
@@ -105,6 +128,17 @@ class OfficialDataController extends Controller
             if (!$modelWinData->save()) {
                 echo "official_win_data save failed (bravo)\n";
                 throw new \Exception();
+            }
+
+            foreach ($jsonObj->getMvpList() as $mvpInfo) {
+                $mvp = new Mvp();
+                $mvp->data_id = $modelOfficialData->id;
+                $mvp->color_id = $mvpInfo['x_win_team_side'] === 'alpha' ? 1 : 2;
+                $mvp->name = $mvpInfo['win_team_mvp'];
+                if (!$mvp->save()) {
+                    echo "MVP save failed\n";
+                    throw new \Exception();
+                }
             }
 
             $transaction->commit();

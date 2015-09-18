@@ -13,6 +13,7 @@ use Yii;
 use yii\web\ViewAction as BaseAction;
 use yii\web\NotFoundHttpException;
 use app\models\Fest;
+use app\models\Mvp;
 use app\models\OfficialData;
 use app\models\Timezone;
 
@@ -29,6 +30,14 @@ class ViewJsonAction extends BaseAction
         $tz = $request->get('tz');
         if (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz])) {
             $tz = Yii::$app->timeZone;
+        }
+        $withMvp = $request->get('mvp');
+        if (is_scalar($withMvp) &&
+                in_array(strtolower((string)$withMvp), ['1', 't', 'true', 'y', 'yes'], true)
+        ) {
+            $withMvp = true;
+        } else {
+            $withMvp = false;
         }
         $callback = $request->get('callback');
         if (!is_scalar($callback) || !preg_match('/^[A-Za-z0-9_.]+$/', $callback)) {
@@ -83,14 +92,21 @@ class ViewJsonAction extends BaseAction
                 ],
             ],
             'wins'   => array_map(
-                function (OfficialData $data) use ($time2str) {
+                function (OfficialData $data) use ($time2str, $withMvp) {
                     $alpha = $data->alpha;
                     $bravo = $data->bravo;
+                    if ($withMvp) {
+                        list($alphaMvpList, $bravoMvpList) = $this->fetchMvpList($data);
+                    } else {
+                        $alphaMvpList = $bravoMvpList = null;
+                    }
                     return [
                         'at'    => $data->downloaded_at,
                         'at_s'  => $time2str($data->downloaded_at),
                         'alpha' => $alpha ? $alpha->count : 0,
                         'bravo' => $bravo ? $bravo->count : 0,
+                        'alphaMvp' => $alpha ? $alphaMvpList : null,
+                        'bravoMvp' => $bravo ? $bravoMvpList : null,
                     ];
                 },
                 $fest->officialDatas
@@ -106,5 +122,28 @@ class ViewJsonAction extends BaseAction
             Yii::$app->getResponse()->format = 'json';
             return $data;
         }
+    }
+
+    private function fetchMvpList(OfficialData $data)
+    {
+        // 本当は Mvp クラスのインスタンスで操作したいところだが、
+        // 1回のフェスのデータを全部インスタンス化するのに 3 秒以上
+        // かかる有様なのでただの配列として取り扱う
+        $tableMvp = Mvp::tableName();
+        $query = (new \yii\db\Query())
+            ->select("{{{$tableMvp}}}.*")
+            ->from("{{{$tableMvp}}}")
+            ->andWhere(["{{{$tableMvp}}}.[[data_id]]" => $data->id])
+            ->orderBy("{{{$tableMvp}}}.[[id]] ASC");
+        $alpha = [];
+        $bravo = [];
+        foreach ($query->all() as $row) {
+            if ($row['color_id'] === '1') {
+                $alpha[] = $row['name'];
+            } elseif ($row['color_id'] === '2') {
+                $bravo[] = $row['name'];
+            }
+        }
+        return [$alpha, $bravo];
     }
 }
