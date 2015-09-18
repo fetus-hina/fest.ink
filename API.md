@@ -237,6 +237,55 @@ BRAVO = TOTAL(wins.bravo) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
 
 ----
 
+## GET /flash.json ##
+
+[`GET https://fest.ink/flash.json`](https://fest.ink/flash.json)
+
+公式サイトの `recent_results.json` をエミュレートしたものを返します。
+
+データはプル操作で取得している関係上、公式のデータから少し遅れたり漏れたりする可能性があります。
+
+フェスを開催していないタイミングなど、表示するデータが無いときは空の配列になります。
+
+```js
+[]
+```
+
+フェスを開催しているタイミングなどの場合、MVP の名前とチームの配列が返されます。
+
+このデータの内容は `/:id.json` に `mvp` をつけた時と同じで、集計すれば（サンプリングされた）勝利数とも一致します。
+
+```js
+[
+  {
+    "win_team_name": "ツッコミ",
+    "win_team_mvp": "VPファイター"
+  },
+  {
+    "win_team_name": "ツッコミ",
+    "win_team_mvp": "がきこ"
+  },
+  {
+    "win_team_name": "ツッコミ",
+    "win_team_mvp": "ケンさん"
+  },
+  {
+    "win_team_name": "ボケ",
+    "win_team_mvp": "ごまだんご"
+  },
+  // ...
+]
+```
+
+### クエリパラメータ ###
+
+* `t` (e.g.: `https://fest.ink/flash.json?t=1442080720`)
+
+    指定した時間のデータを取得します。
+    値はUNIX時間で、 `t=1442080720` の場合 `2015-09-13T02:58:40+09:00` です。
+
+----
+
 ## GET /timezone.json ##
 
 [`GET https://fest.ink/timezone.json`](https://fest.ink/timezone.json)

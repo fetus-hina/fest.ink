@@ -31,6 +31,7 @@ class FestController extends Controller
     {
         $prefix = 'app\actions\fest';
         return [
+            'emulate-official-json' => [ 'class' => $prefix . '\EmulateOfficialJsonAction' ],
             'index'         => [ 'class' => $prefix . '\IndexAction' ],
             'index-json'    => [ 'class' => $prefix . '\IndexJsonAction' ],
             'view'          => [ 'class' => $prefix . '\ViewAction' ],
