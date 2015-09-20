@@ -111,3 +111,70 @@ footer {
     margin-left: 10%;
     margin-right: 5%;
 }
+
+#official-result {
+    display: none;
+}
+
+#official-result-container {
+    position: relative;
+    width: 480px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #ccc;
+    color: #fff;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, .5);
+    text-align: center;
+
+    .official-result-label {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .8);
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .official-result-team {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+
+        &[data-team="bravo"] {
+            left: 50%;
+        }
+    }
+
+    .official-result-team-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background: #d9435f;
+
+        &[data-team="bravo"] {
+            left: 50%;
+            background: #5cb85c;
+        }
+    }
+
+    .result-data {
+        letter-spacing: 0.2ex;
+    }
+
+    .result-percent {
+        font-size: 0.5em;
+        margin-left: .25ex;
+    }
+
+    .result-multiply {
+        font-size: 0.4em;
+        margin-left: .25ex;
+        letter-spacing: 0;
+        color: rgba(255, 255, 255, .75);
+    }
+        
+}

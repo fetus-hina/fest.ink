@@ -50,6 +50,24 @@
     </div>
   </div>
 
+  <div id="social">
+    <div>
+      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
+    </div>
+    <div>
+      <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
+    </div>
+  </div>
+
+  <div id="official-result">
+    <h1>
+      フェス「{{$fest->name|escape}}」の結果
+    </h1>
+    <div id="official-result-container" class="ikamodoki">
+    </div>
+    <hr>
+  </div>
+
   <h1>
     フェス「{{$fest->name|escape}}」の推定勝率
   </h1>
@@ -57,13 +75,6 @@
     スプラトゥーンの公式サイトで公開されているデータを基に推計したデータです。
     数パーセントポイント程度の誤差を含んでいるものとして参考程度にどうぞ。
   </p>
-
-  <div>
-    <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
-  </div>
-  <div>
-    <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
-  </div>
 
   <h2 id="rate">
     推定勝率: <span class="ikamodoki"><span class="total-rate" data-team="alpha">シュトクチュウ</span> VS <span class="total-rate" data-team="bravo">シュトクチュウ</span></span>
