@@ -3,6 +3,12 @@
 {{title}}{{$app->name|escape}} | フェス「{{$fest->name|escape}}」の推定勝率{{/title}}
 
 <div class="container" data-fest="{{$fest->id|escape}}">
+  <div id="social">
+    <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
+    &#32;
+    <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a>
+  </div>
+
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default auto-tooltip" id="btn-update" title="表示データを今すぐ更新します">
@@ -47,15 +53,6 @@
       <button type="button" class="btn btn-default auto-tooltip" id="btn-scale" title="試合開催数を推定し、補正して表示します（実験的）">
         <span class="glyphicon glyphicon-adjust"></span>
       </button>
-    </div>
-  </div>
-
-  <div id="social">
-    <div>
-      <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
-    </div>
-    <div>
-      <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a> 10分ごとに推定勝率をツイートします
     </div>
   </div>
 
