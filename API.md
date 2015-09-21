@@ -233,7 +233,7 @@ BRAVO = TOTAL(wins.bravo) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
 
     - デフォルトは `Asia/Tokyo` です
     - UTC(GMT) に設定する場合は `Etc/UTC` です
-    - ほとんどの一般的な `地域/都市名` 表記が利用できます。具体的なリストは /timezone.json で取得できます。
+    - ほとんどの一般的な `地域/都市名` 表記が利用できます。具体的なリストは `/timezone.json` で取得できます。
 
 * `mvp` (e.g.: `https://fest.ink/5.json?mvp=1`)
 
@@ -316,6 +316,70 @@ BRAVO = TOTAL(wins.bravo) / { TOTAL(wins.alpha) + TOTAL(wins.bravo) }
 
     指定した時間のデータを取得します。
     値はUNIX時間で、 `t=1442080720` の場合 `2015-09-13T02:58:40+09:00` です。
+
+* `extend` (e.g.: `https://fest.ink/flash.json?extend=1`)
+
+    レスポンスにフェス情報を含みます。
+    JSON の構造が次のように大きく変わります。
+
+    ```js
+    {
+      // フェスの情報です。 index.json と同じ構造になります。
+      // フェスが開催されていない時は null になります。
+      "fest": {
+        "id": 5,
+        "name": "ボケ vs ツッコミ",
+        "term": {
+          "begin": 1442026800,
+          "end": 1442113200,
+          "begin_s": "2015-09-12T12:00:00+09:00",
+          "end_s": "2015-09-13T12:00:00+09:00",
+          "in_session": false,
+          "status": "closed"
+        },
+        "teams": {
+          "alpha": {
+            "name": "ボケ",
+            "ink": "d9612b"
+          },
+          "bravo": {
+            "name": "ツッコミ",
+            "ink": "5c7cb8"
+          }
+        },
+        "result": {
+          "vote": {
+            "alpha": 43,
+            "bravo": 57,
+            "multiply": 1
+          },
+          "win": {
+            "alpha": 49,
+            "bravo": 51,
+            "multiply": 4
+          }
+        }
+      },
+
+      // MVPの一覧はここに移されます
+      "mvp": [
+        {
+          "win_team_name": "ボケ",
+          "win_team_mvp": "クライ"
+        },
+        // ...
+      ]
+    }
+    ```
+
+* `tz` (e.g.: `https://fest.ink/flash.json?extend=1&tz=Europe%2fLondon`)
+
+    日時の文字列表記のタイムゾーンを指定します。
+    `extend` パラメータと同時に指定します。（`extend` を使わない場合は指定しても無意味です）
+
+    - デフォルトは `Asia/Tokyo` です
+    - UTC(GMT) に設定する場合は `Etc/UTC` です
+    - ほとんどの一般的な `地域/都市名` 表記が利用できます。具体的なリストは `/timezone.json` で取得できます。
 
 ----
 

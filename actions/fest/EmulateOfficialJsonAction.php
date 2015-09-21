@@ -7,11 +7,13 @@
 
 namespace app\actions\fest;
 
+use DateTimeZone;
 use Yii;
 use yii\web\ViewAction as BaseAction;
 use app\models\Fest;
 use app\models\Mvp;
 use app\models\OfficialData;
+use app\models\Timezone;
 
 class EmulateOfficialJsonAction extends BaseAction
 {
@@ -28,6 +30,20 @@ class EmulateOfficialJsonAction extends BaseAction
         if (!is_scalar($callback) || !preg_match('/^[A-Za-z0-9_.]+$/', $callback)) {
             $callback = null;
         }
+        $extend = $request->get('extend');
+        if (is_scalar($extend) &&
+                in_array(strtolower((string)$extend), ['1', 't', 'true', 'y', 'yes'], true)
+        ) {
+            $extend = true;
+        } else {
+            $extend = false;
+        }
+        $tz = $request->get('tz');
+        $tz = new DateTimeZone(
+            (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz]))
+                ? Yii::$app->timeZone
+                : $tz
+        );
 
         // その時間に開催されている/いたフェスを取得
         $fest = Fest::find()
@@ -35,7 +51,7 @@ class EmulateOfficialJsonAction extends BaseAction
             ->andWhere(['>', '[[end_at]]', $time])
             ->one();
         if (!$fest) {
-            return $this->result([], $callback);
+            return $this->result($extend, null, [], $callback, $tz);
         }
 
         // その時間から10分以内に取得した最新の JSON に関する情報を取得
@@ -47,7 +63,7 @@ class EmulateOfficialJsonAction extends BaseAction
             ->limit(1)
             ->one();
         if (!$officialData) {
-            return $this->result([], $callback);
+            return $this->result($extend, $fest, [], $callback, $tz);
         }
 
         // データ処理のためにアルファ/ブラボーチームの情報が必要
@@ -55,10 +71,12 @@ class EmulateOfficialJsonAction extends BaseAction
         $bravo = $fest->bravoTeam;
         if (!$alpha || !$bravo) {
             // 本当は Internal Server Error
-            return $this->result([], $callback);
+            return $this->result($extend, $fest, [], $callback, $tz);
         }
 
         return $this->result(
+            $extend,
+            $fest,
             array_map(
                 function (Mvp $mvp) use ($alpha, $bravo) {
                     $team = $mvp->color_id == 1 ? $alpha : $bravo;
@@ -69,20 +87,30 @@ class EmulateOfficialJsonAction extends BaseAction
                 },
                 $officialData->mvps
             ),
-            $callback
+            $callback,
+            $tz
         );
     }
 
-    private function result(array $data, $callback) {
+    private function result($extend, Fest $fest = null, array $data, $callback, DateTimeZone $tz = null) {
+        if ($extend) {
+            $sendData = [
+                'fest' => $fest ? $fest->toJsonArray($tz) : null,
+                'mvp' => $data,
+            ];
+        } else {
+            $sendData = $data;
+        }
+
         if ($callback !== null) {
             Yii::$app->getResponse()->format = 'jsonp';
             return [
-                'data' => $data,
+                'data' => $sendData,
                 'callback' => $callback,
             ];
         } else {
             Yii::$app->getResponse()->format = 'json';
-            return $data;
+            return $sendData;
         }
     }
 }
