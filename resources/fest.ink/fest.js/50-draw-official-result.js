@@ -92,6 +92,7 @@ $(document).ready(function () {
             // サイズ変更なし
             return;
         }
+        $container.attr('data-width', containerWidth);
         var containerHeight     = $container.width() * 9 / 16;
         var voteLabelTop        = containerHeight * 0.24845;
         var winLabelTop         = containerHeight * 0.49068;
