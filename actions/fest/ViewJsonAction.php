@@ -12,6 +12,7 @@ use DateTimeZone;
 use Yii;
 use yii\web\ViewAction as BaseAction;
 use yii\web\NotFoundHttpException;
+use app\components\helpers\DateTimeFormatter;
 use app\models\Fest;
 use app\models\Mvp;
 use app\models\OfficialData;
@@ -29,9 +30,12 @@ class ViewJsonAction extends BaseAction
             throw new NotFoundHttpException();
         }
         $tz = $request->get('tz');
-        if (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz])) {
-            $tz = Yii::$app->timeZone;
-        }
+        $tz = new DateTimeZone(
+            (!is_scalar($tz) || !Timezone::findOne(['zone' => $tz]))
+                ? Yii::$app->timeZone
+                : $tz
+        );
+
         $withMvp = $request->get('mvp');
         if (is_scalar($withMvp) &&
                 in_array(strtolower((string)$withMvp), ['1', 't', 'true', 'y', 'yes'], true)
@@ -44,20 +48,6 @@ class ViewJsonAction extends BaseAction
         if (!is_scalar($callback) || !preg_match('/^[A-Za-z0-9_.]+$/', $callback)) {
             $callback = null;
         }
-
-        $time2str = function ($time) use ($tz) {
-            $t1 = (int)floor((float)$time); // time の整数部
-            $t2 = (float)$time - $t1;       // time の小数部
-
-            $dateTime = DateTime::createFromFormat(
-                'U u',
-                sprintf('%d %06d', $t1, (int)floor($t2 * 1000000))
-            );
-            $dateTime->setTimeZone(new DateTimeZone($tz));
-            return $t2 > 0
-                ? $dateTime->format('Y-m-d\TH:i:s.uP')
-                : $dateTime->format('Y-m-d\TH:i:sP');
-        };
 
         $now = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
         $officialResult = null;
@@ -84,51 +74,33 @@ class ViewJsonAction extends BaseAction
         }
         $alpha = $fest->alphaTeam;
         $bravo = $fest->bravoTeam;
-        $data = [
-            'now'   => $now,
-            'now_s' => $time2str($now),
-            'id'    => $fest->id,
-            'name'  => $fest->name,
-            'term'  => [
-                'begin' => $fest->start_at,
-                'end'   => $fest->end_at,
-                'begin_s' => $time2str($fest->start_at),
-                'end_s'   => $time2str($fest->end_at),
-                'in_session' => ($state === 'in session'),
-                'status' => $state,
+        $data = array_merge(
+            [
+                'now'   => $now,
+                'now_s' => DateTimeFormatter::unixTimeToString($now, $tz),
+                'wins'  => array_map(
+                    function (OfficialData $data) use ($withMvp, $tz) {
+                        $alpha = $data->alpha;
+                        $bravo = $data->bravo;
+                        if ($withMvp) {
+                            list($alphaMvpList, $bravoMvpList) = $this->fetchMvpList($data);
+                        } else {
+                            $alphaMvpList = $bravoMvpList = null;
+                        }
+                        return [
+                            'at'    => $data->downloaded_at,
+                            'at_s'  => DateTimeFormatter::unixTimeToString($data->downloaded_at, $tz),
+                            'alpha' => $alpha ? $alpha->count : 0,
+                            'bravo' => $bravo ? $bravo->count : 0,
+                            'alphaMvp' => $alpha ? $alphaMvpList : null,
+                            'bravoMvp' => $bravo ? $bravoMvpList : null,
+                        ];
+                    },
+                    $fest->officialDatas
+                ),
             ],
-            'teams'  => [
-                'alpha' => [
-                    'name' => $alpha->name,
-                    'ink' => $alpha->ink_color,
-                ],
-                'bravo' => [
-                    'name' => $bravo->name,
-                    'ink' => $bravo->ink_color,
-                ],
-            ],
-            'wins'   => array_map(
-                function (OfficialData $data) use ($time2str, $withMvp) {
-                    $alpha = $data->alpha;
-                    $bravo = $data->bravo;
-                    if ($withMvp) {
-                        list($alphaMvpList, $bravoMvpList) = $this->fetchMvpList($data);
-                    } else {
-                        $alphaMvpList = $bravoMvpList = null;
-                    }
-                    return [
-                        'at'    => $data->downloaded_at,
-                        'at_s'  => $time2str($data->downloaded_at),
-                        'alpha' => $alpha ? $alpha->count : 0,
-                        'bravo' => $bravo ? $bravo->count : 0,
-                        'alphaMvp' => $alpha ? $alphaMvpList : null,
-                        'bravoMvp' => $bravo ? $bravoMvpList : null,
-                    ];
-                },
-                $fest->officialDatas
-            ),
-            'result' => $officialResult,
-        ];
+            $fest->toJsonArray($tz)
+        );
         if ($callback !== null) {
             Yii::$app->getResponse()->format = 'jsonp';
             return [

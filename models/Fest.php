@@ -7,7 +7,9 @@
 
 namespace app\models;
 
+use DateTimeZone;
 use Yii;
+use app\components\helpers\DateTimeFormatter;
 
 /**
  * This is the model class for table "fest".
@@ -100,5 +102,57 @@ class Fest extends \yii\db\ActiveRecord
     public function getColors()
     {
         return $this->hasMany(Color::className(), ['id' => 'color_id'])->viaTable('team', ['fest_id' => 'id']);
+    }
+
+    public function toJsonArray(DateTimeZone $tz = null)
+    {
+        $now = (int)(isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time());
+        $alpha = $this->alphaTeam;
+        $bravo = $this->bravoTeam;
+        $officialResult = null;
+        if ((int)$this->start_at > $now) {
+            $state = 'scheduled';
+        } elseif ((int)$this->end_at > $now) {
+            $state = 'in session';
+        } else {
+            $state = 'closed';
+            if ($this->officialResult) {
+                $officialResult = [
+                    'vote' => [
+                        'alpha' => (int)$this->officialResult->alpha_people,
+                        'bravo' => (int)$this->officialResult->bravo_people,
+                        'multiply' => 1,
+                    ],
+                    'win' => [
+                        'alpha' => (int)$this->officialResult->alpha_win,
+                        'bravo' => (int)$this->officialResult->bravo_win,
+                        'multiply' => (int)$this->officialResult->win_rate_times,
+                    ],
+                ];
+            }
+        }
+        return [
+            'id'    => (int)$this->id,
+            'name'  => $this->name,
+            'term'  => [
+                'begin'         => (int)$this->start_at,
+                'end'           => (int)$this->end_at,
+                'begin_s'       => DateTimeFormatter::unixTimeToString((int)$this->start_at, $tz),
+                'end_s'         => DateTimeFormatter::unixTimeToString((int)$this->end_at, $tz),
+                'in_session'    => ($state === 'in session'),
+                'status'        => $state,
+            ],
+            'teams' => [
+                'alpha' => [
+                    'name' => $alpha->name,
+                    'ink' => $alpha->ink_color,
+                ],
+                'bravo' => [
+                    'name' => $bravo->name,
+                    'ink' => $bravo->ink_color,
+                ],
+            ],
+            'result' => $officialResult,
+        ];
     }
 }
