@@ -76,7 +76,7 @@ class TwitterController extends Controller
         $fest = $this->getCurrentFest($now);
         if (!$fest) {
             echo "fest closed.\n";
-            false;
+            return false;
         }
 
         $query = (new \yii\db\Query())
