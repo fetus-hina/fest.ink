@@ -69,7 +69,7 @@ class OfficialDataController extends Controller
 
     public function actionUpdate()
     {
-        $debug = true;
+        $debug = false;
 
         $now = $debug ? strtotime('2015-07-03 17:18:06+9') : time();
         $fest = $this->getCurrentFest($now);
