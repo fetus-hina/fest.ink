@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "0.6.0",
+            "version": "0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "e87fe829f28043a809dc764b0591d273014ac862"
+                "reference": "3ebfb5bbc3a75a5b44b77371204076cfe1d585ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/e87fe829f28043a809dc764b0591d273014ac862",
-                "reference": "e87fe829f28043a809dc764b0591d273014ac862",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/3ebfb5bbc3a75a5b44b77371204076cfe1d585ef",
+                "reference": "3ebfb5bbc3a75a5b44b77371204076cfe1d585ef",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "social",
                 "twitter"
             ],
-            "time": "2015-09-08 17:28:41"
+            "time": "2015-10-07 14:15:19"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -557,16 +557,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.0.3",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "369ecee47fb94326bbe9fba785dc081331d80a89"
+                "reference": "f667aa2000a192adfa53332335a2ae0c1cb9ea6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/369ecee47fb94326bbe9fba785dc081331d80a89",
-                "reference": "369ecee47fb94326bbe9fba785dc081331d80a89",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/f667aa2000a192adfa53332335a2ae0c1cb9ea6e",
+                "reference": "f667aa2000a192adfa53332335a2ae0c1cb9ea6e",
                 "shasum": ""
             },
             "require": {
@@ -595,7 +595,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-10-02 14:15:52"
+            "time": "2015-10-08 12:57:25"
         },
         {
             "name": "php-curl-class/php-curl-class",
