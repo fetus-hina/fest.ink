@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand ikamodoki" href="/">イカフェスレート</a>
+        <a class="navbar-brand ikamodoki" href="/"><del style="font-size:0.618em">イカ</del>タコフェスレート</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
