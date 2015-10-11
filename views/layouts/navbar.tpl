@@ -51,6 +51,9 @@
               </li>
               <li class="divider"></li>
               <li>
+                <a href="https://stat.ink/">stat.ink</a>
+              </li>
+              <li>
                 <a href="https://ikadenwa.ink/" class="auto-tooltip" title="フレンドマッチ中の通話に便利なサイトです">イカデンワ</a>
               </li>
               <li>
