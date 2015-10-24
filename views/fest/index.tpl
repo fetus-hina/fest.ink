@@ -1,7 +1,7 @@
 {{strip}}
 <div class="container">
   <h1 class="ikamodoki">
-    <del style="font-size:0.618em">イカ</del>タコフェスレート
+    イカフェスレート
   </h1>
   <p>
     スプラトゥーンの公式サイトで公開されているデータを基にフェスの勝率を推定するサイトです。
