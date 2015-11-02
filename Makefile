@@ -15,6 +15,7 @@ RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css.gz \
 
 all: \
 	composer.phar \
+	composer-plugin \
 	vendor \
 	node_modules \
 	config/google-analytics.php \
@@ -30,6 +31,9 @@ favicon-maybe:
 	test -f config/favicon.license.txt && make favicon || true
 
 resource: $(RESOURCE_TARGETS)
+
+composer-plugin: composer.phar
+	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.0'
 
 vendor: composer.phar
 	php composer.phar install --prefer-dist
