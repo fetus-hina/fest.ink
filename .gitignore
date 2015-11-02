@@ -5,6 +5,7 @@
 .settings
 /config/cookie-secret.php
 /config/favicon.license.txt
+/config/google-adsense.php
 /config/google-analytics.php
 /config/twitter.php
 /node_modules

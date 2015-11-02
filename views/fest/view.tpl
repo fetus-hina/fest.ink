@@ -9,6 +9,8 @@
     <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a>
   </div>
 
+  {{include '@app/views/layouts/ad.tpl'}}
+
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default auto-tooltip" id="btn-update" title="表示データを今すぐ更新します">

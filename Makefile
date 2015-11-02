@@ -19,6 +19,7 @@ all: \
 	vendor \
 	node_modules \
 	config/google-analytics.php \
+	config/google-adsense.php \
 	config/twitter.php \
 	config/cookie-secret.php \
 	resource \
@@ -151,6 +152,13 @@ config/twitter.php:
 config/google-analytics.php:
 	echo '<?php' > config/google-analytics.php
 	echo 'return "";' >> config/google-analytics.php
+
+config/google-adsense.php:
+	echo '<?php'                >  config/google-adsense.php
+	echo 'return ['             >> config/google-adsense.php
+	echo "    'client' => '',"  >> config/google-adsense.php
+	echo "    'slot'   => '',"  >> config/google-adsense.php
+	echo '];'                   >> config/google-adsense.php
 
 runtime/tzdata: runtime/tzdata-latest.tar.gz
 	mkdir runtime/tzdata || true
