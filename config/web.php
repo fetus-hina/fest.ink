@@ -2,7 +2,7 @@
 $params = require(__DIR__ . '/params.php');
 $config = [
     'name' => 'イカフェスレート',
-    'version' => '2.0.1',
+    'version' => '2.0.2',
     'id' => 'basic',
     'language' => 'ja-jp',
     'timeZone' => 'Asia/Tokyo',
