@@ -15,9 +15,9 @@ $(document).ready(function () {
         ).append(
             $('<div>', {'data-team': 'bravo'}).addClass('official-result-team-bg')
         ).append(
-            $('<div>', {'id': 'official-result-label-vote'}).addClass('official-result-label').text('とくひょうりつ')
+            $('<div>', {'id': 'official-result-label-vote'}).addClass('official-result-label').text('得票率')
         ).append(
-            $('<div>', {'id': 'official-result-label-win'}).addClass('official-result-label').text('しょうりつ')
+            $('<div>', {'id': 'official-result-label-win'}).addClass('official-result-label').text('勝率')
         ).append(
             $('<div>', {'id': 'official-result-label-total'}).addClass('official-result-label').text('-')
         ).append(

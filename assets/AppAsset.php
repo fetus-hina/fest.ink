@@ -26,7 +26,6 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapThemeAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'app\assets\IkamodokiAsset',
         'app\assets\FlotAsset',
         'app\assets\FontAwesomeAsset',
         'app\assets\GithubForkRibbonCssAsset',

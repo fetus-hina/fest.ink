@@ -47,7 +47,6 @@
         バグの報告・改善の提案などがありましたら、
           <a href="https://github.com/fetus-hina/fest.ink"><span class="fa fa-github"></span> GitHubのプロジェクト</a>に報告・提案するか、
           <a href="https://twitter.com/fetus_hina"><span class="fa fa-twitter"></span> @fetus_hina</a>にご連絡ください。<br>
-        ページの一部に<a href="http://aramugi.com/?page_id=807" class="ikamodoki">イカモドキ</a>と<a href="http://fizzystack.web.fc2.com/paintball.html" class="ikamodoki">Paintball</a>を使用しています。<br>
         サイト内で表示している日時の時間帯は上部の「タイムゾーン」の設定に従っています。通常日本時間(<code>Asia/Tokyo</code>)で表示しています。現在の設定は<code>{{$app->getTimezone()|escape}}</code>です。<br>
       </div>
       <div class="footer-powered">

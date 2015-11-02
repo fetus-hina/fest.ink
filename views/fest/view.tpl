@@ -56,11 +56,19 @@
     </div>
   </div>
 
+  {{registerCssFile url="https://fonts.googleapis.com/css?family=Chango"}}
+  {{registerCss}}
+    #official-result-container .result-number,
+    #official-result-container .result-percent,
+    #official-result-container .result-multiply{
+      font-family:'Chango',cursive
+    }
+  {{/registerCss}}
   <div id="official-result">
     <h1>
       フェス「{{$fest->name|escape}}」の結果
     </h1>
-    <div id="official-result-container" class="ikamodoki">
+    <div id="official-result-container">
     </div>
     <hr>
   </div>
@@ -74,7 +82,7 @@
   </p>
 
   <h2 id="rate">
-    推定勝率: <span class="ikamodoki"><span class="total-rate" data-team="alpha">シュトクチュウ</span> VS <span class="total-rate" data-team="bravo">シュトクチュウ</span></span>
+    推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span>
   </h2>
   <p>
     {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
