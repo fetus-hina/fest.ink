@@ -14,7 +14,6 @@ https://fest.ink/ のソースコードです。
 * PHP 5.5+
 * SQLite3
 * Node.js (`npm`)
-* [webify](https://github.com/ananthakumaran/webify)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
@@ -42,23 +41,6 @@ CentOS 7 の標準 PHP は 5.4.16 です。このバージョンでは動作し�
 
 使い方
 ------
-
-### PREREQUIREMENTS ###
-
-イカモドキのウェブフォント生成のために `webify` コマンドが必要です。
-
-[webifyのリリース](https://github.com/ananthakumaran/webify/releases)からコンパイル済みバイナリを取得するか、
-`cabal install webify` で webify をインストールしてください。
-
-CentOS 7 で EPEL が有効なら、こんな感じでインストールできるみたいです。
-
-```sh
-sudo yum install cabal-install
-cabal update
-cabal install webify
-```
-
-`webify` の実行ファイルへパスを通すことを忘れずに。(`~/.cabal/bin` あたり)
 
 ### SETUP ###
 
@@ -117,6 +99,20 @@ Twitter 連携機能を有効にするには次のように設定します。
     ```sh
     ./yii twitter/update
     ```
+
+
+### DOCKER ###
+
+
+テスト環境構築用の `Dockerfile` が同梱されています。自分でビルドするか、Docker Hub の [`jp3cki/festink`](https://hub.docker.com/r/jp3cki/festink/) でビルド済みのイメージが取得できます。
+
+主要なソフトウェアのバージョンが合わせてあるため、本番環境とほぼ同じ環境ができあがるはずです。
+
+現在の作業ディレクトリの中身が `/home/festink/fest.ink` にデプロイされます。その際 `vendor` などは一度消され、再構成されます。
+
+コンテナを起動すると 80/TCP で Nginx が待ち受けています。ここへ接続して使用します。必要であれば `docker run` する時に `-p 8080:80` のように任意のポートにマップしてください。
+
+なお、任天堂からのデータ取得の定期実行(cron)は意図的に組み込んでいません。
 
 
 API
