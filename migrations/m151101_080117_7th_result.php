@@ -17,6 +17,6 @@ class m151101_080117_7th_result extends Migration
 
     public function safeDown()
     {
-        $this->delete('official_result', ['fest_id' => 6]);
+        $this->delete('official_result', ['fest_id' => 7]);
     }
 }
