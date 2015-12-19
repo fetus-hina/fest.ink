@@ -98,6 +98,7 @@ class ViewJsonAction extends BaseAction
                     },
                     $fest->officialDatas
                 ),
+                'summary' => $this->makeSummary($fest->officialDatas),
             ],
             $fest->toJsonArray($tz)
         );
@@ -134,5 +135,23 @@ class ViewJsonAction extends BaseAction
             }
         }
         return [$alpha, $bravo];
+    }
+
+    private function makeSummary(array $list)
+    {
+        $alpha = 0;
+        $bravo = 0;
+        foreach ($list as $data) {
+            if ($data->alpha) {
+                $alpha += $data->alpha->count;
+            }
+            if ($data->bravo) {
+                $bravo += $data->bravo->count;
+            }
+        }
+        return [
+            'alphaWins' => $alpha,
+            'bravoWins' => $bravo,
+        ];
     }
 }
