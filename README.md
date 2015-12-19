@@ -17,7 +17,7 @@ https://fest.ink/ のソースコードです。
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* CentOS 7.1.1503 (x86_64)
+* CentOS 7.2.1511 (x86_64)
 * Nginx 1.9.x (mainline)
 * SQLite 3.7.17 (標準)
 * Node.js 0.10.36 ([EPEL](https://fedoraproject.org/wiki/EPEL))
