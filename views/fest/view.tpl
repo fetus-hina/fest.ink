@@ -82,6 +82,13 @@
     スプラトゥーンの公式サイトで公開されているデータを基に推計したデータです。
     数パーセントポイント程度の誤差を含んでいるものとして参考程度にどうぞ。
   </p>
+  {{if $fest->id >= 7}}
+    <p>
+      <a href="https://stat.ink/fest/jp/{{$fest->id|escape:url}}">
+        stat.inkの投稿情報に基づいて計算したデータはこちらです。
+      </a>
+    </p>
+  {{/if}}
 
   <h2 id="rate">
     推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span>
