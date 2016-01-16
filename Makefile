@@ -17,6 +17,7 @@ all: \
 	composer.phar \
 	composer-plugin \
 	vendor \
+	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
 	config/google-analytics.php \
 	config/google-adsense.php \
@@ -36,7 +37,7 @@ resource: $(RESOURCE_TARGETS)
 composer-plugin: composer.phar
 	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.0'
 
-vendor: composer.phar
+vendor: composer.phar composer.lock composer-plugin
 	php composer.phar install --prefer-dist
 
 node_modules:
@@ -166,5 +167,9 @@ runtime/tzdata: runtime/tzdata-latest.tar.gz
 
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
+
+vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: vendor FORCE
+	head -n 815 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php | tail -n 10 | grep '\\1 \\2' > /dev/null && \
+		patch -d vendor/smarty/smarty -p1 -Nst < data/patch/smarty-strip.patch || /bin/true
 
 .PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE

@@ -11,7 +11,7 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 5.5+
+* PHP 7.0+
 * SQLite3
 * Node.js (`npm`)
 
@@ -20,23 +20,28 @@ https://fest.ink/ は現在次の構成で動作しています。
 * CentOS 7.2.1511 (x86_64)
 * Nginx 1.9.x (mainline)
 * SQLite 3.7.17 (標準)
-* Node.js 0.10.36 ([EPEL](https://fedoraproject.org/wiki/EPEL))
 * [SCL](https://www.softwarecollections.org/)
-    - [rh-php56](https://www.softwarecollections.org/en/scls/rhscl/rh-php56/)
-        - PHP 5.6.*
-            - `rh-php56-php-cli`
-            - `rh-php56-php-gd`
-            - `rh-php56-php-mbstring`
-            - `rh-php56-php-pdo`
-        - PHP-FPM
-            - `rh-php56-php-fpm`
-    - [php56more](https://www.softwarecollections.org/en/scls/remi/php56more/)
-        - Mcrypt
-            - `more-php56-php-mcrypt`
+    - [v8314](https://www.softwarecollections.org/en/scls/rhscl/v8314/)
+        - V8 3.14.* (Used by Node.js)
+    - [nodejs010](https://www.softwarecollections.org/en/scls/rhscl/nodejs010/)
+        - Node.js 0.10.*
+        - `nodejs010-nodejs`
+        - `nodejs010-npm`
+    * [Remi's RPM repository](http://rpms.famillecollet.com/)
+        - `remi-safe` repository, it uses SCL mechanism
+            - PHP 7.0.*
+                - `php70-php-cli`
+                - `php70-php-fpm`
+                - `php70-php-gd`
+                - `php70-php-mbstring`
+                - `php70-php-mcrypt`
+                - `php70-php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
 CentOS 7 の標準 PHP は 5.4.16 です。このバージョンでは動作しません。
+
+環境の作り方は `Dockerfile` を見るのが手っ取り早いです。素の CentOS 7 から環境を構築する手順はそこに書かれています。
 
 
 使い方

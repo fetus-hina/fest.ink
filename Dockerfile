@@ -2,9 +2,18 @@ FROM centos:centos7
 MAINTAINER AIZAWA Hina <hina@bouhime.com>
 
 ADD docker/nginx/nginx.repo /etc/yum.repos.d/
-RUN yum update -y && \
+ADD docker/rpm-gpg/ /etc/pki/rpm-gpg/
+
+RUN rpm --import \
+    /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
+    /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo \
+    /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 \
+    /etc/pki/rpm-gpg/RPM-GPG-KEY-remi \
+        && \
+    yum update -y && \
     yum install -y \
         ImageMagick \
+        centos-release-scl-rh \
         curl \
         nginx \
         patch \
@@ -15,24 +24,21 @@ RUN yum update -y && \
         unzip \
         wget \
         http://ftp.tsukuba.wide.ad.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm \
-        https://www.softwarecollections.org/en/scls/remi/php56more/epel-7-x86_64/download/remi-php56more-epel-7-x86_64.noarch.rpm \
-        https://www.softwarecollections.org/en/scls/rhscl/git19/epel-7-x86_64/download/rhscl-git19-epel-7-x86_64.noarch.rpm \
-        https://www.softwarecollections.org/en/scls/rhscl/nodejs010/epel-7-x86_64/download/rhscl-nodejs010-epel-7-x86_64.noarch.rpm \
-        https://www.softwarecollections.org/en/scls/rhscl/rh-php56/epel-7-x86_64/download/rhscl-rh-php56-epel-7-x86_64.noarch.rpm \
-        https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm \
+        http://rpms.famillecollet.com/enterprise/7/safe/x86_64/remi-release-7.1-3.el7.remi.noarch.rpm  \
             && \
     yum install -y \
         git19-git \
-        more-php56-php-mcrypt \
         nodejs010-npm \
-        rh-php56-php-cli \
-        rh-php56-php-fpm \
-        rh-php56-php-intl \
-        rh-php56-php-mbstring \
-        rh-php56-php-opcache \
-        rh-php56-php-pdo \
-        rh-php56-php-pecl-jsonc \
-        rh-php56-php-xml \
+        php70-php-cli \
+        php70-php-fpm \
+        php70-php-intl \
+        php70-php-json \
+        php70-php-mbstring \
+        php70-php-mcrypt \
+        php70-php-opcache \
+        php70-php-pdo \
+        php70-php-pecl-zip \
+        php70-php-xml \
         supervisor \
             && \
     yum clean all && \
@@ -49,7 +55,7 @@ RUN cd ~festink/fest.ink && bash -c 'source /etc/profile.d/scl-env.sh && make cl
 
 USER root
 ADD docker/php/php-config.diff /tmp/
-RUN patch -p1 -d /etc/opt/rh/rh-php56 < /tmp/php-config.diff && rm /tmp/php-config.diff
+RUN patch -p1 -d /etc/opt/remi/php70 < /tmp/php-config.diff && rm /tmp/php-config.diff
 
 ADD docker/nginx/default.conf /etc/nginx/conf.d/
 
