@@ -23,16 +23,23 @@ $(document).ready(function () {
         var scale = window.fest.getTimeBasedScaler();
         var alpha = [];
         var bravo = [];
-        for (var i = 0; i < json.wins.length; ++i) {
-            var tmp = json.wins[i];
+        var lastAt = null;
+        $.each(json.wins, function () {
+            var tmp = this;
             var tmpA = scale(tmp.alpha, tmp.at);
             var tmpB = scale(tmp.bravo, tmp.at);
             var sum = tmpA + tmpB;
             if (sum > 0) {
+                if (tmp.at - lastAt >= 16 * 60) {
+                    // 16 分以上データが途切れたらグラフを切る
+                    alpha.push([lastAt * 1000 + 1, null]);
+                    bravo.push([lastAt * 1000 + 1, null]);
+                }
                 alpha.push([tmp.at * 1000, tmpA * 100 / sum]);
                 bravo.push([tmp.at * 1000, tmpB * 100 / sum]);
+                lastAt = tmp.at;
             }
-        }
+        });
         previous = {
             data: [alpha, bravo],
             term: json.term,
