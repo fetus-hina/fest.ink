@@ -151,8 +151,12 @@ $(document).ready(function () {
             });
         })();
 
-        (function() {
-            $('.result-team').css({
+        window.setTimeout(function() {
+            var $labels = $('.result-team');
+            var $parent = $labels.parent();
+            var fontSize = containerHeight * 0.12422;
+            var maxWidth = Math.max(1, Math.round(containerWidth / 2 - 20));
+            $labels.css({
                 'position': 'absolute',
                 'top': 0,
                 'left': 0,
@@ -161,7 +165,23 @@ $(document).ready(function () {
                 'height': voteLabelTop + 'px',
                 'lineHeight': voteLabelTop + 'px',
             });
-        })();
+            var $tmpLabel = $labels.clone().appendTo($parent).css({
+                'width': 'auto',
+            });
+            while (fontSize > 1) {
+                $tmpLabel.css('fontSize', fontSize);
+                if ($tmpLabel.width() <= maxWidth) {
+                    break;
+                }
+                fontSize = Math.max(1, fontSize * 0.95);
+            }
+            $tmpLabel.remove();
+
+            $labels.css('fontSize', fontSize + 'px');
+            $('.result-team').css({
+                'fontSize': fontSize + 'px',
+            });
+        }, 1);
     }; // }}}
 
     $('#event').on('receiveUpdateData', function (ev, data_) {
