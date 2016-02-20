@@ -150,6 +150,88 @@ class OfficialDataController extends Controller
         return 2;
     }
 
+    public function actionImport($path, $at, $festId = null)
+    {
+        $at = strtotime($at, time());
+        if ($at === false) {
+            fwrite(STDERR, "Invalid time stamp: {$at}\n");
+            return 1;
+        }
+        if ($festId === null) {
+            $fest = $this->getCurrentFest($at);
+        } else {
+            $fest = Fest::findOne(['id' => $festId]);
+        }
+        if (!$fest) {
+            fwrite(STDERR, "Splatfest not found: ID={$festId}\n");
+            return 1;
+        }
+        $json = file_get_contents($path);
+        if (!$json || substr($json, 0, 2) === '[]' || substr($json, 0, 2) === '{}') {
+            echo "failed or empty json.\n";
+            return 1;
+        }
+        $jsonObj = new OfficialJson($fest, $json);
+        if ($this->isDuplicated($fest, $jsonObj->sha256sum)) {
+            echo "duplicated.\n";
+            return 0;
+        }
+        $winCounts = $jsonObj->getWinCounts();
+        if ($winCounts->alpha < 1 && $winCounts->bravo < 1) {
+            echo "winCounts error\n";
+            return 1;
+        }
+        $db = Yii::$app->db;
+        $transaction = $db->beginTransaction();
+        try {
+            $modelOfficialData = new OfficialData();
+            $modelOfficialData->fest_id = $fest->id;
+            $modelOfficialData->sha256sum = $jsonObj->sha256sum;
+            $modelOfficialData->downloaded_at = $at;
+
+            if (!$modelOfficialData->save()) {
+                echo "official_data save failed\n";
+                throw new \Exception();
+            }
+
+            $modelWinData = new OfficialWinData();
+            $modelWinData->data_id = $modelOfficialData->id;
+            $modelWinData->color_id = 1;
+            $modelWinData->count = $winCounts->alpha;
+            if (!$modelWinData->save()) {
+                echo "official_win_data save failed (alpha)\n";
+                throw new \Exception();
+            }
+
+            $modelWinData = new OfficialWinData();
+            $modelWinData->data_id = $modelOfficialData->id;
+            $modelWinData->color_id = 2;
+            $modelWinData->count = $winCounts->bravo;
+            if (!$modelWinData->save()) {
+                echo "official_win_data save failed (bravo)\n";
+                throw new \Exception();
+            }
+
+            foreach ($jsonObj->getMvpList() as $mvpInfo) {
+                $mvp = new Mvp();
+                $mvp->data_id = $modelOfficialData->id;
+                $mvp->color_id = $mvpInfo['x_win_team_side'] === 'alpha' ? 1 : 2;
+                $mvp->name = $mvpInfo['win_team_mvp'];
+                if (!$mvp->save()) {
+                    echo "MVP save failed\n";
+                    throw new \Exception();
+                }
+            }
+
+            $transaction->commit();
+            echo "OK\n";
+            return 0;
+        } catch (\Exception $e) {
+        }
+        $transaction->rollback();
+        return 2;
+    }
+
     private function getCurrentFest($now)
     {
         return Fest::find()
