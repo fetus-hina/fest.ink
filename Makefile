@@ -1,13 +1,16 @@
+COMPOSER_VERSION=1.0.0-alpha11
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
 
-FAVICON_TARGETS=resources/.compiled/favicon/favicon.ico \
+FAVICON_TARGETS= \
+	resources/.compiled/favicon/favicon.ico \
 	resources/.compiled/favicon/76x76-precomposed.png \
 	resources/.compiled/favicon/120x120-precomposed.png \
 	resources/.compiled/favicon/152x152-precomposed.png \
 	resources/.compiled/favicon/180x180-precomposed.png
 
-RESOURCE_TARGETS=resources/.compiled/fest.ink/fest.css.gz \
+RESOURCE_TARGETS= \
+	resources/.compiled/fest.ink/fest.css.gz \
 	resources/.compiled/fest.ink/fest.js.gz \
 	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz \
 	resources/.compiled/pixiv/pixiv_logo.png \
@@ -70,7 +73,7 @@ clean-favicon:
 		runtime/favicon
 
 composer.phar:
-	curl -sS https://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php -- --version=$(COMPOSER_VERSION)
 
 resources/.compiled/favicon/favicon.ico: runtime/favicon/face-320x320.png
 	mkdir -p resources/.compiled/favicon || true
