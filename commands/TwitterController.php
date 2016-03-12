@@ -122,7 +122,7 @@ class TwitterController extends Controller
             $status .= 'https://fest.ink/' . rawurlencode($fest->id);
             $count += 23;
         }
-        $tags = [ '#Splatoon', '#スプラトゥーン', '#Splatfest' ];
+        $tags = [];
         foreach ($tags as $tag) {
             $tagLen = mb_strlen($tag, 'UTF-8') + 1; // +1 = space
             if (140 - $count >= $tagLen) {
