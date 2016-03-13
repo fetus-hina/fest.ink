@@ -8,8 +8,21 @@ $(document).ready(function () {
     var draw = function () {
         $('.rate-graph.rate-graph-whole').each(function () {
             var $area = $(this);
+            var opts = $.extend(
+                {},
+                window.fest.getGraphOptions(previous.term, previous.teams),
+                {
+                    "grid": {
+                        "markings": previous.markings,
+                    },
+                }
+            );
             $area.empty();
-            $.plot($area, previous.data, window.fest.getGraphOptions(previous.term, previous.teams));
+            $.plot(
+                $area,
+                previous.data,
+                opts
+            );
         });
     };
 
@@ -31,6 +44,9 @@ $(document).ready(function () {
         var bravoTotal = 0;
         var alpha = [];
         var bravo = [];
+        var markings = [];
+        var lastNSStart = json.term.begin;
+        var markingColor = "rgba(128,128,128,0.5)";
         for (var i = 0; i < wins.length; ++i) {
             var tmp = wins[i];
             var tmpA = scale(tmp.alpha, tmp.at);
@@ -46,12 +62,40 @@ $(document).ready(function () {
                     tmp.at * 1000,
                     bravoTotal * 100 / (alphaTotal + bravoTotal)
                 ]);
+
+                var chi = window.fest.isSignificant(alphaTotal, bravoTotal);
+                if (chi === undefined || chi === 'n.s.') {
+                    if (lastNSStart === null) {
+                        lastNSStart = tmp.at;
+                    }
+                } else {
+                    if (lastNSStart !== null) {
+                        markings.push({
+                            xaxis: {
+                                from: lastNSStart * 1000,
+                                to: tmp.at * 1000
+                            },
+                            color: markingColor,
+                        });
+                        lastNSStart = null;
+                    }
+                }
             }
+        }
+        if (lastNSStart !== null) {
+            markings.push({
+                xaxis: {
+                    from: lastNSStart * 1000,
+                    to: json.term.end * 1000
+                },
+                color: markingColor,
+            });
         }
         previous = {
             data: [alpha, bravo],
             term: json.term,
             teams: json.teams,
+            markings: markings,
         };
         draw();
     });

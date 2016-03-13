@@ -36,6 +36,15 @@ $(document).ready(function () {
                     : ((rate * 100).toFixed(1) + '%')
             );
         }); // }}}
+        $('.total-rate-info').each(function () {
+            var $this = $(this);
+            var chi2 = window.fest.isSignificant(summary.aSumRaw, summary.bSumRaw);
+            $this.text(
+                chi2 === 'n.s.'
+                    ? '（有意差なし）'
+                    : ''
+            );
+        });
         $('.sample-count').each(function () { // {{{
             var $this = $(this);
             if (isNaN(summary.aSumRaw) || isNaN(summary.bSumRaw)) {

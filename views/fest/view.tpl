@@ -91,7 +91,7 @@
   {{/if}}
 
   <h2 id="rate">
-    推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span>
+    推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span> <span class="total-rate-info"></span>
   </h2>
   <p>
     {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
@@ -122,6 +122,9 @@
   </h2>
   <p>
     上部の「推定勝率」の遷移をグラフにしたものです。「最終的にどちらが勝ちそうか」ということを示します。
+  </p>
+  <p>
+    <strong>背景が暗いところ</strong>（またはグラフが暗く描画されているところ）は両チームの勝率が50%:50%と仮定した時との<strong>有意差がない</strong>ことを示します。(p&lt;0.05)
   </p>
   <div class="rate-graph rate-graph-whole">
   </div>
