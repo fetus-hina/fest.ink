@@ -333,16 +333,16 @@
         },
         {
             "name": "bower-asset/yii2-pjax",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/jquery-pjax.git",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/6818718408086db6bdcf33649cecb86b6b4f9b67",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/60728da6ade5879e807a49ce59ef9a72039b8978",
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978",
                 "shasum": ""
             },
             "require": {
@@ -355,6 +355,7 @@
                     ".travis.yml",
                     "Gemfile",
                     "Gemfile.lock",
+                    "CONTRIBUTING.md",
                     "vendor/",
                     "script/",
                     "test/"
@@ -586,16 +587,16 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "4.10.0",
+            "version": "4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004"
+                "reference": "f85d7aebe750c1ac21b40c7d433d5a615ffdc5f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004",
-                "reference": "dce9acb7a27f98b5040cfa9b3aa36da4a7ff3004",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/f85d7aebe750c1ac21b40c7d433d5a615ffdc5f1",
+                "reference": "f85d7aebe750c1ac21b40c7d433d5a615ffdc5f1",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +639,7 @@
                 "web service",
                 "xml"
             ],
-            "time": "2016-01-31 12:32:31"
+            "time": "2016-03-09 00:50:07"
         },
         {
             "name": "smarty/smarty",
@@ -1519,7 +1520,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
