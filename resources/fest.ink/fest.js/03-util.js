@@ -117,5 +117,31 @@
                 return 'n.s.';
             }
         },
+        getSignificantRange: function (alpha, bravo) {
+            var total = alpha + bravo;
+            if (total == 0 || isNaN(total)) {
+                return undefined;
+            }
+            var expected = total / 2;
+            var lower = undefined;
+            var upper = undefined;
+            var permil;
+            for (permil = 1; permil < 1000; ++permil) {
+                var assumeAlpha = Math.round(total * permil / 1000);
+                var assumeBravo = total - assumeAlpha;
+                var sA = alpha + assumeAlpha;
+                var sB = bravo + assumeBravo;
+                var chi2 = (2 * total) * Math.pow(alpha * assumeBravo - bravo * assumeAlpha, 2) / (sA * sB * total * total);
+                if (chi2 < 3.84146) {
+                    if (lower === undefined) {
+                        lower = permil;
+                    }
+                    upper = permil;
+                } else if (upper !== undefined) {
+                    break;
+                }
+            }
+            return [ lower / 10, upper / 10 ];
+        },
     };
 })();

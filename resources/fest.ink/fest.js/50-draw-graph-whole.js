@@ -102,7 +102,7 @@ $(document).ready(function () {
 
     $event.on('updateConfigGraphType updateConfigGraphInk', function () {
         if (!previous) {
-            t$event.trigger('requestUpdateData');
+            $event.trigger('requestUpdateData');
             return;
         }
         draw();

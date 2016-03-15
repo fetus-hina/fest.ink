@@ -129,6 +129,15 @@
   <div class="rate-graph rate-graph-whole">
   </div>
 
+  <h2 id="graph-whole2">
+    誤差推定
+  </h2>
+  <p>
+    「実際の勝率はこの範囲に大体入っているのではないかな」という範囲を示します。
+  </p>
+  <div class="rate-graph rate-graph-whole2">
+  </div>
+
   <h2 id="graph-win">
     勝利数グラフ
   </h2>

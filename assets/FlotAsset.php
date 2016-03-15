@@ -14,9 +14,10 @@ class FlotAsset extends AssetBundle
     public $sourcePath = '@bower/flot';
     public $js = [
         'jquery.flot.js',
+        'jquery.flot.fillbetween.js',
+        'jquery.flot.resize.js',
         'jquery.flot.stack.js',
         'jquery.flot.time.js',
-        'jquery.flot.resize.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
