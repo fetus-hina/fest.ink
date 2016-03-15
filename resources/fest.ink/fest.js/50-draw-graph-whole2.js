@@ -11,12 +11,21 @@ $(document).ready(function () {
             var opts = $.extend(true, {}, window.fest.getGraphOptions(previous.term, previous.teams));
             delete opts['colors'];
             delete opts['series'];
+
+            var colors = window.fest.conf.useInkColor.get()
+                ? {
+                    alpha: "#" + previous.teams.alpha.ink,
+                    bravo: "#" + previous.teams.bravo.ink,
+                } : {
+                    alpha: "#d9435f",
+                    bravo: "#5cb85c",
+                };
+            var data = $.extend(true, {}, previous).data;
+            for (var i = 0; i < data.length; ++i) {
+                data[i].color = colors[data[i].color];
+            }
             $area.empty();
-            $.plot(
-                $area,
-                previous.data,
-                opts
-            );
+            $.plot($area, data, opts);
         });
     };
 
@@ -71,14 +80,12 @@ $(document).ready(function () {
 
             }
         }
-        var colorA = window.fest.conf.useInkColor.get() ? '#' + json.teams.alpha.ink : '#d9435f';
-        var colorB = window.fest.conf.useInkColor.get() ? '#' + json.teams.bravo.ink : '#5cb85c';
         previous = {
             data: [
-                { id: "alphaL", data: lowerA, lines: { show: true, lineWidth: 0, fill: false }, color: colorA },
-                { id: "alphaH", data: upperA, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: colorA, fillBetween: "alphaL" },
-                { id: "bravoL", data: lowerB, lines: { show: true, lineWidth: 0, fill: false }, color: colorB },
-                { id: "bravoH", data: upperB, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: colorB, fillBetween: "bravoL" },
+                { id: "alphaL", data: lowerA, lines: { show: true, lineWidth: 0, fill: false }, color: "alpha" },
+                { id: "alphaH", data: upperA, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "alpha", fillBetween: "alphaL" },
+                { id: "bravoL", data: lowerB, lines: { show: true, lineWidth: 0, fill: false }, color: "bravo" },
+                { id: "bravoH", data: upperB, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "bravo", fillBetween: "bravoL" },
                 // { data: alpha, lines: {show: true}, color: colorA },
                 // { data: bravo, lines: {show: true}, color: colorB },
             ],
