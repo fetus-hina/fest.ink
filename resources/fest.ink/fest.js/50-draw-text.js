@@ -30,11 +30,27 @@ $(document).ready(function () {
             var $this = $(this);
             var teamId = ($this.attr('data-team') + "").substr(0, 1);
             var rate = summary[teamId] ? summary[teamId] : NaN;
-            $this.text(
-                (rate === undefined || isNaN(rate))
-                    ? '???'
-                    : ((rate * 100).toFixed(1) + '%')
-            );
+            if (rate === undefined || isNaN(rate)) {
+                $this.empty().text('???');
+            } else {
+                var range = window.fest.conf.useGraphScale.get()
+                    ? undefined
+                    : window.fest.getSignificantRange(summary.aSumRaw, summary.bSumRaw);
+                $this.empty().append(
+                    (rate * 100).toFixed(1)
+                );
+                if (range) {
+                    $this.append(
+                        $('<span>')
+                            .text('±' + ((range[1] - range[0]) / 2).toFixed(1))
+                            .css({
+                                color: '#999',
+                                fontSize: '0.618em',
+                            })
+                    );
+                }
+                $this.append('%');
+            }
         }); // }}}
         $('.total-rate-info').each(function () {
             var $this = $(this);
