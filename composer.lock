@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "0.6.2",
+            "version": "0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "d4fc4a3c36f5ecdfc8865ab1e7cefc432e49491c"
+                "reference": "6bcc5e866423e499a962a00a06df07da880c0c1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/d4fc4a3c36f5ecdfc8865ab1e7cefc432e49491c",
-                "reference": "d4fc4a3c36f5ecdfc8865ab1e7cefc432e49491c",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/6bcc5e866423e499a962a00a06df07da880c0c1c",
+                "reference": "6bcc5e866423e499a962a00a06df07da880c0c1c",
                 "shasum": ""
             },
             "require": {
@@ -26,8 +26,8 @@
                 "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpmd/phpmd": "2.2.*",
-                "phpunit/phpunit": "4.7.*",
+                "phpmd/phpmd": "2.3.*",
+                "phpunit/phpunit": "4.8.*",
                 "squizlabs/php_codesniffer": "2.3.*"
             },
             "type": "library",
@@ -59,7 +59,7 @@
                 "social",
                 "twitter"
             ],
-            "time": "2015-11-05 04:04:20"
+            "time": "2016-03-30 11:14:45"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -204,16 +204,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874"
+                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/788eaba2f83e7b7445c7a83a50c81c0704423874",
-                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
+                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -792,16 +792,16 @@
         },
         {
             "name": "yiisoft/yii2-bootstrap",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923"
+                "reference": "3fd2b8c950cce79d60e9702d6bcb24eb3c80f6c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
-                "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/3fd2b8c950cce79d60e9702d6bcb24eb3c80f6c5",
+                "reference": "3fd2b8c950cce79d60e9702d6bcb24eb3c80f6c5",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +838,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-09-23 17:48:24"
+            "time": "2016-03-17 03:29:28"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -889,16 +889,16 @@
         },
         {
             "name": "yiisoft/yii2-smarty",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-smarty.git",
-                "reference": "d911f6474cd2b27c0ffb279baf66d0e033a69dd0"
+                "reference": "450572fb9904a0c4b9ce6b10de0f7b691060d32e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-smarty/zipball/d911f6474cd2b27c0ffb279baf66d0e033a69dd0",
-                "reference": "d911f6474cd2b27c0ffb279baf66d0e033a69dd0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-smarty/zipball/450572fb9904a0c4b9ce6b10de0f7b691060d32e",
+                "reference": "450572fb9904a0c4b9ce6b10de0f7b691060d32e",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +936,7 @@
                 "smarty",
                 "yii2"
             ],
-            "time": "2015-05-25 20:59:03"
+            "time": "2016-03-17 04:00:36"
         },
         {
             "name": "zendframework/zend-crypt",
@@ -1175,16 +1175,16 @@
         },
         {
             "name": "bower-asset/typeahead.js",
-            "version": "v0.10.5",
+            "version": "v0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twitter/typeahead.js.git",
-                "reference": "5f198b87d1af845da502ea9df93a5e84801ce742"
+                "reference": "588440f66559714280628a4f9799f0c4eb880a4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twitter/typeahead.js/zipball/5f198b87d1af845da502ea9df93a5e84801ce742",
-                "reference": "5f198b87d1af845da502ea9df93a5e84801ce742",
+                "url": "https://api.github.com/repos/twitter/typeahead.js/zipball/588440f66559714280628a4f9799f0c4eb880a4a",
+                "reference": "588440f66559714280628a4f9799f0c4eb880a4a",
                 "shasum": ""
             },
             "require": {
@@ -1411,16 +1411,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.3",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "56cc5caf051189720b8de974e4746090aaa10d44"
+                "reference": "9a5aef5fc0d4eff86853d44202b02be8d5a20154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/56cc5caf051189720b8de974e4746090aaa10d44",
-                "reference": "56cc5caf051189720b8de974e4746090aaa10d44",
+                "url": "https://api.github.com/repos/symfony/console/zipball/9a5aef5fc0d4eff86853d44202b02be8d5a20154",
+                "reference": "9a5aef5fc0d4eff86853d44202b02be8d5a20154",
                 "shasum": ""
             },
             "require": {
@@ -1467,20 +1467,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-28 16:20:50"
+            "time": "2016-03-17 09:19:04"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.8.3",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "877bb4b16ea573cc8c024e9590888fcf7eb7e0f7"
+                "reference": "ca24cf2cd4e3826f571e0067e535758e73807aa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/877bb4b16ea573cc8c024e9590888fcf7eb7e0f7",
-                "reference": "877bb4b16ea573cc8c024e9590888fcf7eb7e0f7",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/ca24cf2cd4e3826f571e0067e535758e73807aa1",
+                "reference": "ca24cf2cd4e3826f571e0067e535758e73807aa1",
                 "shasum": ""
             },
             "require": {
@@ -1516,7 +1516,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-22 16:12:45"
+            "time": "2016-03-10 10:53:53"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1579,16 +1579,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.3",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe"
+                "reference": "fb467471952ef5cf8497c029980e556b47545333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe",
-                "reference": "7dedd5b60550f33dca16dd7e94ef8aca8b67bbfe",
+                "url": "https://api.github.com/repos/symfony/process/zipball/fb467471952ef5cf8497c029980e556b47545333",
+                "reference": "fb467471952ef5cf8497c029980e556b47545333",
                 "shasum": ""
             },
             "require": {
@@ -1624,20 +1624,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-02 13:33:15"
+            "time": "2016-03-23 13:11:46"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.3",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995"
+                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
-                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/584e52cb8f788a887553ba82db6caacb1d6260bb",
+                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb",
                 "shasum": ""
             },
             "require": {
@@ -1673,24 +1673,24 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-23 07:41:20"
+            "time": "2016-03-04 07:54:35"
         },
         {
             "name": "yiisoft/yii2-gii",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "e5a023e8779bd774194842ec1b8fb4917cf04007"
+                "reference": "1bd6df6804ca077ec022587905a0d43eb286f507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e5a023e8779bd774194842ec1b8fb4917cf04007",
-                "reference": "e5a023e8779bd774194842ec1b8fb4917cf04007",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/1bd6df6804ca077ec022587905a0d43eb286f507",
+                "reference": "1bd6df6804ca077ec022587905a0d43eb286f507",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/typeahead.js": "0.10.*",
+                "bower-asset/typeahead.js": "0.10.* | ~0.11.0",
                 "phpspec/php-diff": ">=1.0.2",
                 "yiisoft/yii2": ">=2.0.4",
                 "yiisoft/yii2-bootstrap": "~2.0"
@@ -1726,7 +1726,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-05-10 22:09:31"
+            "time": "2016-03-18 14:09:46"
         }
     ],
     "aliases": [],
