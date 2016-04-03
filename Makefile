@@ -1,4 +1,4 @@
-COMPOSER_VERSION=1.0.0-alpha11
+COMPOSER_VERSION=1.0.0-beta1
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
 
@@ -18,6 +18,7 @@ RESOURCE_TARGETS= \
 
 all: \
 	composer.phar \
+	composer-update \
 	composer-plugin \
 	vendor \
 	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
@@ -37,10 +38,14 @@ favicon-maybe:
 
 resource: $(RESOURCE_TARGETS)
 
-composer-plugin: composer.phar
-	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.0'
+composer-update: composer.phar
+	(./composer.phar --version | grep "Composer version $(COMPOSER_VERSION) " >/dev/null) || ./composer.phar self-update -- $(COMPOSER_VERSION)
 
-vendor: composer.phar composer.lock composer-plugin
+composer-plugin: composer.phar composer-update
+	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.1'
+	grep '"hirak/prestissimo"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'hirak/prestissimo:^0.1'
+
+vendor: composer.phar composer.lock composer-plugin composer-update
 	php composer.phar install --prefer-dist
 
 node_modules:
