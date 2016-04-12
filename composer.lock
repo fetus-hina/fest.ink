@@ -128,16 +128,16 @@
         },
         {
             "name": "bower-asset/fontawesome",
-            "version": "v4.5.0",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968"
+                "reference": "5697be912bc4aa455bfe343f50afdd41caae1a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/fddd2c240452e6c8990c4ef75e0265b455aa7968",
-                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/5697be912bc4aa455bfe343f50afdd41caae1a2f",
+                "reference": "5697be912bc4aa455bfe343f50afdd41caae1a2f",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -204,16 +204,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd"
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
-                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/af22a351b2ea5801ffb1695abb3bb34d5bed9198",
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -990,16 +990,16 @@
         },
         {
             "name": "zendframework/zend-math",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-math.git",
-                "reference": "395ebb981e01f2fc708ba07d8ee0d86f6e3e9ed6"
+                "reference": "f4358090d5d23973121f1ed0b376184b66d9edec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-math/zipball/395ebb981e01f2fc708ba07d8ee0d86f6e3e9ed6",
-                "reference": "395ebb981e01f2fc708ba07d8ee0d86f6e3e9ed6",
+                "url": "https://api.github.com/repos/zendframework/zend-math/zipball/f4358090d5d23973121f1ed0b376184b66d9edec",
+                "reference": "f4358090d5d23973121f1ed0b376184b66d9edec",
                 "shasum": ""
             },
             "require": {
@@ -1013,13 +1013,13 @@
             "suggest": {
                 "ext-bcmath": "If using the bcmath functionality",
                 "ext-gmp": "If using the gmp functionality",
-                "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable"
+                "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if Mcrypt extensions is unavailable"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1036,7 +1036,7 @@
                 "math",
                 "zf2"
             ],
-            "time": "2016-02-02 23:15:14"
+            "time": "2016-04-07 16:29:53"
         },
         {
             "name": "zendframework/zend-stdlib",
@@ -1262,19 +1262,24 @@
         },
         {
             "name": "phpspec/php-diff",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a"
+                "reference": "0464787bfa7cd13576c5a1e318709768798bec6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
-                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/0464787bfa7cd13576c5a1e318709768798bec6a",
+                "reference": "0464787bfa7cd13576c5a1e318709768798bec6a",
                 "shasum": ""
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Diff": "lib/"
@@ -1287,12 +1292,11 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2013-11-01 13:02:21"
+            "time": "2016-04-07 12:29:16"
         },
         {
             "name": "psr/log",
@@ -1334,19 +1338,20 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8"
+                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
-                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1bcdf03b068a530ac1962ce671dead356eeba43b",
+                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "ext-tokenizer": "*",
                 "ext-xmlwriter": "*",
                 "php": ">=5.1.2"
@@ -1407,7 +1412,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-01-19 23:39:10"
+            "time": "2016-04-03 22:58:34"
         },
         {
             "name": "symfony/console",

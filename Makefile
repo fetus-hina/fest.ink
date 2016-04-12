@@ -1,4 +1,4 @@
-COMPOSER_VERSION=1.0.0-beta1
+COMPOSER_VERSION=1.0.0
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
 
