@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "0.6.3",
+            "version": "0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "6bcc5e866423e499a962a00a06df07da880c0c1c"
+                "reference": "f7dec715c6e79e6085470b8b5d4dc2727afc5186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/6bcc5e866423e499a962a00a06df07da880c0c1c",
-                "reference": "6bcc5e866423e499a962a00a06df07da880c0c1c",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/f7dec715c6e79e6085470b8b5d4dc2727afc5186",
+                "reference": "f7dec715c6e79e6085470b8b5d4dc2727afc5186",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "social",
                 "twitter"
             ],
-            "time": "2016-03-30 11:14:45"
+            "time": "2016-04-20 23:23:26"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -128,16 +128,16 @@
         },
         {
             "name": "bower-asset/fontawesome",
-            "version": "v4.6.0",
+            "version": "v4.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "5697be912bc4aa455bfe343f50afdd41caae1a2f"
+                "reference": "6535013c330e801ecf0b23c437865a7fb344486d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/5697be912bc4aa455bfe343f50afdd41caae1a2f",
-                "reference": "5697be912bc4aa455bfe343f50afdd41caae1a2f",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/6535013c330e801ecf0b23c437865a7fb344486d",
+                "reference": "6535013c330e801ecf0b23c437865a7fb344486d",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -1040,16 +1040,16 @@
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "22eb098958980fbbe6b9a06f209f5a4b496cc0c1"
+                "reference": "8bafa58574204bdff03c275d1d618aaa601588ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/22eb098958980fbbe6b9a06f209f5a4b496cc0c1",
-                "reference": "22eb098958980fbbe6b9a06f209f5a4b496cc0c1",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/8bafa58574204bdff03c275d1d618aaa601588ae",
+                "reference": "8bafa58574204bdff03c275d1d618aaa601588ae",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1081,7 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2016-02-03 16:53:37"
+            "time": "2016-04-12 21:19:36"
         }
     ],
     "packages-dev": [
