@@ -7,9 +7,10 @@
 
 namespace app\commands;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Yii;
 use yii\console\Controller;
-use Abraham\TwitterOAuth\TwitterOAuth;
+use app\components\helpers\Significant;
 use app\models\Fest;
 
 class TwitterController extends Controller
@@ -72,7 +73,7 @@ class TwitterController extends Controller
         // {{{
         $debug = false;
 
-        $now = $debug ? strtotime('2015-07-03 17:18:06+9') : time();
+        $now = $debug ? strtotime('2015-09-13T10:00:00+09') : time();
         $fest = $this->getCurrentFest($now);
         if (!$fest) {
             echo "fest closed.\n";
@@ -108,14 +109,17 @@ class TwitterController extends Controller
         $alphaWinPercent = round($sum['total_win_a'] * 1000 / ($sum['total_win_a'] + $sum['total_win_b'])) / 10;
         $lastUpdated = new \DateTime('@' . $sum['last_updated_at']);
         $lastUpdated->setTimezone(new \DateTimeZone("Asia/Tokyo"));
+        $signficantRange = Significant::significantRange($sum['total_win_a'], $sum['total_win_b']);
         $status = sprintf(
-            "フェス\"%s\"の推定勝率(%s現在)\n%sチーム: %.1f%%\n%sチーム: %.1f%%\n",
+            "フェス\"%1\$s\"の推定勝率(%4\$s現在, N=%8\$d)\n%2\$s: %5\$.1f±%7\$.1f%%\n%3\$s: %6\$.1f±%7\$.1f%%\n",
             $fest->name,
-            $lastUpdated->format('Y-m-d H:i T'),
             $fest->alphaTeam->name,
-            $alphaWinPercent,
             $fest->bravoTeam->name,
-            100 - $alphaWinPercent
+            $lastUpdated->format('Y-m-d H:i T'),
+            $alphaWinPercent,
+            100 - $alphaWinPercent,
+            ($signficantRange[1] - $signficantRange[0]) / 2,
+            $sum['total_win_a'] + $sum['total_win_b']
         );
         $count = mb_strlen($status, 'UTF-8');
         if (140 - $count >= 23) {
@@ -129,6 +133,11 @@ class TwitterController extends Controller
                 $status .= ' ' . $tag;
                 $count += $tagLen;
             }
+        }
+
+        if ($debug) {
+            echo $status . "\n";
+            exit;
         }
         return $status;
         // }}}
