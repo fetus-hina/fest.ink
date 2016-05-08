@@ -1,4 +1,3 @@
-COMPOSER_VERSION=1.0.0
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
 
@@ -39,7 +38,8 @@ favicon-maybe:
 resource: $(RESOURCE_TARGETS)
 
 composer-update: composer.phar
-	(./composer.phar --version | grep "Composer version $(COMPOSER_VERSION) " >/dev/null) || ./composer.phar self-update -- $(COMPOSER_VERSION)
+	./composer.phar self-update
+	touch -r composer.json composer.phar
 
 composer-plugin: composer.phar composer-update
 	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.1'
@@ -78,7 +78,8 @@ clean-favicon:
 		runtime/favicon
 
 composer.phar:
-	curl -sS https://getcomposer.org/installer | php -- --version=$(COMPOSER_VERSION)
+	curl -sS https://getcomposer.org/installer | php
+	touch -r composer.json composer.phar
 
 resources/.compiled/favicon/favicon.ico: runtime/favicon/face-320x320.png
 	mkdir -p resources/.compiled/favicon || true
