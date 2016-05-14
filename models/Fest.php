@@ -42,7 +42,7 @@ class Fest extends \yii\db\ActiveRecord
         return [
             [['name', 'start_at', 'end_at'], 'required'],
             [['name'], 'string'],
-            [['start_at', 'end_at'], 'integer']
+            [['start_at', 'end_at', 'is_multiple_region'], 'integer']
         ];
     }
 
@@ -134,6 +134,7 @@ class Fest extends \yii\db\ActiveRecord
         return [
             'id'    => (int)$this->id,
             'name'  => $this->name,
+            'is_multiple_region' => !!$this->is_multiple_region,
             'term'  => [
                 'begin'         => (int)$this->start_at,
                 'end'           => (int)$this->end_at,

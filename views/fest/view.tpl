@@ -92,6 +92,14 @@
       </a>
     </p>
   {{/if}}
+  {{if $fest->is_multiple_region}}
+    <p>
+      <strong style="color:red">
+        このフェスは複数の地域にまたがって開催されています。<br>
+        統計対象は日本のみとなっている可能性があり、他の地域を合わせてみると結果は大きくずれるかもしれません。
+      </strong>
+    </p>
+  {{/if}}
 
   <h2 id="rate">
     推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span> <span class="total-rate-info"></span>
