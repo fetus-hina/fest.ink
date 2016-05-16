@@ -85,9 +85,10 @@
   <p>
     統計学的な処理（誤差率や有意差等）は実験的な実装です。
   </p>
-  {{if $fest->id >= 7}}
+  {{$statink = $fest->statInkUrl}}
+  {{if $statink}}
     <p>
-      <a href="https://stat.ink/fest/jp/{{$fest->id|escape:url}}">
+      <a href="{{$statink|escape}}">
         stat.inkの投稿情報に基づいて計算したデータはこちらです。
       </a>
     </p>

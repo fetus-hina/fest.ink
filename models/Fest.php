@@ -156,4 +156,16 @@ class Fest extends \yii\db\ActiveRecord
             'result' => $officialResult,
         ];
     }
+
+    public function getStatInkUrl()
+    {
+        if ($this->id < 7) {
+            return null;
+        }
+        return sprintf(
+            '%s/fest/jp/%s',
+            rtrim(Yii::getAlias('@statink'), '/'),
+            rawurlencode((string)$this->id)
+        );
+    }
 }

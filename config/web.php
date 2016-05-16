@@ -81,6 +81,9 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
+    'aliases' => [
+        '@statink' => 'https://stat.ink/',
+    ],
 ];
 
 if (YII_ENV_DEV) {
