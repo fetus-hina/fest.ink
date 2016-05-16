@@ -48,6 +48,10 @@ composer-plugin: composer.phar composer-update
 vendor: composer.phar composer.lock composer-plugin composer-update
 	php composer.phar install --prefer-dist
 
+composer.lock: composer.json composer.phar
+	php composer.phar update -vvv
+	touch -r composer.json composer.lock
+
 node_modules:
 	npm install
 
