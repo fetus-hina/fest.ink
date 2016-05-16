@@ -43,7 +43,7 @@ composer-update: composer.phar
 
 composer-plugin: composer.phar composer-update
 	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.1'
-	grep '"hirak/prestissimo"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'hirak/prestissimo:^0.1'
+	grep '"hirak/prestissimo"' ~/.composer/composer.json >/dev/null && ./composer.phar global remove 'hirak/prestissimo' || true
 
 vendor: composer.phar composer.lock composer-plugin composer-update
 	php composer.phar install --prefer-dist
