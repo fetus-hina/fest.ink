@@ -20,6 +20,7 @@
         "bower-asset/timezone-js": "^0.4.13",
         "cybercog/yii2-google-analytics": "^0.3.1",
         "jp3cki/yii2-googleadsense": "^2.0",
+        "nojimage/twitter-text-php": "^1.1",
         "php-curl-class/php-curl-class": "^4.6",
         "yiisoft/yii2": "^2.0.6",
         "yiisoft/yii2-bootstrap": "2.0.*",
