@@ -9,8 +9,10 @@ namespace app\components\helpers;
 
 class Significant
 {
+    const P_0_001 = 'p<.001';
     const P_0_01 = 'p<.01';
     const P_0_05 = 'p<.05';
+    const P_0_10 = 'p<.10';
     const NS = 'n.s.';
 
     public static function isSignificant($alpha, $bravo)
@@ -23,10 +25,14 @@ class Significant
         $a = pow($alpha - $expected, 2) / $expected;
         $b = pow($bravo - $expected, 2) / $expected;
         $chi2 = $a + $b;
-        if ($chi2 >= 6.63490) {
+        if ($chi2 >= 10.82757) {
+            return static::P_0_001;
+        } else if ($chi2 >= 6.63490) {
             return static::P_0_01;
         } else if ($chi2 >= 3.84146) {
             return static::P_0_05;
+        } else if ($chi2 >= 2.70554) {
+            return static::P_0_10;
         } else {
             return static::NS;
         }

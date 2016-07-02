@@ -162,6 +162,14 @@ class TwitterController extends Controller
         );
         $lines[] = (function () use ($sum, $fest, $teamNameA, $teamNameB) {
             switch (Significant::isSignificant($sum['total_win_a'], $sum['total_win_b'])) {
+                case Significant::P_0_001:
+                    return sprintf(
+                        '【%sチーム優勢】',
+                        $sum['total_win_a'] > $sum['total_win_b']
+                            ? $teamNameA
+                            : $teamNameB
+                    );
+
                 case Significant::P_0_01:
                     return sprintf(
                         '【%sチーム優勢の模様】',
@@ -172,7 +180,15 @@ class TwitterController extends Controller
 
                 case Significant::P_0_05:
                     return sprintf(
-                        '【%sチーム優勢?】',
+                        '【%sチーム優勢？】',
+                        $sum['total_win_a'] > $sum['total_win_b']
+                            ? $teamNameA
+                            : $teamNameB
+                    );
+
+                case Significant::P_0_10:
+                    return sprintf(
+                        '【%sチーム優勢の気配】',
                         $sum['total_win_a'] > $sum['total_win_b']
                             ? $teamNameA
                             : $teamNameB
