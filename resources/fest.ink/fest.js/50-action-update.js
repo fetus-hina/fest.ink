@@ -21,13 +21,27 @@ $(document).ready(function () {
             totalBravoRaw += json.wins[i].bravo;
         }
         var totalCount = totalAlpha + totalBravo;
+        var aRange = (function(significantRange) {
+            if (significantRange === undefined || totalCount < 1) {
+                return {
+                    'min': NaN,
+                    'max': NaN,
+                };
+            }
+            return {
+                'min': significantRange[0],
+                'max': significantRange[1],
+            };
+        })(window.fest.getSignificantRange(totalAlphaRaw, totalBravoRaw));
         return {
             'a':        (totalCount > 0) ? totalAlpha / totalCount : NaN,
             'b':        (totalCount > 0) ? totalBravo / totalCount : NaN,
             'aSum':     (totalCount > 0) ? totalAlpha : NaN,
             'bSum':     (totalCount > 0) ? totalBravo : NaN,
             'aSumRaw':  (totalCount > 0) ? totalAlphaRaw: NaN,
-            'bSumRaw':  (totalCount > 0) ? totalBravoRaw: NaN
+            'bSumRaw':  (totalCount > 0) ? totalBravoRaw: NaN,
+            'aRange':   aRange,
+            'bRange':   {'min': 100 - aRange.max, 'max': 100 - aRange.min},
         };
     }; // }}}
     $event.on('requestUpdateData', function () {

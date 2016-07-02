@@ -112,14 +112,18 @@
     {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
   </p>
   <div class="progress">
-    <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar" style="width:0%" data-team="alpha">
+    <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="alpha">
+    </div>
+    <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="alpha">
     </div>
   </div>
   <p>
     {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate" data-team="bravo">取得中</span>（サンプル数：<span class="sample-count" data-team="bravo">???</span>）
   </p>
   <div class="progress">
-    <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar" style="width:0%" data-team="bravo">
+    <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="bravo">
+    </div>
+    <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="bravo">
     </div>
   </div>
 

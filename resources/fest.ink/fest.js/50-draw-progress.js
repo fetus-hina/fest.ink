@@ -26,14 +26,24 @@ $(document).ready(function () {
             json.teams.alpha.ink,
             json.teams.bravo.ink,
         ];
+        console.log(summary);
         $('.total-progressbar').each(function () {
             var $this = $(this);
             var teamId = ($this.attr('data-team') + "").substr(0, 1);
-            var rate = summary[teamId] ? summary[teamId] : NaN;
+            var rangeKey = teamId + 'Range'; // "aRange" or "bRange"
+            var rate = (function() {
+                if (summary[rangeKey] && summary[rangeKey].max && summary[rangeKey].min) {
+                    return $this.hasClass('total-progressbar-uncertain')
+                        ? (summary[rangeKey].max - summary[rangeKey].min)
+                        : summary[rangeKey].min;
+                } else {
+                    return NaN;
+                }
+            })();
             $this.width(
                 (rate === undefined || isNaN(rate))
                     ? '0%'
-                    : ((rate * 100) + "%")
+                    : (rate + "%")
             );
         });
         updateColor();
