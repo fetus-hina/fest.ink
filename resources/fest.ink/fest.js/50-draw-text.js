@@ -63,7 +63,7 @@ $(document).ready(function () {
                     case 'p<.01':
                         return '【' + teamName + 'チーム優勢の模様】';
 
-                    case 'p<0.01':
+                    case 'p<.001':
                         return '【' + teamName + 'チーム優勢】';
 
                     default:

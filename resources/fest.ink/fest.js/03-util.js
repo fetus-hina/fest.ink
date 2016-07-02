@@ -73,7 +73,7 @@
             var b = Math.pow(bravo - expected, 2) / expected;
             var chi2 = parseFloat((a + b).toFixed(5));
             if (chi2 >= 10.82757) {
-                return 'p<0.01';
+                return 'p<.001';
             } else if (chi2 >= 6.63490) {
                 return 'p<.01';
             } else if (chi2 >= 3.84146) {
