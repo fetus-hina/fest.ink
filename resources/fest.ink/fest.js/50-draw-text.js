@@ -28,38 +28,42 @@ $(document).ready(function () {
 
         $('.total-rate').each(function () { // {{{
             var $this = $(this);
-            var teamId = ($this.attr('data-team') + "").substr(0, 1);
-            var rate = summary[teamId] ? summary[teamId] : NaN;
-            if (rate === undefined || isNaN(rate)) {
+            var teamKey = ($this.attr('data-team') + "").substr(0, 1) + "Range";
+            var rate = (summary[teamKey] && summary[teamKey].min && summary[teamKey].max)
+                    ? summary[teamKey]
+                    : undefined;
+            if (rate === undefined) {
                 $this.empty().text('???');
             } else {
-                var range = window.fest.conf.useGraphScale.get()
-                    ? undefined
-                    : window.fest.getSignificantRange(summary.aSumRaw, summary.bSumRaw);
-                $this.empty().append(
-                    (rate * 100).toFixed(1)
+                $this.empty().text(
+                    (parseFloat(rate.min).toFixed(1)) +
+                    '～' +
+                    (parseFloat(rate.max).toFixed(1)) +
+                    '%'
                 );
-                if (range) {
-                    $this.append(
-                        $('<span>')
-                            .text('±' + ((range[1] - range[0]) / 2).toFixed(1))
-                            .css({
-                                color: '#999',
-                                fontSize: '0.618em',
-                            })
-                    );
-                }
-                $this.append('%');
             }
         }); // }}}
         $('.total-rate-info').each(function () {
             var $this = $(this);
             var chi2 = window.fest.isSignificant(summary.aSumRaw, summary.bSumRaw);
-            $this.text(
-                chi2 === 'n.s.'
-                    ? '（有意差なし）'
-                    : ''
-            );
+            $this.text((function() {
+                var teamName = (summary.aSumRaw > summary.bSumRaw)
+                        ? json.teams.alpha.name
+                        : json.teams.bravo.name;
+                switch (chi2) {
+                    case 'n.s.':
+                        return '【優劣不明】';
+
+                    case 'p<.05':
+                        return '【' + teamName + 'チーム優勢?】';
+
+                    case 'p<.01':
+                        return '【' + teamName + 'チーム優勢の模様】';
+
+                    default:
+                        return '';
+                }
+            })());
         });
         $('.sample-count').each(function () { // {{{
             var $this = $(this);

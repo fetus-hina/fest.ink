@@ -106,7 +106,7 @@
   {{/if}}
 
   <h2 id="rate">
-    推定勝率: <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span> <span class="total-rate-info"></span>
+    推定勝率: <span class="total-rate-info"></span> <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span>
   </h2>
   <p>
     {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
