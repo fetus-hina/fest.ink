@@ -8,13 +8,43 @@
 namespace app\commands;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Exception;
 use Yii;
-use yii\console\Controller;
 use app\components\helpers\Significant;
 use app\models\Fest;
+use yii\console\Controller;
 
 class TwitterController extends Controller
 {
+    /**
+     * @var string 検索基準となる日時を strtotime() が解釈できる形式で指定します。
+     */
+    public $time = null;
+
+    public function init()
+    {
+        parent::init();
+        Yii::$app->timeZone = 'Asia/Tokyo';
+    }
+
+    public function options(/*string*/ $action) /* : array */
+    {
+        switch ($action) {
+            case 'update':
+                return ['time'];
+
+            default:
+                return [];
+        }
+    }
+
+    public function optionAliases() /* : array */
+    {
+        return [
+            't' => 'time',
+        ];
+    }
+
     public function actionUpdate()
     {
         $status = $this->makeTweet();
@@ -73,13 +103,13 @@ class TwitterController extends Controller
         // {{{
         $debug = false;
 
-        $now = $debug ? strtotime('2015-09-13T10:00:00+09') : time();
-        $fest = $this->getCurrentFest($now);
+        $fest = $this->getCurrentFest();
         if (!$fest) {
             echo "fest closed.\n";
             return false;
         }
 
+        $time = $this->getTime();
         $query = (new \yii\db\Query())
             ->select([
                 'SUM({{win_a}}.[[count]]) AS [[total_win_a]]',
@@ -95,10 +125,13 @@ class TwitterController extends Controller
                 '{{official_win_data}} AS {{win_b}}',
                 '{{official_data}}.[[id]] = {{win_b}}.[[data_id]]'
             )
-            ->andWhere([
-                '{{official_data}}.[[fest_id]]' => $fest->id,
-                '{{win_a}}.[[color_id]]' => 1,
-                '{{win_b}}.[[color_id]]' => 2,
+            ->andWhere(['and',
+                [
+                    '{{official_data}}.[[fest_id]]' => $fest->id,
+                    '{{win_a}}.[[color_id]]' => 1,
+                    '{{win_b}}.[[color_id]]' => 2,
+                ],
+                ['<=', '{{official_data}}.[[downloaded_at]]', $time],
             ]);
         if (!$sum = $query->createCommand()->queryOne()) {
             return false;
@@ -110,31 +143,65 @@ class TwitterController extends Controller
         $lastUpdated = new \DateTime('@' . $sum['last_updated_at']);
         $lastUpdated->setTimezone(new \DateTimeZone("Asia/Tokyo"));
         $signficantRange = Significant::significantRange($sum['total_win_a'], $sum['total_win_b']);
-        $status = sprintf(
-            "フェス\"%1\$s\"の推定勝率(%4\$s現在, N=%8\$d)\n%2\$s: %5\$.1f±%7\$.1f%%\n%3\$s: %6\$.1f±%7\$.1f%%\n",
+        list($teamNameA, $teamNameB) = (function ($a, $b) {
+            $len = mb_strlen($a, 'UTF-8');
+            for ($i = 0; $i < $len; ++$i) {
+                $tmpA = mb_substr($a, $i, 1, 'UTF-8');
+                $tmpB = mb_substr($b, $i, 1, 'UTF-8');
+                if ($tmpA !== $tmpB) {
+                    return [$tmpA, $tmpB];
+                }
+            }
+            return ['Ａ', 'Ｂ'];
+        })($fest->alphaTeam->name, $fest->bravoTeam->name);
+        $lines = [];
+        $lines[] = sprintf('フェス「%s」の推定勝率(%s現在; N=%s)',
             $fest->name,
-            $fest->alphaTeam->name,
-            $fest->bravoTeam->name,
-            $lastUpdated->format('Y-m-d H:i T'),
-            $alphaWinPercent,
-            100 - $alphaWinPercent,
-            ($signficantRange[1] - $signficantRange[0]) / 2,
-            $sum['total_win_a'] + $sum['total_win_b']
+            $lastUpdated->format('Y-m-d H:i'),
+            number_format($sum['total_win_a'] + $sum['total_win_b'])
         );
-        $count = mb_strlen($status, 'UTF-8');
-        if (140 - $count >= 23) {
-            $status .= 'https://fest.ink/' . rawurlencode($fest->id);
-            $count += 23;
-        }
-        $tags = [];
-        foreach ($tags as $tag) {
-            $tagLen = mb_strlen($tag, 'UTF-8') + 1; // +1 = space
-            if (140 - $count >= $tagLen) {
-                $status .= ' ' . $tag;
-                $count += $tagLen;
+        $lines[] = (function () use ($sum, $fest, $teamNameA, $teamNameB) {
+            switch (Significant::isSignificant($sum['total_win_a'], $sum['total_win_b'])) {
+                case Significant::P_0_01:
+                    return sprintf(
+                        '【%sチーム優勢の模様】',
+                        $sum['total_win_a'] > $sum['total_win_b']
+                            ? $teamNameA
+                            : $teamNameB
+                    );
+
+                case Significant::P_0_05:
+                    return sprintf(
+                        '【%sチーム優勢?】',
+                        $sum['total_win_a'] > $sum['total_win_b']
+                            ? $teamNameA
+                            : $teamNameB
+                    );
+
+                default:
+                    return '【優劣不明】';
+            }
+        })();
+        $lines[] = sprintf('%s: %.1f～%.1f%%',
+            $teamNameA,
+            $signficantRange[0],
+            $signficantRange[1]
+        );
+        $lines[] = sprintf('%s: %.1f～%.1f%%',
+            $teamNameB,
+            100 - $signficantRange[1],
+            100 - $signficantRange[0]
+        );
+        $status = implode("\n", $lines);
+        $appends = [
+            "\n" . 'https://fest.ink/' . rawurlencode($fest->id),
+        ];
+        $twValidation = \Twitter_Validation::create('', ['short_url_length' => 23, 'short_url_length_https' => 23]);
+        foreach ($appends as $appendText) {
+            if ($twValidation->getTweetLength($status . $appendText) <= 140) {
+                $status .= $appendText;
             }
         }
-
         if ($debug) {
             echo $status . "\n";
             exit;
@@ -174,11 +241,35 @@ class TwitterController extends Controller
         // }}}
     }
 
-    private function getCurrentFest($now)
+    private function getCurrentFest() /* : ?Fest */
     {
-        return Fest::find()
-            ->andWhere(['<=', '{{fest}}.[[start_at]]', $now])
-            ->andWhere(['>', '{{fest}}.[[end_at]]', $now])
+        $time = $this->getTime();
+        fprintf(STDERR, "%s: %s に開催中のフェスを取得しています...\n", __METHOD__, date('Y-m-d\TH:i:sO', (int)$time));
+        $ret = Fest::find()
+            ->andWhere(['<=', '{{fest}}.[[start_at]]', $time])
+            ->andWhere(['>', '{{fest}}.[[end_at]]', $time])
             ->one();
+        fwrite(STDERR, $ret
+            ? sprintf("%s: 開催中フェス: #%d, %s\n", __METHOD__, $ret->id, $ret->name)
+            : (__METHOD__ . ": フェスは見つかりませんでした\n")
+        );
+        return $ret;
+    }
+
+    public function getTime() : int
+    {
+        $now = $_SERVER['REQUEST_TIME'] ?? time();
+        if ($this->time === null || trim((string)$this->time) === '') {
+            return $now;
+        }
+        if (is_scalar($this->time)) {
+            $t = @strtotime($this->time, $now);
+        } else {
+            $t = false;
+        }
+        if ($t === false) {
+            throw new Exception('Invalid time value: "' . (string)$this->time . '"');
+        }
+        return (int)$t;
     }
 }
