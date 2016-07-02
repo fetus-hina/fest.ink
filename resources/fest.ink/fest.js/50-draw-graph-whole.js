@@ -64,7 +64,7 @@ $(document).ready(function () {
                 ]);
 
                 var chi = window.fest.isSignificant(alphaTotal, bravoTotal);
-                if (chi === undefined || chi === 'n.s.') {
+                if (chi === undefined || chi === 'n.s.' || chi === 'p<.10') {
                     if (lastNSStart === null) {
                         lastNSStart = tmp.at;
                     }
