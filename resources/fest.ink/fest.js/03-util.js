@@ -29,46 +29,9 @@
                 date.getTimezoneAbbreviation();
         },
         getTimeBasedScaler: function () { // {{{
-            var scaledScaler = function (value, time) { // {{{
-                var scaleMap = [
-                    1.0000, 1.0000, 1.0000, 0.7778, // 00:00 - 01:30 JST
-                    0.5556, 0.3333, 0.1296, 0.2315, // 02:00
-                    0.0278, 0.0000, 0.0000, 0.0000, // 04:00
-                    0.0833, 0.1667, 0.1667, 0.1667, // 06:00
-                    0.1667, 0.2083, 0.2500, 0.2917, // 08:00
-                    0.3333, 0.3333, 0.3333, 0.3333, // 10:00
-                    0.3333, 0.3556, 0.3778, 0.4000, // 12:00
-                    0.4222, 0.4444, 0.4444, 0.4444, // 14:00
-                    0.4444, 0.3819, 0.4028, 0.4236, // 16:00
-                    0.3611, 0.2917, 0.2222, 0.2222, // 18:00
-                    0.2222, 0.3333, 0.4444, 0.5556, // 20:00
-                    0.6667, 0.7778, 0.8889, 1.0000, // 22:00 - 23:30 JST
-                ];
-    
-                // 最大値(1.0000)に対してscaleMapの0.0000は実際にはどれだけ試合があったと想定するか
-                var minScale = 0.2000; // 最小の時間帯は最大の時間帯のn%の試合数と想定
-    
-                // 時間関係
-                var timeInDay = (time + 32400) % 86400; // 32400 = 9時間, 日本時間のずれ(日本時間00:00を0としたい)
-                var timeIndex1 = Math.floor(timeInDay / 1800); // scaleMap の index。30分ごと。
-                var timeIndex2 = (timeIndex1 + 1) % 48;
-                var scaleOffset = (timeInDay % 1800) / 1800;
-    
-                var scale1 = scaleMap[timeIndex1] * (1 - minScale) + minScale;
-                var scale2 = scaleMap[timeIndex2] * (1 - minScale) + minScale;
-    
-                // scale1 と scale2 の間を線形補間して scaleOffset の位置に相当する値(minScale～1.0000)
-                var scale = (scale1 * (1 - scaleOffset)) + (scale2 * scaleOffset);
-    
-                // 適当に10倍して計算する
-                return Math.round(value * 10 * scale);
-            }; // }}}
-            var asIsScaler = function (value/*, time*/) {
+            return function (value/*, time*/) {
                 return value;
             };
-            return fest.conf.useGraphScale.get()
-                ? scaledScaler
-                : asIsScaler;
         }, // }}}
         getGraphOptions: function (term, teams) { // {{{
             var defaultInks = { alpha: 'd9435f', bravo: '5cb85c' };
@@ -108,11 +71,15 @@
             }
             var a = Math.pow(alpha - expected, 2) / expected;
             var b = Math.pow(bravo - expected, 2) / expected;
-            var chi2 = a + b;
-            if (chi2 >= 6.63490) {
+            var chi2 = parseFloat((a + b).toFixed(5));
+            if (chi2 >= 10.82757) {
+                return 'p<0.01';
+            } else if (chi2 >= 6.63490) {
                 return 'p<.01';
             } else if (chi2 >= 3.84146) {
                 return 'p<.05';
+            } else if (chi2 >= 2.70554) {
+                return 'p<.10';
             } else {
                 return 'n.s.';
             }

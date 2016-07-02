@@ -54,11 +54,17 @@ $(document).ready(function () {
                     case 'n.s.':
                         return '【優劣不明】';
 
+                    case 'p<.10':
+                        return '【' + teamName + 'チーム優勢の気配】';
+
                     case 'p<.05':
-                        return '【' + teamName + 'チーム優勢?】';
+                        return '【' + teamName + 'チーム優勢？】';
 
                     case 'p<.01':
                         return '【' + teamName + 'チーム優勢の模様】';
+
+                    case 'p<0.01':
+                        return '【' + teamName + 'チーム優勢】';
 
                     default:
                         return '';

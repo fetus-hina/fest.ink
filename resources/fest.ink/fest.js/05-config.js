@@ -91,11 +91,9 @@
         }, // }}}
         useGraphScale: { // {{{
             get: function () {
-                return loadBoolean('graph-scale', 'use', 'not use', false);
+                return false;
             },
             set: function (isUse) {
-                save('graph-scale', isUse ? 'use' : 'not use');
-                isEventFiredMyself || $('#event').trigger('updateConfigGraphScale');
             },
         }, // }}}
         timezone: { // {{{
@@ -114,7 +112,6 @@
             'update-interval':  'updateConfigUpdateInterval',
             'graph-type':       'updateConfigGraphType',
             'graph-ink':        'updateConfigGraphInk',
-            'graph-scale':      'updateConfigGraphScale',
         };
         $(window).on('storage', function ($ev) {
             var ev = $ev.originalEvent;
