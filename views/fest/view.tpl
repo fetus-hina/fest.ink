@@ -124,41 +124,45 @@
     </div>
   </div>
 
-  <h2 id="graph-short">
-    短期的勝率グラフ
-  </h2>
-  <p>
-    その時点での直近の勝率をグラフにしたものです。「この時間帯はどっちが優勢」ということを示します。
-  </p>
-  <div class="rate-graph rate-graph-short">
-  </div>
-
-  <h2 id="graph-whole">
-    長期的勝率グラフ
-  </h2>
-  <p>
-    上部の「推定勝率」の遷移をグラフにしたものです。「最終的にどちらが勝ちそうか」ということを示します。
-  </p>
-  <p>
-    <strong>背景が暗いところ</strong>（またはグラフが暗く描画されているところ）は両チームの勝率が50%:50%と仮定した時との<strong>有意差がない</strong>ことを示します。(p&lt;0.05)
-  </p>
-  <div class="rate-graph rate-graph-whole">
-  </div>
-
   <h2 id="graph-whole2">
-    誤差推定
+    勝率推定グラフ
   </h2>
   <p>
-    「実際の勝率はこの範囲に大体入っているのではないかな」という範囲を示します。
+    標本から真の勝率を推定した範囲の遷移を示します。
+  </p>
+  <p>
+    背景が暗いところ</strong>は両チームの勝率が50%:50%と仮定した時との有意差がみられないことを示します。(p&lt;0.05)
   </p>
   <div class="rate-graph rate-graph-whole2">
   </div>
 
-  <h2 id="graph-win">
-    勝利数グラフ
+  <h2 id="graph-whole">
+    勝率グラフ（標本・全期間）
   </h2>
   <p>
-    数値はサンプリングされたものです。全数のどのくらいの割合で取得できているのかはわかりません。（サンプル数: <span class="sample-count">(取得中)</span>）
+    取得した標本を単純に合計してそのまま勝率として表示したグラフです。
+  </p>
+  <p>
+    背景が暗いところ</strong>は両チームの勝率が50%:50%と仮定した時との有意差がみられないことを示します。(p&lt;0.05)
+  </p>
+  <div class="rate-graph rate-graph-whole">
+  </div>
+
+  <h2 id="graph-short">
+    勝率グラフ（標本・取得時のみ）
+  </h2>
+  <p>
+    その時点で取得した標本の勝率をグラフにしたものです。
+  </p>
+  <div class="rate-graph rate-graph-short">
+  </div>
+
+  <h2 id="graph-win">
+    標本数グラフ
+  </h2>
+  <p>
+    標本として取得した各チームの勝利数の合計をグラフにしたものです。
+    （標本数: <span class="sample-count" data-team="alpha">(取得中)</span> + <span class="sample-count" data-team="bravo">(取得中)</span> = <span class="sample-count">(取得中)</span>）
   </p>
   <div class="rate-graph rate-graph-win-count">
   </div>
