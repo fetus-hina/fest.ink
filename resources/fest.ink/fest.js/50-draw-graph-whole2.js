@@ -8,7 +8,16 @@ $(document).ready(function () {
     var draw = function () {
         $('.rate-graph.rate-graph-whole2').each(function () {
             var $area = $(this);
-            var opts = $.extend(true, {}, window.fest.getGraphOptions(previous.term, previous.teams));
+            var opts = $.extend(
+                true,
+                {},
+                window.fest.getGraphOptions(previous.term, previous.teams),
+                {
+                    "grid": {
+                        "markings": previous.markings,
+                    }
+                }
+            );
             delete opts['colors'];
             delete opts['series'];
 
@@ -51,6 +60,9 @@ $(document).ready(function () {
         var upperA = [];
         var lowerB = [];
         var upperB = [];
+        var markings = [];
+        var lastNSStart = json.term.begin;
+        var markingColor = "rgba(128,128,128,0.25)";
         for (var i = 0; i < wins.length; ++i) {
             var tmp = wins[i];
             var tmpA = tmp.alpha;
@@ -78,7 +90,33 @@ $(document).ready(function () {
                     upperB.push([tmp.at * 1000, null]);
                 }
 
+               var chi = window.fest.isSignificant(alphaTotal, bravoTotal);
+               if (chi === undefined || chi === 'n.s.' || chi === 'p<.10') {
+                   if (lastNSStart === null) {
+                       lastNSStart = tmp.at;
+                   }
+               } else {
+                   if (lastNSStart !== null) {
+                       markings.push({
+                           xaxis: {
+                               from: lastNSStart * 1000,
+                               to: tmp.at * 1000,
+                           },
+                           color: markingColor,
+                       });
+                       lastNSStart = null;
+                   }
+               }
             }
+        }
+        if (lastNSStart !== null) {
+            markings.push({
+                xaxis: {
+                    from: lastNSStart * 1000,
+                    to: json.term.end * 1000,
+                },
+                color: markingColor,
+            });
         }
         previous = {
             data: [
@@ -91,6 +129,7 @@ $(document).ready(function () {
             ],
             term: json.term,
             teams: json.teams,
+            markings: markings,
         };
         draw();
     });
