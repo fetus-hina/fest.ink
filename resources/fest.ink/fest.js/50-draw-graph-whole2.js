@@ -67,11 +67,12 @@ $(document).ready(function () {
             var tmp = wins[i];
             var tmpA = tmp.alpha;
             var tmpB = tmp.bravo;
+            var range;
             alphaTotal += tmpA;
             bravoTotal += tmpB;
             if (alphaTotal + bravoTotal > 0) {
                 alpha.push([tmp.at * 1000, alphaTotal * 100 / (alphaTotal + bravoTotal)]);
-                var range = window.fest.getSignificantRange(alphaTotal, bravoTotal);
+                range = window.fest.getSignificantRange(alphaTotal, bravoTotal);
                 if (range) {
                     lowerA.push([tmp.at * 1000, range[0]]);
                     upperA.push([tmp.at * 1000, range[1]]);
@@ -81,7 +82,7 @@ $(document).ready(function () {
                 }
 
                 bravo.push([tmp.at * 1000, bravoTotal * 100 / (alphaTotal + bravoTotal)]);
-                var range = window.fest.getSignificantRange(bravoTotal, alphaTotal);
+                range = window.fest.getSignificantRange(bravoTotal, alphaTotal);
                 if (range) {
                     lowerB.push([tmp.at * 1000, range[0]]);
                     upperB.push([tmp.at * 1000, range[1]]);
@@ -121,9 +122,9 @@ $(document).ready(function () {
         previous = {
             data: [
                 { id: "alphaL", data: lowerA, lines: { show: true, lineWidth: 0, fill: false }, color: "alpha" },
-                { id: "alphaH", data: upperA, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "alpha", fillBetween: "alphaL" },
+                { id: "alphaH", data: upperA, lines: { show: true, lineWidth: 0, fill: 0.5 }, color: "alpha", fillBetween: "alphaL" },
                 { id: "bravoL", data: lowerB, lines: { show: true, lineWidth: 0, fill: false }, color: "bravo" },
-                { id: "bravoH", data: upperB, lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "bravo", fillBetween: "bravoL" },
+                { id: "bravoH", data: upperB, lines: { show: true, lineWidth: 0, fill: 0.5 }, color: "bravo", fillBetween: "bravoL" },
                 // { data: alpha, lines: {show: true}, color: colorA },
                 // { data: bravo, lines: {show: true}, color: colorB },
             ],
