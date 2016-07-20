@@ -200,9 +200,11 @@ vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: v
 	zopfli -c --gzip -i50 $< > $@
 
 %.css.br: %.css
+	rm -f $@
 	bro --quality 11 --input $< --output $@
 
 %.js.br: %.js
+	rm -f $@
 	bro --quality 11 --input $< --output $@
 
 .PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE
