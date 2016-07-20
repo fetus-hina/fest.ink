@@ -4,7 +4,7 @@
 
 <div class="container" data-fest="{{$fest->id|escape}}">
   <div id="social">
-    <a class="twitter-share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-hashtags="Splatoon,Splatfest,スプラトゥーン" data-count="horizontal" data-via="ikafest" href="https://twitter.com/intent/tweet">Tweet</a>
+    <a class="share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-via="ikafest" href="https://twitter.com/intent/tweet" style="display:none">Tweet</a>
     &#32;
     <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a>
   </div>
