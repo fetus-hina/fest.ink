@@ -26,7 +26,6 @@ $(document).ready(function () {
             json.teams.alpha.ink,
             json.teams.bravo.ink,
         ];
-        console.log(summary);
         $('.total-progressbar').each(function () {
             var $this = $(this);
             var teamId = ($this.attr('data-team') + "").substr(0, 1);
