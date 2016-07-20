@@ -1,5 +1,6 @@
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
+GULP=./node_modules/.bin/gulp
 
 FAVICON_TARGETS= \
 	resources/.compiled/favicon/favicon.ico \
@@ -8,12 +9,19 @@ FAVICON_TARGETS= \
 	resources/.compiled/favicon/152x152-precomposed.png \
 	resources/.compiled/favicon/180x180-precomposed.png
 
-RESOURCE_TARGETS= \
-	resources/.compiled/fest.ink/fest.css.gz \
-	resources/.compiled/fest.ink/fest.js.gz \
-	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz \
+RESOURCE_TARGETS_MAIN= \
+	resources/.compiled/fest.ink/fest.css \
+	resources/.compiled/fest.ink/fest.js \
+	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
 	resources/.compiled/pixiv/pixiv_logo.png \
-	resources/.compiled/tz-data/tz-init.js.gz
+	resources/.compiled/tz-data/tz-init.js
+
+RESOURCE_TARGETS= \
+	$(RESOURCE_TARGETS_MAIN) \
+	$(RESOURCE_TARGETS_MAIN:.css=.css.br) \
+	$(RESOURCE_TARGETS_MAIN:.css=.css.gz) \
+	$(RESOURCE_TARGETS_MAIN:.js=.js.br) \
+	$(RESOURCE_TARGETS_MAIN:.js=.js.gz)
 
 all: \
 	composer.phar \
@@ -125,17 +133,17 @@ runtime/favicon/bust-500x500.png: data/favicon/ikagirl.png
 data/favicon/ikagirl.png: vendor data/favicon/ikagirl.dat
 	./yii favicon/decrypt
 
-resources/.compiled/fest.ink/fest.js.gz: node_modules $(JS_SRCS)
-	./node_modules/.bin/gulp fest-ink-js
+resources/.compiled/fest.ink/fest.js: $(JS_SRCS) node_modules
+	$(GULP) js --in 'resources/fest.ink/fest.js/*.js' --out $@
 
-resources/.compiled/fest.ink/fest.css.gz: node_modules resources/fest.ink/fest.less
-	./node_modules/.bin/gulp fest-ink-css
+resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
+	$(GULP) less --in $< --out $@
 
-resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js.gz: node_modules resources/gh-fork-ribbon/gh-fork-ribbon.js
-	./node_modules/.bin/gulp gh-fork
+resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js: resources/gh-fork-ribbon/gh-fork-ribbon.js node_modules
+	$(GULP) js --in $< --out $@
 
-resources/.compiled/tz-data/tz-init.js.gz: node_modules runtime/tzdata resources/tz-data/tz-init.js
-	./node_modules/.bin/gulp tz-data
+resources/.compiled/tz-data/tz-init.js: resources/tz-data/tz-init.js node_modules runtime/tzdata
+	$(GULP) js --in $< --out $@
 
 resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
 	mkdir -p resources/.compiled/pixiv || true
@@ -184,5 +192,17 @@ runtime/tzdata-latest.tar.gz:
 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: vendor FORCE
 	head -n 815 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php | tail -n 10 | grep '\\1 \\2' > /dev/null && \
 		patch -d vendor/smarty/smarty -p1 -Nst < data/patch/smarty-strip.patch || /bin/true
+
+%.css.gz: %.css
+	zopfli -c --gzip -i50 $< > $@
+
+%.js.gz: %.js
+	zopfli -c --gzip -i50 $< > $@
+
+%.css.br: %.css
+	bro --quality 11 --input $< --output $@
+
+%.js.br: %.js
+	bro --quality 11 --input $< --output $@
 
 .PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE

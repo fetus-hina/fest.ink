@@ -1,13 +1,15 @@
-FROM centos:centos7
+FROM centos:7
 MAINTAINER AIZAWA Hina <hina@bouhime.com>
 
 ADD docker/nginx/nginx.repo /etc/yum.repos.d/
 ADD docker/rpm-gpg/ /etc/pki/rpm-gpg/
+ADD docker/jp3cki/jp3cki.repo /etc/yum.repos.d/
 
 RUN rpm --import \
     /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
     /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo \
     /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 \
+    /etc/pki/rpm-gpg/RPM-GPG-KEY-JP3CKI \
     /etc/pki/rpm-gpg/RPM-GPG-KEY-remi \
         && \
     yum update -y && \
@@ -15,6 +17,7 @@ RUN rpm --import \
         ImageMagick \
         centos-release-scl-rh \
         curl \
+        epel-release \
         nginx \
         patch \
         pngcrush \
@@ -23,10 +26,11 @@ RUN rpm --import \
         tar \
         unzip \
         wget \
-        http://ftp.tsukuba.wide.ad.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm \
-        http://rpms.famillecollet.com/enterprise/7/safe/x86_64/remi-release-7.1-3.el7.remi.noarch.rpm  \
+        http://rpms.famillecollet.com/enterprise/7/safe/x86_64/remi-release-7.2-1.el7.remi.noarch.rpm \
             && \
+    yum-config-manager --enable jp3cki && \
     yum install -y \
+        brotli \
         git19-git \
         nodejs010-npm \
         php70-php-cli \
@@ -40,6 +44,7 @@ RUN rpm --import \
         php70-php-pecl-zip \
         php70-php-xml \
         supervisor \
+        zopfli \
             && \
     yum clean all && \
     useradd festink && \
