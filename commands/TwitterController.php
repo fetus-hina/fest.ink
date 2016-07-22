@@ -143,17 +143,19 @@ class TwitterController extends Controller
         $lastUpdated = new \DateTime('@' . $sum['last_updated_at']);
         $lastUpdated->setTimezone(new \DateTimeZone("Asia/Tokyo"));
         $signficantRange = Significant::significantRange($sum['total_win_a'], $sum['total_win_b']);
-        list($teamNameA, $teamNameB) = (function ($a, $b) {
-            $len = mb_strlen($a, 'UTF-8');
-            for ($i = 0; $i < $len; ++$i) {
-                $tmpA = mb_substr($a, $i, 1, 'UTF-8');
-                $tmpB = mb_substr($b, $i, 1, 'UTF-8');
-                if ($tmpA !== $tmpB) {
-                    return [$tmpA, $tmpB];
-                }
-            }
-            return ['Ａ', 'Ｂ'];
-        })($fest->alphaTeam->name, $fest->bravoTeam->name);
+        // list($teamNameA, $teamNameB) = (function ($a, $b) {
+        //     $len = mb_strlen($a, 'UTF-8');
+        //     for ($i = 0; $i < $len; ++$i) {
+        //         $tmpA = mb_substr($a, $i, 1, 'UTF-8');
+        //         $tmpB = mb_substr($b, $i, 1, 'UTF-8');
+        //         if ($tmpA !== $tmpB) {
+        //             return [$tmpA, $tmpB];
+        //         }
+        //     }
+        //     return ['Ａ', 'Ｂ'];
+        // })($fest->alphaTeam->name, $fest->bravoTeam->name);
+        $teamNameA = $fest->alphaTeam->name;
+        $teamNameB = $fest->bravoTeam->name;
         $lines = [];
         $lines[] = sprintf('フェス「%s」の推定勝率(%s現在; N=%s)',
             $fest->name,
