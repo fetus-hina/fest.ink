@@ -3,8 +3,8 @@ $(document).ready(function () {
     if (!window.fest.isFestPage()) {
         return;
     }
-    var $buttons = $('#social .share-button');
-    if ($buttons.length < 1) {
+    var $template = $('#social .share-button');
+    if ($template.length < 1) {
         return;
     }
     var NaN = Number.NaN;
@@ -13,7 +13,7 @@ $(document).ready(function () {
         var date = data_.date;
         var json = data_.json;
         var summary = data_.summary;
-        var $newButton = $buttons.clone()
+        var $newButton = $template.clone()
                 .css('display', 'inline')
                 .addClass('twitter-share-button');
         if (!isNaN(summary.aRange.min)) {
@@ -52,8 +52,13 @@ $(document).ready(function () {
             );
         }
         if (window.twttr && window.twttr.widgets) {
-            $newButton.insertAfter($buttons);
+            // 実体化されていないボタンになるべき要素を消す
+            $('.twitter-share-button').remove();
+            // 実体化済みのボタンを消す
             $('.twitter-share-button-rendered').remove();
+
+            // 新しいボタン（になるべき要素）を追加する
+            $newButton.insertAfter($template);
             window.twttr.widgets.load();
         }
     });
