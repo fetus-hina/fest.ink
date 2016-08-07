@@ -21,7 +21,8 @@ RESOURCE_TARGETS= \
 	$(RESOURCE_TARGETS_MAIN:.css=.css.br) \
 	$(RESOURCE_TARGETS_MAIN:.css=.css.gz) \
 	$(RESOURCE_TARGETS_MAIN:.js=.js.br) \
-	$(RESOURCE_TARGETS_MAIN:.js=.js.gz)
+	$(RESOURCE_TARGETS_MAIN:.js=.js.gz) \
+	resources/.compiled/tz-data/files
 
 all: \
 	composer.phar \
@@ -188,6 +189,9 @@ runtime/tzdata: runtime/tzdata-latest.tar.gz
 
 runtime/tzdata-latest.tar.gz:
 	wget -O runtime/tzdata-latest.tar.gz ftp://ftp.iana.org/tz/tzdata-latest.tar.gz
+
+resources/.compiled/tz-data/files: runtime/tzdata
+	rsync -a $</ $@/
 
 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: vendor FORCE
 	head -n 815 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php | tail -n 10 | grep '\\1 \\2' > /dev/null && \
