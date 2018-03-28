@@ -22,7 +22,7 @@
         "jp3cki/yii2-googleadsense": "^2.0",
         "nojimage/twitter-text-php": "^1.1",
         "php-curl-class/php-curl-class": "^4.6",
-        "yiisoft/yii2": "2.0.x-dev",
+        "yiisoft/yii2": "2.0.*",
         "yiisoft/yii2-bootstrap": "2.0.*",
         "yiisoft/yii2-smarty": "2.0.*",
         "zendframework/zend-crypt": "^2.5"
