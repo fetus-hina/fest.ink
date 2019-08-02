@@ -18,16 +18,16 @@
         "bower-asset/timezone-js": "^0.4.13",
         "cybercog/yii2-google-analytics": "^0.3.1",
         "jp3cki/yii2-googleadsense": "^2.0",
-        "yiisoft/yii2": "2.0.*",
-        "yiisoft/yii2-bootstrap": "2.0.*",
-        "yiisoft/yii2-smarty": "2.0.*",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-smarty": "*",
         "zendframework/zend-crypt": "^2.5"
     },
     "require-dev": {
         "phpcq/author-validation": "^1.1",
         "squizlabs/php_codesniffer": "^2.3",
         "symfony/yaml": "^2.7",
-        "yiisoft/yii2-gii": "2.0.*"
+        "yiisoft/yii2-gii": "*"
     },
     "extra": {
         "asset-installer-paths": {
