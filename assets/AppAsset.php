@@ -28,8 +28,6 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapPluginAsset',
         'app\assets\FlotAsset',
         'app\assets\FontAwesomeAsset',
-        'app\assets\GithubForkRibbonCssAsset',
-        'app\assets\GithubForkRibbonJsAsset',
         'app\assets\TwitterWidgetAsset',
     ];
 }

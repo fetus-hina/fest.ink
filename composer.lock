@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3945d42cfd28352ffb2ec647cd7da35a",
+    "content-hash": "3242bc643b2e4093660045af979c8ffe",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -107,45 +107,6 @@
                 "CC-BY-3.0"
             ],
             "description": "Font Awesome"
-        },
-        {
-            "name": "bower-asset/github-fork-ribbon-css",
-            "version": "0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/simonwhitaker/github-fork-ribbon-css.git",
-                "reference": "b3305a5555123a30502c1feb4ff23047030dc3f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/simonwhitaker/github-fork-ribbon-css/zipball/b3305a5555123a30502c1feb4ff23047030dc3f0",
-                "reference": "b3305a5555123a30502c1feb4ff23047030dc3f0",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "gh-fork-ribbon.css",
-                    "gh-fork-ribbon.ie.css"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "\"Fork me on GitHub\" CSS ribbon",
-            "keywords": [
-                "GitHub",
-                "css",
-                "fork",
-                "ribbon"
-            ]
         },
         {
             "name": "bower-asset/inputmask",
@@ -1203,7 +1164,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">= 7.0",
+        "php": ">= 7.1",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",

@@ -12,7 +12,6 @@ FAVICON_TARGETS= \
 RESOURCE_TARGETS_MAIN= \
 	resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
-	resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js \
 	resources/.compiled/pixiv/pixiv_logo.png \
 	resources/.compiled/tz-data/tz-init.js
 
@@ -135,9 +134,6 @@ resources/.compiled/fest.ink/fest.js: $(JS_SRCS) node_modules
 
 resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
 	$(GULP) less --in $< --out $@
-
-resources/.compiled/gh-fork-ribbon/gh-fork-ribbon.js: resources/gh-fork-ribbon/gh-fork-ribbon.js node_modules
-	$(GULP) js --in $< --out $@
 
 resources/.compiled/tz-data/tz-init.js: resources/tz-data/tz-init.js node_modules runtime/tzdata
 	$(GULP) js --in $< --out $@
