@@ -83,11 +83,6 @@ fest.ink の favicon はフリーライセンスではありません。
     make
     ```
 
-### FETCH DATA ###
-
-任天堂から新しいデータを取得するには、定期的に `/path/to/yii official-data/update` を実行します。フェスが開催されていないときは何もしません。
-
-
 ### DOCKER ###
 
 

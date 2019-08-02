@@ -7,7 +7,6 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">= 7.0",
-        "ext-curl": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
@@ -19,7 +18,6 @@
         "bower-asset/timezone-js": "^0.4.13",
         "cybercog/yii2-google-analytics": "^0.3.1",
         "jp3cki/yii2-googleadsense": "^2.0",
-        "php-curl-class/php-curl-class": "^4.6",
         "yiisoft/yii2": "2.0.*",
         "yiisoft/yii2-bootstrap": "2.0.*",
         "yiisoft/yii2-smarty": "2.0.*",
