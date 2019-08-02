@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3242bc643b2e4093660045af979c8ffe",
+    "content-hash": "33ff393946adbbeb3934946aded1901d",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -170,16 +170,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.4",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "c0185ab7c75aab88762c5aae780b9d83b80eda72"
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/c0185ab7c75aab88762c5aae780b9d83b80eda72",
-                "reference": "c0185ab7c75aab88762c5aae780b9d83b80eda72",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -197,7 +197,8 @@
                 "javascript",
                 "jquery",
                 "library"
-            ]
+            ],
+            "time": "2019-05-01T21:19:28+00:00"
         },
         {
             "name": "bower-asset/punycode",
