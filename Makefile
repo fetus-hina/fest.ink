@@ -31,7 +31,6 @@ all: \
 	vendor \
 	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
-	config/google-adsense.php \
 	config/cookie-secret.php \
 	resource \
 	favicon-maybe \
@@ -165,13 +164,6 @@ db/fest.sqlite: vendor runtime/tzdata FORCE
 config/cookie-secret.php: vendor
 	test -f config/cookie-secret.php || ./yii secret/cookie
 	touch config/cookie-secret.php
-
-config/google-adsense.php:
-	echo '<?php'                >  config/google-adsense.php
-	echo 'return ['             >> config/google-adsense.php
-	echo "    'client' => '',"  >> config/google-adsense.php
-	echo "    'slot'   => '',"  >> config/google-adsense.php
-	echo '];'                   >> config/google-adsense.php
 
 runtime/tzdata: runtime/tzdata-latest.tar.gz
 	mkdir runtime/tzdata || true

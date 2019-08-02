@@ -6,7 +6,6 @@
   <p>
     スプラトゥーンの公式サイトで公開されているデータを基にフェスの勝率を推定するサイトです。
   </p>
-  {{include '@app/views/layouts/ad.tpl'}}
   <table class="table table-stripe" id="fest-list">
     <tbody>
       {{foreach $allFest as $_fest}}
