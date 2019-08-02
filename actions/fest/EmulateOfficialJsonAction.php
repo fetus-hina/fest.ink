@@ -92,7 +92,13 @@ class EmulateOfficialJsonAction extends BaseAction
         );
     }
 
-    private function result($extend, Fest $fest = null, array $data, $callback, DateTimeZone $tz = null) {
+    private function result(
+        $extend,
+        ?Fest $fest = null,
+        array $data,
+        $callback,
+        ?DateTimeZone $tz = null
+    ) {
         if ($extend) {
             $sendData = [
                 'fest' => $fest ? $fest->toJsonArray($tz) : null,

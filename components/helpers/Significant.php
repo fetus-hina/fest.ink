@@ -27,11 +27,11 @@ class Significant
         $chi2 = $a + $b;
         if ($chi2 >= 10.82757) {
             return static::P_0_001;
-        } else if ($chi2 >= 6.63490) {
+        } elseif ($chi2 >= 6.63490) {
             return static::P_0_01;
-        } else if ($chi2 >= 3.84146) {
+        } elseif ($chi2 >= 3.84146) {
             return static::P_0_05;
-        } else if ($chi2 >= 2.70554) {
+        } elseif ($chi2 >= 2.70554) {
             return static::P_0_10;
         } else {
             return static::NS;
@@ -52,13 +52,15 @@ class Significant
             $assumeBravo = $total - $assumeAlpha;
             $sA = $alpha + $assumeAlpha;
             $sB = $bravo + $assumeBravo;
-            $chi2 = (2 * $total) * pow($alpha * $assumeBravo - $bravo * $assumeAlpha, 2) / ($sA * $sB * $total * $total);
+            $chi2 = (2 * $total) *
+                pow($alpha * $assumeBravo - $bravo * $assumeAlpha, 2) /
+                ($sA * $sB * $total * $total);
             if ($chi2 < 3.84146) {
                 if ($lower === null) {
                     $lower = $permil;
                 }
                 $upper = $permil;
-            } else if ($upper !== null) {
+            } elseif ($upper !== null) {
                 break;
             }
         }
