@@ -18,7 +18,7 @@
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-smarty": "*",
-        "zendframework/zend-crypt": "^2.5"
+        "zendframework/zend-crypt": "^3.3"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.4",
