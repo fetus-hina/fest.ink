@@ -33,7 +33,6 @@ all: \
 	node_modules \
 	config/google-analytics.php \
 	config/google-adsense.php \
-	config/twitter.php \
 	config/cookie-secret.php \
 	resource \
 	favicon-maybe \
@@ -168,9 +167,6 @@ db/fest.sqlite: vendor runtime/tzdata FORCE
 config/cookie-secret.php: vendor
 	test -f config/cookie-secret.php || ./yii secret/cookie
 	touch config/cookie-secret.php
-
-config/twitter.php:
-	cp config/twitter.php.sample config/twitter.php
 
 config/google-analytics.php:
 	echo '<?php' > config/google-analytics.php

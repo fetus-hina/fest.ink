@@ -88,28 +88,6 @@ fest.ink の favicon はフリーライセンスではありません。
 任天堂から新しいデータを取得するには、定期的に `/path/to/yii official-data/update` を実行します。フェスが開催されていないときは何もしません。
 
 
-### TWITTER ###
-
-Twitter 連携機能を有効にするには次のように設定します。
-
-1. 必要であれば新規 Twitter アカウントを取得します。
-2. 取得したアカウント、または、あなたのアカウントで新しいアプリを申請し、 `consumer key` と `consumer secret` を取得します。
-3. `config/twitter.php` を開き、`consumerKey` と `consumerSecret` にそれぞれ取得した値を設定します。 `userToken` と `userSecret` はこの時点では空にしておきます。
-4. コマンドラインで認証を行います。
-
-    ```sh
-    ./yii twitter/auth
-    ```
-
-5. 表示される指示に従って URL にアクセスし、取得したアカウントで認証します。認証すると PIN コードが表示されますのでコマンドラインにそのまま打ち込みます。
-6. PIN コードの確認が行われた後、 `userToken` と `userSecret` に設定するべき値が表示されますので、 `config/twitter.php` に設定します。
-7. データを収集したあと次のように実行すればツイートされます。実際には `cron` 等を設定することになります。ツイート内容は現在固定です。 `commands/TwitterController.php` を開いて該当箇所を確認してください。
-
-    ```sh
-    ./yii twitter/update
-    ```
-
-
 ### DOCKER ###
 
 

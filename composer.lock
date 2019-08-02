@@ -4,62 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "497afbe3546121634db0245d78b53679",
+    "content-hash": "6d55285d49d1047ab2871b09e0f52b73",
     "packages": [
-        {
-            "name": "abraham/twitteroauth",
-            "version": "0.6.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "fc0766220c79087ac8178625d34e88ca29160d5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/fc0766220c79087ac8178625d34e88ca29160d5b",
-                "reference": "fc0766220c79087ac8178625d34e88ca29160d5b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpmd/phpmd": "2.3.*",
-                "phpunit/phpunit": "4.8.*",
-                "squizlabs/php_codesniffer": "2.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Abraham\\TwitterOAuth\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Abraham Williams",
-                    "email": "abraham@abrah.am",
-                    "homepage": "https://abrah.am",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The most popular PHP library for use with the Twitter OAuth REST API.",
-            "homepage": "https://twitteroauth.com",
-            "keywords": [
-                "Twitter API",
-                "Twitter oAuth",
-                "api",
-                "oauth",
-                "rest",
-                "social",
-                "twitter"
-            ],
-            "time": "2016-10-10T14:20:30+00:00"
-        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -608,71 +554,6 @@
                 "yii2"
             ],
             "time": "2015-10-15T13:09:18+00:00"
-        },
-        {
-            "name": "nojimage/twitter-text-php",
-            "version": "v1.14.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nojimage/twitter-text-php.git",
-                "reference": "4c3d764030429a227e7687a44a3fe12aaf7d0e84"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nojimage/twitter-text-php/zipball/4c3d764030429a227e7687a44a3fe12aaf7d0e84",
-                "reference": "4c3d764030429a227e7687a44a3fe12aaf7d0e84",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "php": ">=5.3.3",
-                "phpunit/phpunit": "4.8.*|5.7.*",
-                "symfony/yaml": "~2.6.0",
-                "twitter/twitter-text": "^1.14.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Twitter\\Text\\": "lib/",
-                    "Twitter_": "compat/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Matt Sanford",
-                    "email": "matt@mzsanford.com",
-                    "homepage": "http://mzsanford.com"
-                },
-                {
-                    "name": "Mike Cochrane",
-                    "email": "mikec@mikenz.geek.nz",
-                    "homepage": "http://mikenz.geek.nz"
-                },
-                {
-                    "name": "Nick Pope",
-                    "email": "git@nickpope.me.uk",
-                    "homepage": "http://www.nickpope.me.uk"
-                },
-                {
-                    "name": "Takashi Nojima",
-                    "homepage": "http://php-tips.com"
-                }
-            ],
-            "description": "A library of PHP classes that provide auto-linking and extraction of usernames, lists, hashtags and URLs from tweets.",
-            "homepage": "https://github.com/nojimage/twitter-text-php",
-            "keywords": [
-                "autolink",
-                "extract",
-                "text",
-                "twitter"
-            ],
-            "time": "2017-09-21T09:38:42+00:00"
         },
         {
             "name": "php-curl-class/php-curl-class",
