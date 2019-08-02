@@ -53,24 +53,6 @@
 
     window.fest.conf = {
         hasStorage: !!localStorage,
-        autoUpdate: { // {{{
-            get: function () {
-                return loadBoolean('autoupdate', 'enabled', 'disabled', true);
-            },
-            set: function (isEnabled) {
-                save('autoupdate', isEnabled ? 'enabled' : 'disabled');
-                isEventFiredMyself || $('#event').trigger('updateConfigAutoUpdate');
-            },
-        }, // }}}
-        updateInterval: { // {{{
-            get: function () {
-                return loadInteger('update-interval', 10 * 60 * 1000); // 10min
-            },
-            set: function (value) {
-                save('update-interval', (~~value) + "");
-                isEventFiredMyself || $('#event').trigger('updateConfigUpdateInterval');
-            },
-        }, // }}}
         graphType: { // {{{
             get: function () {
                 return loadStringIn('graph-type', 'stack', ['stack', 'overlay']);
@@ -108,8 +90,6 @@
 
     $(document).ready(function () {
         var map = {
-            'autoupdate':       'updateConfigAutoUpdate',
-            'update-interval':  'updateConfigUpdateInterval',
             'graph-type':       'updateConfigGraphType',
             'graph-ink':        'updateConfigGraphInk',
         };

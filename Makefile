@@ -1,6 +1,5 @@
 STYLE_TARGETS=actions assets commands components controllers models
 JS_SRCS=$(shell ls -1 resources/fest.ink/fest.js/*.js)
-GULP=./node_modules/.bin/gulp
 
 FAVICON_TARGETS= \
 	resources/.compiled/favicon/favicon.ico \
@@ -130,13 +129,18 @@ data/favicon/ikagirl.png: vendor data/favicon/ikagirl.dat
 	./yii favicon/decrypt
 
 resources/.compiled/fest.ink/fest.js: $(JS_SRCS) node_modules
-	$(GULP) js --in 'resources/fest.ink/fest.js/*.js' --out $@
+	@mkdir -p resources/.compiled/fest.ink
+	cat $(JS_SRCS) | \
+		npx babel -s false -f jsfile | \
+		npx uglifyjs -c -m -b beautify=false,ascii_only=true --comments -o $@
 
 resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
-	$(GULP) less --in $< --out $@
+	@mkdir -p resources/.compiled/fest.ink
+	npx lessc $< | npx postcss --no-map -o $@
 
 resources/.compiled/tz-data/tz-init.js: resources/tz-data/tz-init.js node_modules runtime/tzdata
-	$(GULP) js --in $< --out $@
+	@mkdir -p resources/.compiled/tz-data
+	npx babel -s false $< | npx uglifyjs -c -m -b beautify=false,ascii_only=true --comments -o $@
 
 resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
 	mkdir -p resources/.compiled/pixiv || true
@@ -175,18 +179,17 @@ vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: v
 	head -n 815 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php | tail -n 10 | grep '\\1 \\2' > /dev/null && \
 		patch -d vendor/smarty/smarty -p1 -Nst < data/patch/smarty-strip.patch || /bin/true
 
-%.css.gz: %.css
-	zopfli -c --gzip -i50 $< > $@
+%.gz: %
+	gzip -cq9 --rsyncable < $< > $@
 
-%.js.gz: %.js
-	zopfli -c --gzip -i50 $< > $@
-
-%.css.br: %.css
-	rm -f $@
-	bro --quality 11 --input $< --output $@
-
-%.js.br: %.js
-	rm -f $@
-	bro --quality 11 --input $< --output $@
+BROTLI := $(shell if [ -e /usr/bin/brotli ]; then echo brotli; else echo bro; fi )
+%.br: %
+ifeq ($(BROTLI),bro)
+	bro --quality 11 --force --input $< --output $@
+else
+	brotli -Zfo $@ $<
+endif
+	@chmod 644 $@
+	@touch $@
 
 .PHONY: all favicon resource check-style fix-style clean clean-resource clean-favicon FORCE

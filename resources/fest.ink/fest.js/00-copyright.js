@@ -1,1 +1,1 @@
-/*! Copyright (C) 2015 AIZAWA Hina | MIT License */
+/* @license Copyright (C) 2015 AIZAWA Hina | MIT License */
