@@ -31,7 +31,6 @@ all: \
 	vendor \
 	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
-	config/google-analytics.php \
 	config/google-adsense.php \
 	config/cookie-secret.php \
 	resource \
@@ -166,10 +165,6 @@ db/fest.sqlite: vendor runtime/tzdata FORCE
 config/cookie-secret.php: vendor
 	test -f config/cookie-secret.php || ./yii secret/cookie
 	touch config/cookie-secret.php
-
-config/google-analytics.php:
-	echo '<?php' > config/google-analytics.php
-	echo 'return "";' >> config/google-analytics.php
 
 config/google-adsense.php:
 	echo '<?php'                >  config/google-adsense.php

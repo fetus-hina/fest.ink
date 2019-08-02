@@ -16,7 +16,6 @@
         "bower-asset/github-fork-ribbon-css": "^0.1.1",
         "bower-asset/jquery": "^2.1",
         "bower-asset/timezone-js": "^0.4.13",
-        "cybercog/yii2-google-analytics": "^0.3.1",
         "jp3cki/yii2-googleadsense": "^2.0",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",

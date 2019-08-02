@@ -21,10 +21,6 @@
         {{$content}}
         {{include '@app/views/layouts/footer.tpl'}}
         <span id="event"></span>
-        {{if $app->params.googleAnalytics != ''}}
-          {{use class="\cybercog\yii\googleanalytics\widgets\GATracking" type="function"}}
-          {{GATracking trackingId=$app->params.googleAnalytics}}
-        {{/if}}
       {{$this->endBody()|@void}}
     </body>
   </html>
