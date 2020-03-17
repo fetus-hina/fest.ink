@@ -8,10 +8,10 @@
 
 namespace app\commands;
 
+use Laminas\Crypt\FileCipher;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
-use Zend\Crypt\FileCipher;
 
 class FaviconController extends Controller
 {

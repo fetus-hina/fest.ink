@@ -15,10 +15,10 @@
         "bower-asset/fontawesome": "^4.4",
         "bower-asset/jquery": "^3.4.1",
         "bower-asset/timezone-js": "^0.4.13",
+        "laminas/laminas-crypt": "^3.3.1",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-smarty": "*",
-        "zendframework/zend-crypt": "^3.3"
+        "yiisoft/yii2-smarty": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.4",
