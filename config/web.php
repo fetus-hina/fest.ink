@@ -82,6 +82,8 @@ $config = [
     ],
     'params' => $params,
     'aliases' => [
+        '@bower' => '@app/node_modules',
+        '@node' => '@app/node_modules',
         '@statink' => 'https://stat.ink/',
     ],
 ];
