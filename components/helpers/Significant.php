@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) 2016 AIZAWA Hina
  * @license https://github.com/fetus-hina/fest.ink/blob/master/LICENSE MIT
@@ -9,11 +10,11 @@ namespace app\components\helpers;
 
 class Significant
 {
-    const P_0_001 = 'p<.001';
-    const P_0_01 = 'p<.01';
-    const P_0_05 = 'p<.05';
-    const P_0_10 = 'p<.10';
-    const NS = 'n.s.';
+    public const P_0_001 = 'p<.001';
+    public const P_0_01 = 'p<.01';
+    public const P_0_05 = 'p<.05';
+    public const P_0_10 = 'p<.10';
+    public const NS = 'n.s.';
 
     public static function isSignificant($alpha, $bravo)
     {

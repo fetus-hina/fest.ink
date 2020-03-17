@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) 2015 AIZAWA Hina
  * @license https://github.com/fetus-hina/fest.ink/blob/master/LICENSE MIT
@@ -25,8 +26,10 @@ class ViewJsonAction extends BaseAction
     {
         $request = Yii::$app->getRequest();
         $id = $request->get('id');
-        if (!is_scalar($id) ||
-                !($fest = Fest::findOne(['id' => $id]))) {
+        if (
+            !is_scalar($id) ||
+            !($fest = Fest::findOne(['id' => $id]))
+        ) {
             throw new NotFoundHttpException();
         }
         $tz = $request->get('tz');
@@ -37,8 +40,9 @@ class ViewJsonAction extends BaseAction
         );
 
         $withMvp = $request->get('mvp');
-        if (is_scalar($withMvp) &&
-                in_array(strtolower((string)$withMvp), ['1', 't', 'true', 'y', 'yes'], true)
+        if (
+            is_scalar($withMvp) &&
+            in_array(strtolower((string)$withMvp), ['1', 't', 'true', 'y', 'yes'], true)
         ) {
             $withMvp = true;
         } else {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) 2015 AIZAWA Hina
  * @license https://github.com/fetus-hina/fest.ink/blob/master/LICENSE MIT
@@ -30,9 +31,10 @@ class AssetConverter extends Component implements AssetConverterInterface
                 $inPath = $basePath . '/' . $asset;
                 $outPath = $basePath . '/' . $asset . '.gz';
                 if (file_exists($inPath)) {
-                    if ($this->forceConvert ||
-                            !file_exists($outPath) ||
-                            @filemtime($inPath) < @filemtime($outPath)
+                    if (
+                        $this->forceConvert ||
+                        !file_exists($outPath) ||
+                        @filemtime($inPath) < @filemtime($outPath)
                     ) {
                         $this->gzip($inPath, $outPath);
                     }

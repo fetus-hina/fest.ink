@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) 2015 AIZAWA Hina
  * @license https://github.com/fetus-hina/fest.ink/blob/master/LICENSE MIT
@@ -18,8 +19,10 @@ class ViewAction extends BaseAction
     {
         $request = Yii::$app->getRequest();
         $id = $request->get('id');
-        if (!is_scalar($id) ||
-                !($fest = Fest::findOne(['id' => $id]))) {
+        if (
+            !is_scalar($id) ||
+            !($fest = Fest::findOne(['id' => $id]))
+        ) {
             throw new NotFoundHttpException();
         }
 

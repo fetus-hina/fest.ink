@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) 2015 AIZAWA Hina
  * @license https://github.com/fetus-hina/fest.ink/blob/master/LICENSE MIT
@@ -31,8 +32,9 @@ class EmulateOfficialJsonAction extends BaseAction
             $callback = null;
         }
         $extend = $request->get('extend');
-        if (is_scalar($extend) &&
-                in_array(strtolower((string)$extend), ['1', 't', 'true', 'y', 'yes'], true)
+        if (
+            is_scalar($extend) &&
+            in_array(strtolower((string)$extend), ['1', 't', 'true', 'y', 'yes'], true)
         ) {
             $extend = true;
         } else {
