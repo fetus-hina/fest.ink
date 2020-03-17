@@ -29,5 +29,11 @@
             "bower-asset-library": "vendor/bower",
             "npm-asset-library": "vendor/npm"
         }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.stat.ink"
+        }
     }
 }
