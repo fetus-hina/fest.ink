@@ -3,43 +3,34 @@ fest.ink
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 [![MIT License](https://img.shields.io/github/license/fetus-hina/fest.ink.svg)](https://github.com/fetus-hina/fest.ink/blob/master/LICENSE)
-[![Dependency Status](https://www.versioneye.com/user/projects/55d469e7265ff60022000dc9/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d469e7265ff60022000dc9)
-[![Dependency Status](https://www.versioneye.com/user/projects/55d469e9265ff6001a000e50/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d469e9265ff6001a000e50)
 
 https://fest.ink/ のソースコードです。
 
 動作環境
 --------
 
-* PHP 7.0+
+* PHP 7.1+
 * SQLite3
 * Node.js (`npm`)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* CentOS 7.2.1511 (x86_64)
-* Nginx 1.9.x (mainline)
+* CentOS 7.7.1908 (x86_64)
+* H2O
 * SQLite 3.7.17 (標準)
 * EPEL
-    - Zopfli
-* [JP3CKI RPM Repository](https://rpm.fetus.jp/)
     - Brotli
+    - Zopfli
 * [SCL](https://www.softwarecollections.org/)
-    - [v8314](https://www.softwarecollections.org/en/scls/rhscl/v8314/)
-        - V8 3.14.* (Used by Node.js)
-    - [nodejs010](https://www.softwarecollections.org/en/scls/rhscl/nodejs010/)
-        - Node.js 0.10.*
-        - `nodejs010-nodejs`
-        - `nodejs010-npm`
-    * [Remi's RPM repository](http://rpms.famillecollet.com/)
+    * [Remi's RPM repository](http://rpms.remirepo.net/)
         - `remi-safe` repository, it uses SCL mechanism
-            - PHP 7.0.*
-                - `php70-php-cli`
-                - `php70-php-fpm`
-                - `php70-php-gd`
-                - `php70-php-mbstring`
-                - `php70-php-mcrypt`
-                - `php70-php-pdo`
+            - PHP 7.1.*
+                - `php71-php-cli`
+                - `php71-php-fpm`
+                - `php71-php-gd`
+                - `php71-php-mbstring`
+                - `php71-php-mcrypt`
+                - `php71-php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
