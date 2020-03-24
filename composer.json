@@ -18,6 +18,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.4",
+        "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*"
     },
     "replace": {

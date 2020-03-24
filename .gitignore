@@ -4,6 +4,7 @@
 .project
 .settings
 /config/cookie-secret.php
+/config/debug-ips.php
 /config/favicon.license.txt
 /config/google-adsense.php
 /config/google-analytics.php
