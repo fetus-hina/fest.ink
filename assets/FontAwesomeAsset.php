@@ -18,4 +18,7 @@ class FontAwesomeAsset extends AssetBundle
     public $js = [
         'js/all.min.js',
     ];
+    public $jsOptions = [
+        'data-auto-replace-svg' => 'nest',
+    ];
 }
