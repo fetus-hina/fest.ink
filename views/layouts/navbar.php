@@ -1,4 +1,11 @@
-{{strip}}
+<?php
+
+declare(strict_types=1);
+
+use app\models\Fest;
+use yii\helpers\Html;
+
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="container">
@@ -17,16 +24,18 @@
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               フェス <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu">
-              {{$_allFest = \app\models\Fest::find()->orderBy("id DESC")->all()}}
-              {{foreach $_allFest as $_fest}}
-                <li>
-                  <a href="{{path route="/fest/view" id=$_fest->id}}">
-                    #{{$_fest->id|escape}}: {{$_fest->name|escape}}
-                  </a>
-                </li>
-              {{/foreach}}
-            </ul>
+            <ul class="dropdown-menu"><?= implode('', array_map(
+              function (Fest $fest): string {
+                return Html::tag('li', Html::a(
+                  Html::encode(vsprintf('#%d: %s', [
+                    $fest->id,
+                    $fest->name,
+                  ])),
+                  ['fest/view', 'id' => $fest->id]
+                ));
+              },
+              Fest::find()->orderBy(['id' => SORT_DESC])->all()
+            )) ?></ul>
           </li>
           <li class="dropdown">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -38,28 +47,12 @@
               </li>
               <li>
                 <a href="https://twitter.com/splatoonjp">
-                  <span class="fa fa-twitter"></span> スプラトゥーン 公式ツイッター
+                  <span class="fab fa-twitter"></span> スプラトゥーン 公式ツイッター
                 </a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="https://splatoon.nintendo.net/">イカリング</a>
-              </li>
-              <li class="divider"></li>
-              <li>
                 <a href="https://stat.ink/">stat.ink</a>
-              </li>
-              <li>
-                <a href="https://ikadenwa.ink/" class="auto-tooltip" title="フレンドマッチ中の通話に便利なサイトです">イカデンワ</a>
-              </li>
-              <li>
-                <a href="http://ikazok.net/" class="auto-tooltip" title="チームの結成や管理、交流に便利なサイトです">イカナカマ</a>
-              </li>
-              <li>
-                <a href="http://siome.ink/" class="auto-tooltip" title="TwitterアカウントとニンテンドーネットワークIDを登録して告知できるサイトです">siome</a>
-              </li>
-              <li>
-                <a href="http://ika.akaihako.com/unislot" class="auto-tooltip" title="サザエガチャのシミュレータです">ウニスロット</a>
               </li>
             </ul>
           </li>
@@ -75,4 +68,3 @@
     </div>
   </div>
 </nav>
-{{/strip}}

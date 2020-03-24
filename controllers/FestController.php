@@ -14,8 +14,6 @@ use yii\filters\VerbFilter;
 
 class FestController extends Controller
 {
-    public $layout = "main.tpl";
-
     public function behaviors()
     {
         return [

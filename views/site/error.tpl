@@ -1,5 +1,4 @@
 {{strip}}
-{{set layout="main.tpl"}}
 <div class="container">
   <h1>
     エラー

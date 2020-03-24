@@ -1,5 +1,4 @@
 {{strip}}
-{{set layout="main.tpl"}}
 {{set title="イカフェスレート | ライセンス"}}
 <div class="container">
   <h1>

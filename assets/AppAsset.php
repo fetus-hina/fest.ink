@@ -6,9 +6,18 @@
  * @author AIZAWA Hina <hina@bouhime.com>
  */
 
+declare(strict_types=1);
+
 namespace app\assets;
 
+use app\assets\FlotAsset;
+use app\assets\FontAwesomeAsset;
+use app\assets\TwitterWidgetAsset;
+use yii\bootstrap\BootstrapAsset;
+use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap\BootstrapThemeAsset;
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
 
 class AppAsset extends AssetBundle
 {
@@ -20,15 +29,15 @@ class AppAsset extends AssetBundle
         'fest.js',
     ];
     public $jsOptions = [
-        'async' => 'async',
+        'async' => true,
     ];
     public $depends = [
-        'yii\web\JqueryAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapThemeAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
-        'app\assets\FlotAsset',
-        'app\assets\FontAwesomeAsset',
-        'app\assets\TwitterWidgetAsset',
+        BootstrapAsset::class,
+        BootstrapPluginAsset::class,
+        BootstrapThemeAsset::class,
+        FlotAsset::class,
+        FontAwesomeAsset::class,
+        JqueryAsset::class,
+        TwitterWidgetAsset::class,
     ];
 }

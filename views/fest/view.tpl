@@ -11,15 +11,15 @@
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
-        <span class="fa fa-area-chart"></span> 上下
+        <span class="fas fa-chart-area"></span> 上下
       </button>
       <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を重ねて表示します" data-type="overlay">
-        <span class="fa fa-area-chart"></span> 重ね
+        <span class="fas fa-chart-area"></span> 重ね
       </button>
     </div>
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default auto-tooltip" id="btn-ink-color" title="インク色の使用有無を切り替えます">
-        <span class="glyphicon glyphicon-tint"></span>
+        <span class="fas fa-tint"></span>
       </button>
     </div>
   </div>

@@ -51,7 +51,7 @@ $(document).ready(function () {
             // 読み込み開始
             $timezoneMenu.append(
                 $('<li>').css('text-align', 'center').append(
-                    $('<span>').addClass('fa fa-spin fa-refresh')
+                    $('<span>').addClass('fas fa-spin fa-sync-alt')
                 )
             );
 

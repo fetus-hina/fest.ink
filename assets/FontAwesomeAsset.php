@@ -6,14 +6,16 @@
  * @author AIZAWA Hina <hina@bouhime.com>
  */
 
+declare(strict_types=1);
+
 namespace app\assets;
 
 use yii\web\AssetBundle;
 
 class FontAwesomeAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/fontawesome';
-    public $css = [
-        'css/font-awesome.min.css',
+    public $sourcePath = '@bower/@fortawesome/fontawesome-free';
+    public $js = [
+        'js/all.min.js',
     ];
 }
