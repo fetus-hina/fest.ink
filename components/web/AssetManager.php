@@ -10,9 +10,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
+declare(strict_types=1);
+
 namespace app\components\web;
 
 use Yii;
+use app\components\Version;
 use yii\helpers\Url;
 
 /**
@@ -52,5 +55,19 @@ class AssetManager extends \yii\web\AssetManager
             }
         }
         return "$baseUrl/$asset";
+    }
+
+    protected function hash($path)
+    {
+        if (is_callable($this->hashCallback)) {
+            return call_user_func($this->hashCallback, $path);
+        }
+
+        $path = (is_file($path) ? dirname($path) : $path) . filemtime($path);
+
+        return vsprintf('%s/%s', [
+            Version::getShortRevision(),
+            substr(hash('sha256', $path), 0, 16),
+        ]);
     }
 }

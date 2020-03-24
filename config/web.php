@@ -28,7 +28,7 @@ return (function (): array {
         'components' => [
             'assetManager' => [
                 'class' => AssetManager::class,
-                'appendTimestamp' => true,
+                'appendTimestamp' => false,
                 'bundles' => [
                     JqueryAsset::class => [
                         'js' => [
