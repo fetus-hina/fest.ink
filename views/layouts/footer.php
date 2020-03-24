@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use app\assets\PixivBannerAsset;
 use app\components\Version;
+use app\components\widgets\IPVersionBadge;
 use yii\helpers\Html;
 
 $am = Yii::$app->assetManager;
@@ -108,15 +109,18 @@ $renderIcon = function (array $data): string {
       通常日本時間(<code>Asia/Tokyo</code>)で表示しています。
       現在の設定は<code><?= Html::encode(Yii::$app->getTimezone()) ?></code>です。<br>
     </div>
-    <div class="footer-powered"><?= vsprintf('Powered by %s', implode(', ', [
-      Html::a(
-        Html::encode('Yii Framework ' . Yii::getVersion()),
-        'https://www.yiiframework.com/'
-      ),
-      Html::a(
-        Html::encode('PHP ' . phpversion()),
-        'https://www.php.net/'
-      ),
-    ])) ?></div>
+    <div class="footer-powered">
+      <?= vsprintf('Powered by %s', implode(', ', [
+        Html::a(
+          Html::encode('Yii Framework ' . Yii::getVersion()),
+          'https://www.yiiframework.com/'
+        ),
+        Html::a(
+          Html::encode('PHP ' . phpversion()),
+          'https://www.php.net/'
+        ),
+      ])) ?><br>
+      <?= IPVersionBadge::widget() . "\n" ?>
+    </div>
   </div>
 </footer>
