@@ -25,7 +25,6 @@ RESOURCE_TARGETS= \
 all: \
 	composer.phar \
 	composer-update \
-	composer-plugin \
 	vendor \
 	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
@@ -45,18 +44,14 @@ composer-update: composer.phar
 	./composer.phar self-update
 	touch -r composer.json composer.phar
 
-composer-plugin: composer.phar composer-update
-	grep '"fxp/composer-asset-plugin"' ~/.composer/composer.json >/dev/null || ./composer.phar global require 'fxp/composer-asset-plugin:^1.1'
-	grep '"hirak/prestissimo"' ~/.composer/composer.json >/dev/null && ./composer.phar global remove 'hirak/prestissimo' || true
-
-vendor: composer.phar composer.lock composer-plugin composer-update
+vendor: composer.phar composer.lock composer-update
 	php composer.phar install --prefer-dist
 
 composer.lock: composer.json composer.phar
 	php composer.phar update -vvv
 	touch -r composer.json composer.lock
 
-node_modules:
+node_modules: package-lock.json
 	npm install
 
 check-style: vendor
