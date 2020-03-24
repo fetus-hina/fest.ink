@@ -7,10 +7,10 @@
     },
     "dependencies": {
         "@babel/cli": "^7.5.5",
-        "@babel/core": "^7.5.5",
+        "@babel/core": "^7.9.0",
         "@babel/polyfill": "^7.4.4",
-        "@babel/preset-env": "^7.5.5",
-        "autoprefixer": "^9.6.1",
+        "@babel/preset-env": "^7.9.0",
+        "autoprefixer": "^9.7.5",
         "bootstrap": "^3.4.1",
         "cssnano": "^4.1.10",
         "flot": "^0.8.3",
