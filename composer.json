@@ -6,7 +6,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "php": ">= 7.1",
+        "php": ">= 7.3",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
@@ -38,7 +38,7 @@
             "enabled": false
         },
         "platform": {
-            "php": "7.1.33"
+            "php": "7.3.16"
         }
     },
     "extra": {
