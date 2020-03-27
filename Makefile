@@ -52,7 +52,13 @@ composer.lock: composer.json composer.phar
 	touch -r composer.json composer.lock
 
 node_modules: package-lock.json
-	npm install
+	npm ci
+	@touch $@
+
+package-lock.json: package.json
+	@rm -rf package-lock.json node_modules
+	npm update
+	@touch $@
 
 check-style: vendor
 	vendor/bin/phpcs --standard=PSR12 --encoding=UTF-8 $(STYLE_TARGETS)
