@@ -18,10 +18,14 @@
         "inputmask": "^5.0.3",
         "jquery": "^3.4.1",
         "less": "^3.9.0",
+        "patch-package": "^6.2.2",
         "postcss-cli": "^7.1.0",
         "punycode": "^2.1.1",
         "timezone-js": "^0.4.13",
         "uglify-js": "^3.6.0",
         "yii2-pjax": "^2.0.7"
+    },
+    "scripts": {
+        "postinstall": "patch-package --patch-dir=data/patch/npm"
     }
 }
