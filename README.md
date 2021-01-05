@@ -9,13 +9,13 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 7.1+
+* PHP 7.3+
 * SQLite3
 * Node.js (`npm`)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* CentOS 7.7.1908 (x86_64)
+* CentOS 7 (x86_64)
 * H2O
 * SQLite 3.7.17 (標準)
 * EPEL
@@ -24,19 +24,17 @@ https://fest.ink/ は現在次の構成で動作しています。
 * [SCL](https://www.softwarecollections.org/)
     * [Remi's RPM repository](http://rpms.remirepo.net/)
         - `remi-safe` repository, it uses SCL mechanism
-            - PHP 7.1.*
-                - `php71-php-cli`
-                - `php71-php-fpm`
-                - `php71-php-gd`
-                - `php71-php-mbstring`
-                - `php71-php-mcrypt`
-                - `php71-php-pdo`
+            - PHP 7.3.*
+                - `php73-php-cli`
+                - `php73-php-fpm`
+                - `php73-php-gd`
+                - `php73-php-mbstring`
+                - `php73-php-mcrypt`
+                - `php73-php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
 CentOS 7 の標準 PHP は 5.4.16 です。このバージョンでは動作しません。
-
-環境の作り方は `Dockerfile` を見るのが手っ取り早いです。素の CentOS 7 から環境を構築する手順はそこに書かれています。
 
 
 使い方
@@ -74,19 +72,6 @@ fest.ink の favicon はフリーライセンスではありません。
     make
     ```
 
-### DOCKER ###
-
-
-テスト環境構築用の `Dockerfile` が同梱されています。自分でビルドするか、Docker Hub の [`jp3cki/festink`](https://hub.docker.com/r/jp3cki/festink/) でビルド済みのイメージが取得できます。
-
-主要なソフトウェアのバージョンが合わせてあるため、本番環境とほぼ同じ環境ができあがるはずです。
-
-現在の作業ディレクトリの中身が `/home/festink/fest.ink` にデプロイされます。その際 `vendor` などは一度消され、再構成されます。
-
-コンテナを起動すると 80/TCP で Nginx が待ち受けています。ここへ接続して使用します。必要であれば `docker run` する時に `-p 8080:80` のように任意のポートにマップしてください。
-
-なお、任天堂からのデータ取得の定期実行(cron)は意図的に組み込んでいません。
-
 
 API
 ---
@@ -100,7 +85,7 @@ License (Source Codes)
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2016 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (c) 2015-2021 AIZAWA Hina \<hina@bouhime.com\>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
