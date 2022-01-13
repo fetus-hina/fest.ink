@@ -22,7 +22,7 @@ class Significant
         if ($expected == 0 || is_nan($expected)) {
             return false;
         }
-            
+
         $a = pow($alpha - $expected, 2) / $expected;
         $b = pow($bravo - $expected, 2) / $expected;
         $chi2 = $a + $b;

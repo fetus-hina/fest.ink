@@ -39,6 +39,9 @@
         },
         "platform": {
             "php": "7.3.16"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "extra": {
