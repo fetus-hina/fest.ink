@@ -6,7 +6,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "php": ">= 7.3",
+        "php": ">= 7.4",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
@@ -38,7 +38,7 @@
             "enabled": false
         },
         "platform": {
-            "php": "7.3.16"
+            "php": "7.4.29"
         },
         "allow-plugins": {
             "yiisoft/yii2-composer": true

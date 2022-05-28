@@ -9,7 +9,7 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 7.3+
+* PHP 7.4+
 * SQLite3
 * Node.js (`npm`)
 
@@ -24,13 +24,13 @@ https://fest.ink/ は現在次の構成で動作しています。
 * [SCL](https://www.softwarecollections.org/)
     * [Remi's RPM repository](http://rpms.remirepo.net/)
         - `remi-safe` repository, it uses SCL mechanism
-            - PHP 7.3.*
-                - `php73-php-cli`
-                - `php73-php-fpm`
-                - `php73-php-gd`
-                - `php73-php-mbstring`
-                - `php73-php-mcrypt`
-                - `php73-php-pdo`
+            - PHP 7.4.*
+                - `php74-php-cli`
+                - `php74-php-fpm`
+                - `php74-php-gd`
+                - `php74-php-mbstring`
+                - `php74-php-mcrypt`
+                - `php74-php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
