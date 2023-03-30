@@ -110,7 +110,7 @@ $renderIcon = function (array $data): string {
       現在の設定は<code><?= Html::encode(Yii::$app->getTimezone()) ?></code>です。<br>
     </div>
     <div class="footer-powered">
-      <?= vsprintf('Powered by %s', implode(', ', [
+      <?= sprintf('Powered by %s', implode(', ', [
         Html::a(
           Html::encode('Yii Framework ' . Yii::getVersion()),
           'https://www.yiiframework.com/'
