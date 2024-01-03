@@ -38,19 +38,57 @@ class Version
         if (self::$revision !== null && self::$shortRevision !== null) {
             return;
         }
+
+        $data = self::fetchRevisionByFile() ?? self::fetchRevisionByGit();
+        if (is_array($data) && count($data) === 2) {
+            self::$revision = $data[0];
+            self::$shortRevision = $data[1];
+            return;
+        }
+
+        self::$revision = false;
+        self::$shortRevision = false;
+    }
+
+    /**
+     * @return array{string, string}|null
+     */
+    private static function fetchRevisionByFile(): array|null
+    {
+        $path = (string)Yii::getAlias('@app/REVISION');
+        if (!file_exists($path)) {
+            return null;
+        }
+
+        $line = trim((string)file_get_contents($path));
+        if (preg_match('/^[0-9a-f]{40,}$/', $line)) {
+            return [
+                $line,
+                substr($line, 0, 7),
+            ];
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array{string, string}|null
+     */
+    private static function fetchRevisionByGit(): array|null
+    {
         try {
             if (!$line = self::getGitLog('%H:%h')) {
                 throw new Exception();
             }
+
             $revisions = explode(':', $line);
             if (count($revisions) !== 2) {
                 throw new Exception();
             }
-            self::$revision = $revisions[0];
-            self::$shortRevision = $revisions[1];
-        } catch (Exception $e) {
-            self::$revision = false;
-            self::$shortRevision = false;
+
+            return $revisions;
+        } catch (Exception) {
+            return null;
         }
     }
 
@@ -62,7 +100,7 @@ class Version
             escapeshellarg($format)
         );
         $lines = $status = null;
-        $line = exec($cmdline, $lines, $status);
+        $line = @exec($cmdline, $lines, $status);
         if ($status !== 0) {
             return false;
         }
