@@ -11,7 +11,6 @@ FAVICON_TARGETS= \
 RESOURCE_TARGETS_MAIN= \
 	resources/.compiled/fest.ink/fest.css \
 	resources/.compiled/fest.ink/fest.js \
-	resources/.compiled/pixiv/pixiv_logo.png \
 	resources/.compiled/tz-data/tz-init.js
 
 RESOURCE_TARGETS= \
@@ -24,7 +23,6 @@ RESOURCE_TARGETS= \
 
 all: \
 	composer.phar \
-	composer-update \
 	vendor \
 	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
@@ -40,11 +38,7 @@ favicon-maybe:
 
 resource: $(RESOURCE_TARGETS)
 
-composer-update: composer.phar
-	./composer.phar self-update
-	touch -r composer.json composer.phar
-
-vendor: composer.phar composer.lock composer-update
+vendor: composer.phar composer.lock
 	php composer.phar install --prefer-dist
 
 composer.lock: composer.json composer.phar
@@ -86,8 +80,12 @@ clean-favicon:
 		runtime/favicon
 
 composer.phar:
-	curl -sS https://getcomposer.org/installer | php
-	touch -r composer.json composer.phar
+ifeq (, $(shell which composer 2>/dev/null))
+	curl -fsSL 'https://getcomposer.org/installer' | php -- --filename=$@ --stable
+	@touch $@
+else
+	ln -s `which composer` $@
+endif
 
 resources/.compiled/favicon/favicon.ico: runtime/favicon/face-320x320.png
 	mkdir -p resources/.compiled/favicon || true
@@ -142,21 +140,6 @@ resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
 resources/.compiled/tz-data/tz-init.js: resources/tz-data/tz-init.js node_modules runtime/tzdata
 	@mkdir -p resources/.compiled/tz-data
 	npx babel -s false $< | npx uglifyjs -c -m -b beautify=false,ascii_only=true --comments -o $@
-
-resources/.compiled/pixiv/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.png
-	mkdir -p resources/.compiled/pixiv || true
-	pngcrush -rem allb -l 9 runtime/pixiv_logo/pixiv_logo.png resources/.compiled/pixiv/pixiv_logo.png
-
-runtime/pixiv_logo/pixiv_logo.png: runtime/pixiv_logo/pixiv_logo.svg
-	convert -background none runtime/pixiv_logo/pixiv_logo.svg -resize 77x30 runtime/pixiv_logo/pixiv_logo.png
-
-runtime/pixiv_logo/pixiv_logo.svg: runtime/pixiv_logo/pixiv_logo.zip
-	unzip -j runtime/pixiv_logo/pixiv_logo.zip pixiv_logo/pixiv_logo.svg -d runtime/pixiv_logo
-	touch runtime/pixiv_logo/pixiv_logo.svg
-
-runtime/pixiv_logo/pixiv_logo.zip:
-	mkdir -p runtime/pixiv_logo || true
-	wget -O runtime/pixiv_logo/pixiv_logo.zip 'http://source.pixiv.net/www/images/pixiv_logo.zip'
 
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0

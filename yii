@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+
 /**
  * Yii console bootstrap file.
  *
@@ -8,7 +9,10 @@
  * @license http://www.yiiframework.com/license/
  */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
+if (!file_exists(__DIR__ . '/REVISION')) {
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+    defined('YII_ENV') or define('YII_ENV', 'dev');
+}
 
 // fcgi doesn't have STDIN and STDOUT defined by default
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));

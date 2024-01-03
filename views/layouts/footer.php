@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use app\assets\PixivBannerAsset;
 use app\components\Version;
 use app\components\widgets\IPVersionBadge;
 use yii\helpers\Html;
@@ -76,20 +75,6 @@ $renderIcon = function (array $data): string {
           'icon' => 'fab fa-amazon',
           'title' => 'Amazon: 著者ページ',
           'url' => 'http://www.amazon.co.jp/%E3%81%A1%E3%82%87%E3%81%BE%E3%81%A9/e/B00WPPKOV8/?_encoding=UTF8&camp=247&creative=1211&linkCode=ur2&tag=fetusjp-22',
-        ],
-        [
-          'icon' => Html::img(
-            $am->getAssetUrl(
-              PixivBannerAsset::register($this),
-              'pixiv_logo.png'
-            ),
-            ['style' => [
-              'height' => '1em',
-              'width' => 'auto',
-            ]]
-          ),
-          'title' => 'Pixiv: #6783972',
-          'url' => 'http://www.pixiv.net/member.php?id=6783972',
         ],
       ]))),
     ]) ?></div>

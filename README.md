@@ -9,32 +9,29 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 7.4+
+* PHP 8.2+
 * SQLite3
-* Node.js (`npm`)
+* Node.js (`node` `npm`)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* CentOS 7 (x86_64)
+* CentOS 9 (x86_64)
 * H2O
-* SQLite 3.7.17 (標準)
+* SQLite 3.34.1
 * EPEL
-    - Brotli
-    - Zopfli
+  - Brotli
+  - Zopfli
+  - pngcrush
 * [SCL](https://www.softwarecollections.org/)
-    * [Remi's RPM repository](http://rpms.remirepo.net/)
-        - `remi-safe` repository, it uses SCL mechanism
-            - PHP 7.4.*
-                - `php74-php-cli`
-                - `php74-php-fpm`
-                - `php74-php-gd`
-                - `php74-php-mbstring`
-                - `php74-php-mcrypt`
-                - `php74-php-pdo`
+  * [Remi's RPM repository](http://rpms.remirepo.net/)
+    - PHP 8.2
+      - `php-cli`
+      - `php-fpm`
+      - `php-gd`
+      - `php-mbstring`
+      - `php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
-
-CentOS 7 の標準 PHP は 5.4.16 です。このバージョンでは動作しません。
 
 
 使い方

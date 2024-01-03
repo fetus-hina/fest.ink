@@ -1,4 +1,5 @@
 <?php
+
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
 $params = require(__DIR__ . '/params.php');
@@ -9,11 +10,14 @@ return [
     'id' => 'basic-console',
     'timeZone' => 'Asia/Tokyo',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'gii'],
+    'bootstrap' => array_values(
+        array_filter(
+            ['log', YII_ENV === 'prod' ? null : 'gii'],
+            fn (?string $module) => $module !== null,
+        ),
+    ),
     'controllerNamespace' => 'app\commands',
-    'modules' => [
-        'gii' => 'yii\gii\Module',
-    ],
+    'modules' => YII_ENV === 'prod' ? [] : ['gii' => 'yii\gii\Module'],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',

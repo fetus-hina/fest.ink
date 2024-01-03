@@ -41,12 +41,6 @@ $requirements = array(
         'memo' => 'Required for SQLite database.',
     ),
     array(
-        'name' => 'Mcrypt extension',
-        'mandatory' => true,
-        'condition' => extension_loaded('mcrypt'),
-        'by' => 'Favicon generator',
-    ),
-    array(
         'name' => 'GD extension',
         'mandatory' => true,
         'condition' => extension_loaded('gd'),
