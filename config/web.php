@@ -19,7 +19,7 @@ return (function (): array {
     $params = require(__DIR__ . '/params.php');
     $config = [
         'name' => 'イカフェスレート',
-        'version' => '2.8.21',
+        'version' => '2.8.23',
         'id' => 'basic',
         'language' => 'ja-jp',
         'timeZone' => 'Asia/Tokyo',
