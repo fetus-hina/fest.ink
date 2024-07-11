@@ -22,14 +22,13 @@ https://fest.ink/ は現在次の構成で動作しています。
   - Brotli
   - Zopfli
   - pngcrush
-* [SCL](https://www.softwarecollections.org/)
-  * [Remi's RPM repository](http://rpms.remirepo.net/)
-    - PHP 8.2
-      - `php-cli`
-      - `php-fpm`
-      - `php-gd`
-      - `php-mbstring`
-      - `php-pdo`
+* [Remi's RPM repository](http://rpms.remirepo.net/) with DNF modules
+  - PHP 8.3
+    - `php-cli`
+    - `php-fpm`
+    - `php-gd`
+    - `php-mbstring`
+    - `php-pdo`
 
 Apache+mod_php で動作させる場合は、 `runtime` ディレクトリと `db/fest.sqlite` ファイルの権限（所有者とパーミッション）に注意してください。
 
@@ -82,7 +81,7 @@ License (Source Codes)
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2022 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (c) 2015-2024 AIZAWA Hina \<hina@bouhime.com\>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -125,7 +124,7 @@ fest.ink で使用しているイカガールのイラストはフリーなラ�
 License (Documentation)
 -----------------------
 
-Copyright (C) 2015-2016 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (C) 2015-2024 AIZAWA Hina \<hina@bouhime.com\>
 
 [![CC-BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/deed.ja)  
 Documents of the fest.ink are licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/deed.en).
