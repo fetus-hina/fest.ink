@@ -15,7 +15,7 @@ https://fest.ink/ のソースコードです。
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* CentOS 9 (x86_64)
+* RockyLinux 9 (x86_64)
 * H2O
 * SQLite 3.34.1
 * EPEL
