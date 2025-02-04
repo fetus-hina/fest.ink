@@ -9,7 +9,7 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-pcre": "*",
-        "laminas/laminas-crypt": "^3.12.0",
+        "laminas/laminas-crypt": "^4.0.0",
         "yiisoft/yii2": "~2.0.51",
         "yiisoft/yii2-bootstrap": "^2.0.11",
         "yiisoft/yii2-smarty": "^2.0.11"
