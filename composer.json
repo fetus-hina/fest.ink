@@ -5,7 +5,7 @@
     "type": "project",
     "homepage": "https://fest.ink/",
     "require": {
-        "php": ">= 8.2",
+        "php": ">= 8.3",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-pcre": "*",
@@ -42,7 +42,7 @@
             "enabled": false
         },
         "platform": {
-            "php": "8.2.27"
+            "php": "8.3.16"
         },
         "process-timeout": 1800
     },

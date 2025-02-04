@@ -9,13 +9,13 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 8.2+
+* PHP 8.3+
 * SQLite3
 * Node.js (`node` `npm`)
 
 https://fest.ink/ は現在次の構成で動作しています。
 
-* RockyLinux 9 (x86_64)
+* Rocky Linux 9 (x86_64)
 * H2O
 * SQLite 3.34.1
 * EPEL
@@ -81,7 +81,7 @@ License (Source Codes)
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2024 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (c) 2015-2025 AIZAWA Hina \<hina@bouhime.com\>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -124,7 +124,7 @@ fest.ink で使用しているイカガールのイラストはフリーなラ�
 License (Documentation)
 -----------------------
 
-Copyright (C) 2015-2024 AIZAWA Hina \<hina@bouhime.com\>
+Copyright (C) 2015-2025 AIZAWA Hina \<hina@bouhime.com\>
 
 [![CC-BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/deed.ja)  
 Documents of the fest.ink are licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/deed.en).
