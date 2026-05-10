@@ -8,7 +8,7 @@
     &#32;
     <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a>
   </div>
-  <div class="btn-toolbar" role="toolbar">
+  <div class="btn-toolbar gap-2" role="toolbar">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-secondary btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
         <span class="fas fa-chart-area"></span> 上下
