@@ -5,6 +5,11 @@ body {
     padding-top: 70px;
 }
 
+// 1 段目の dropdown を navbar の高さ分だけ下げる
+.navbar .dropdown-menu {
+    margin-top: 0;
+}
+
 .rate-graph {
     height: 500px;
 }
@@ -59,24 +64,23 @@ footer {
     }
 }
 
+// Bootstrap 5 にネスト dropdown が無いので、CSS でサブメニュー機能を実装する
 .dropdown-submenu {
     position: relative;
 
     & > .dropdown-menu {
         top: 0;
         left: 100%;
-        margin-top: -6px;
+        margin-top: -.25rem;
         margin-left: -1px;
-        -webkit-border-radius: 0 6px 6px 6px;
-        -moz-border-radius: 0 6px 6px;
-        border-radius: 0 6px 6px 6px;
+        border-radius: 0 .25rem .25rem .25rem;
     }
 
     &:hover > .dropdown-menu {
         display: block;
     }
 
-    & > a:after {
+    & > .dropdown-item:after {
         display: block;
         content: " ";
         float: right;
@@ -85,25 +89,9 @@ footer {
         border-color: transparent;
         border-style: solid;
         border-width: 5px 0 5px 5px;
-        border-left-color: #ccc;
-        margin-top: 5px;
-        margin-right: -10px;
-    }
-
-    &:hover > a:after {
-        border-left-color: #fff;
-    }
-
-    &.pull-left {
-        float: none;
-    }
-
-    &.pull-left > .dropdown-menu {
-        left: -100%;
-        margin-left: 10px;
-        -webkit-border-radius: 6px 0 6px 6px;
-        -moz-border-radius: 6px 0 6px 6px;
-        border-radius: 6px 0 6px 6px;
+        border-left-color: currentColor;
+        margin-top: .5em;
+        margin-right: -.5em;
     }
 }
 

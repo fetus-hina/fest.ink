@@ -10,11 +10,11 @@ $(document).ready(function () {
         $button.each(function () {
             var $this = $(this);
             $this.removeClass('btn-primary')
-                .removeClass('btn-default')
+                .removeClass('btn-secondary')
                 .addClass(
                     state === $this.attr('data-type')
                         ? 'btn-primary'
-                        : 'btn-default'
+                        : 'btn-secondary'
                 );
         });
     };

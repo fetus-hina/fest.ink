@@ -10,15 +10,15 @@
   </div>
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
+      <button type="button" class="btn btn-secondary btn-graphtype auto-tooltip" title="両チームの勝率を上下に並べて表示します" data-type="stack">
         <span class="fas fa-chart-area"></span> 上下
       </button>
-      <button type="button" class="btn btn-default btn-graphtype auto-tooltip" title="両チームの勝率を重ねて表示します" data-type="overlay">
+      <button type="button" class="btn btn-secondary btn-graphtype auto-tooltip" title="両チームの勝率を重ねて表示します" data-type="overlay">
         <span class="fas fa-chart-area"></span> 重ね
       </button>
     </div>
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default auto-tooltip" id="btn-ink-color" title="インク色の使用有無を切り替えます">
+      <button type="button" class="btn btn-secondary auto-tooltip" id="btn-ink-color" title="インク色の使用有無を切り替えます">
         <span class="fas fa-tint"></span>
       </button>
     </div>
@@ -78,18 +78,18 @@
     {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
   </p>
   <div class="progress">
-    <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="alpha">
+    <div class="progress-bar bg-danger progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="alpha">
     </div>
-    <div class="progress-bar progress-bar-danger progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="alpha">
+    <div class="progress-bar bg-danger progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="alpha">
     </div>
   </div>
   <p>
     {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate" data-team="bravo">取得中</span>（サンプル数：<span class="sample-count" data-team="bravo">???</span>）
   </p>
   <div class="progress">
-    <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="bravo">
+    <div class="progress-bar bg-success progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="bravo">
     </div>
-    <div class="progress-bar progress-bar-success progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="bravo">
+    <div class="progress-bar bg-success progress-bar-striped total-progressbar total-progressbar-uncertain" style="width:0%" data-team="bravo">
     </div>
   </div>
 

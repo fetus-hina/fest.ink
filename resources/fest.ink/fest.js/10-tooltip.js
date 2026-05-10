@@ -1,4 +1,6 @@
 // Copyright (C) 2015 AIZAWA Hina | MIT License
 $(document).ready(function () {
-    $('.auto-tooltip').tooltip({'container': 'body'});
+    document.querySelectorAll('.auto-tooltip').forEach(function (el) {
+        new bootstrap.Tooltip(el, { container: 'body' });
+    });
 });

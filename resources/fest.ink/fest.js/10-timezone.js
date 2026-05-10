@@ -10,13 +10,13 @@ $(document).ready(function () {
             var $li = $('li', $timezoneMenu);
             var onDisplay = function () {
                 var currentTimezone = window.fest.conf.timezone.get();
-                $('.glyphicon-ok', $timezoneMenu).each(function () {
+                $('.tz-check', $timezoneMenu).each(function () {
                     var $this = $(this);
                     $this.css(
-                        'color',
+                        'visibility',
                         $this.parent().attr('data-timezone') === currentTimezone
-                            ? '#333'
-                            : 'rgba(0,0,0,0)'
+                            ? 'visible'
+                            : 'hidden'
                     );
                 });
             };
@@ -65,16 +65,20 @@ $(document).ready(function () {
                     var $currentInitial = null;
                     $timezoneMenu.empty().append(
                         $('<li>').append(
-                            $('<a>', {'href': 'javascript:;', 'data-timezone': 'Asia/Tokyo'}).append(
-                                $('<span>').addClass('glyphicon glyphicon-ok')
+                            $('<a>', {
+                                'href': 'javascript:;',
+                                'class': 'dropdown-item',
+                                'data-timezone': 'Asia/Tokyo',
+                            }).append(
+                                $('<span>').addClass('tz-check fas fa-fw fa-check')
                             ).append(
                                 ' 日本時間'
                             ).click(function () {
-                                changeTimezone('Asia/Tokyo')
+                                changeTimezone('Asia/Tokyo');
                             })
                         )
                     ).append(
-                        $('<li>').addClass('divider')
+                        $('<li>').append($('<hr>').addClass('dropdown-divider'))
                     );
                     for (var i = 0; i < zones.length; ++i) {
                         var match = zones[i].id.match(/^([^\/]+)\/((.).*)$/);
@@ -87,9 +91,10 @@ $(document).ready(function () {
                                 $currentArea = $('<ul>').addClass('dropdown-menu');
                                 $timezoneMenu.append(
                                     $('<li>').addClass('dropdown-submenu').append(
-                                        $('<a>', {'href': 'javascript:;', 'data-toggle': 'dropdown'}).text(
-                                            currentArea
-                                        )
+                                        $('<a>', {
+                                            'href': 'javascript:;',
+                                            'class': 'dropdown-item',
+                                        }).text(currentArea)
                                     ).append(
                                         $currentArea
                                     )
@@ -102,9 +107,10 @@ $(document).ready(function () {
                                 $currentInitial = $('<ul>').addClass('dropdown-menu');
                                 $currentArea.append(
                                     $('<li>').addClass('dropdown-submenu').append(
-                                        $('<a>', {'href': 'javascript:;', 'data-toggle': 'dropdown'}).text(
-                                            currentInitial
-                                        )
+                                        $('<a>', {
+                                            'href': 'javascript:;',
+                                            'class': 'dropdown-item',
+                                        }).text(currentInitial)
                                     ).append(
                                         $currentInitial
                                     )
@@ -115,8 +121,12 @@ $(document).ready(function () {
                             // "Asia"->"T"->"Asia/Tokyo"
                             $currentInitial.append(
                                 $('<li>').append(
-                                    $('<a>', {'href': 'javascript:;', 'data-timezone': match[0]}).append(
-                                        $('<span>').addClass('glyphicon glyphicon-ok')
+                                    $('<a>', {
+                                        'href': 'javascript:;',
+                                        'class': 'dropdown-item',
+                                        'data-timezone': match[0],
+                                    }).append(
+                                        $('<span>').addClass('tz-check fas fa-fw fa-check')
                                     ).append(
                                         ' ' + match[0]
                                     ).click(function () {

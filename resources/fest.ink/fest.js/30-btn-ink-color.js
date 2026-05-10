@@ -8,8 +8,8 @@ $(document).ready(function () {
     var onChange = function () {
         var state = window.fest.conf.useInkColor.get();
         $button.removeClass('btn-primary')
-            .removeClass('btn-default')
-            .addClass(state ? 'btn-primary' : 'btn-default');
+            .removeClass('btn-secondary')
+            .addClass(state ? 'btn-primary' : 'btn-secondary');
     };
     onChange();
 

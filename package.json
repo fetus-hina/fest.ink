@@ -12,7 +12,6 @@
         "@babel/preset-env": "^7.29.5",
         "@fortawesome/fontawesome-free": "^5.15.4",
         "autoprefixer": "^10.5.0",
-        "bootstrap": "^3.4.1",
         "cssnano": "^7.1.9",
         "flot": "~0.8.3",
         "inputmask": "^5.0.9",

@@ -6,8 +6,8 @@ use app\components\web\AssetConverter;
 use app\components\web\AssetManager;
 use app\components\web\PrettyJsonResponseFormatter;
 use app\components\web\Response;
-use yii\bootstrap\BootstrapAsset;
-use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap5\BootstrapAsset;
+use yii\bootstrap5\BootstrapPluginAsset;
 use yii\caching\FileCache;
 use yii\debug\Module as DebugModule;
 use yii\gii\Module as GiiModule;
@@ -37,12 +37,12 @@ return (function (): array {
                     ],
                     BootstrapAsset::class => [
                         'css' => [
-                            'css/bootstrap.min.css',
+                            'bootstrap.min.css',
                         ],
                     ],
                     BootstrapPluginAsset::class => [
                         'js' => [
-                            'js/bootstrap.min.js',
+                            'bootstrap.bundle.min.js',
                         ],
                     ],
                 ],

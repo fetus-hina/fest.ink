@@ -13,9 +13,8 @@ namespace app\assets;
 use app\assets\FlotAsset;
 use app\assets\FontAwesomeAsset;
 use app\assets\TwitterWidgetAsset;
-use yii\bootstrap\BootstrapAsset;
-use yii\bootstrap\BootstrapPluginAsset;
-use yii\bootstrap\BootstrapThemeAsset;
+use yii\bootstrap5\BootstrapAsset;
+use yii\bootstrap5\BootstrapPluginAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 
@@ -34,7 +33,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         BootstrapAsset::class,
         BootstrapPluginAsset::class,
-        BootstrapThemeAsset::class,
         FlotAsset::class,
         FontAwesomeAsset::class,
         JqueryAsset::class,
