@@ -13,7 +13,7 @@ use cebe\markdown\GithubMarkdown as Markdown;
 
 class ApiDocAction extends SimpleAction
 {
-    public $view = 'api.tpl';
+    public $view = 'api';
 
     public function run()
     {

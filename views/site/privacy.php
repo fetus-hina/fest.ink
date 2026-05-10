@@ -1,5 +1,12 @@
-{{strip}}
-{{set title="イカフェスレート | プライバシーポリシー"}}
+<?php
+
+declare(strict_types=1);
+
+/** @var \yii\web\View $this */
+
+$this->title = 'イカフェスレート | プライバシーポリシー';
+
+?>
 <div class="container">
   <h1>
     プライバシーポリシー
@@ -59,4 +66,3 @@
     <!-- 保存される情報はどのサイトでも行われているものなので、気になるなら回線切ったほうがいいです。 -->
   </p>
 </div>
-{{/strip}}

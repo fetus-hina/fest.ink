@@ -42,7 +42,6 @@ after('deploy:vendors', 'deploy:assets');
 
 task('deploy:assets', function () {
     within('{{release_or_current_path}}', function () {
-        run('{{bin/make}} vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php 2>&1');
         run('{{bin/make}} resource 2>&1');
         run('{{bin/make}} favicon-maybe 2>&1');
     });

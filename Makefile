@@ -24,7 +24,6 @@ RESOURCE_TARGETS= \
 all: \
 	composer.phar \
 	vendor \
-	vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php \
 	node_modules \
 	config/cookie-secret.php \
 	resource \
@@ -158,10 +157,6 @@ runtime/tzdata-latest.tar.gz:
 
 resources/.compiled/tz-data/files: runtime/tzdata
 	rsync -a $</ $@/
-
-vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php: vendor FORCE
-	head -n 815 vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatecompilerbase.php | tail -n 10 | grep '\\1 \\2' > /dev/null && \
-		patch -d vendor/smarty/smarty -p1 -Nst < data/patch/smarty-strip.patch || /bin/true
 
 %.gz: %
 	gzip -cq9 --rsyncable < $< > $@

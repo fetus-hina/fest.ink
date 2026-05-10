@@ -26,7 +26,7 @@ class ViewAction extends BaseAction
             throw new NotFoundHttpException();
         }
 
-        return $this->controller->render('view.tpl', [
+        return $this->controller->render('view', [
             'fest' => $fest,
         ]);
     }

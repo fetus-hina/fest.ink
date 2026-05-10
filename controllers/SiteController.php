@@ -18,7 +18,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-                'view' => 'error.tpl',
+                'view' => 'error',
             ],
             'api' => [
                 'class' => 'app\actions\site\ApiDocAction',
@@ -28,7 +28,7 @@ class SiteController extends Controller
             ],
             'privacy' => [
                 'class' => 'app\actions\site\SimpleAction',
-                'view' => 'privacy.tpl',
+                'view' => 'privacy',
             ],
         ];
     }

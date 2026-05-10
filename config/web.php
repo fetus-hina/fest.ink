@@ -12,7 +12,6 @@ use yii\caching\FileCache;
 use yii\debug\Module as DebugModule;
 use yii\gii\Module as GiiModule;
 use yii\log\FileTarget;
-use yii\smarty\ViewRenderer as SmartyViewRenderer;
 use yii\web\JqueryAsset;
 
 return (function (): array {
@@ -112,18 +111,6 @@ return (function (): array {
                 'class' => Response::class,
                 'formatters' => [
                     'json' => PrettyJsonResponseFormatter::class,
-                ],
-            ],
-            'view' => [
-                'renderers' => [
-                    'tpl' => [
-                        'class' => SmartyViewRenderer::class,
-                        'options' => [
-                            'force_compile' => defined('YII_DEBUG') && YII_DEBUG,
-                            'left_delimiter' => '{{',
-                            'right_delimiter' => '}}',
-                        ],
-                    ],
                 ],
             ],
             'cache' => [

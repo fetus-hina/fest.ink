@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Source for https://fest.ink/ — "イカフェスレート", a Splatoon Splatfest tracking/rating site. Yii 2 PHP application backed by SQLite, with a server-rendered Smarty/Bootstrap 3 frontend and a JSON API documented in `API.md`.
+Source for https://fest.ink/ — "イカフェスレート", a Splatoon Splatfest tracking/rating site. Yii 2 PHP application backed by SQLite, with a server-rendered Bootstrap 5 frontend (plain Yii PHP views) and a JSON API documented in `API.md`.
 
 Requires PHP 8.3+ (`ext-intl`, `ext-mbstring`), Node.js, and SQLite 3. ImageMagick (`convert`) and `pngcrush` are needed only when building the favicon.
 
@@ -32,7 +32,7 @@ There is no test suite in this repo — no PHPUnit config, no `tests/` directory
 
 **URL routing is strict and explicit.** `config/web.php` sets `enableStrictParsing => true` with hand-written rules (numeric IDs map to `fest/view`, `<id>.json` to `fest/view-json`, and so on). Adding a public URL means editing the `urlManager.rules` array — there is no convention-based fallback.
 
-**Two view engines coexist.** PHP layouts under `views/layouts/` (`main.php`, `navbar.php`, `footer.php`) wrap Smarty templates (`.tpl`) under `views/{fest,site}/`. The Smarty configuration in `config/web.php` swaps the default delimiters to `{{ ... }}` — keep that in mind when editing `.tpl` files; standard Smarty `{...}` syntax will not work.
+**Views are plain Yii PHP templates.** `views/layouts/` (`main.php`, `navbar.php`, `footer.php`) wraps page views under `views/{fest,site}/`. The convention in this repo is curly-brace block syntax (`<?php foreach (...) { ?> ... <?php } ?>`) rather than the alternative `endforeach`/`endif` form — match that style when editing.
 
 **Models are Yii ActiveRecord against SQLite.** `models/Fest.php` is the central entity (a Splatfest event); `Team`, `Color`, `OfficialResult`, `OfficialData`, `Mvp`, `Timezone` hang off it. `Fest::toJsonArray()` is the canonical shape for the public JSON API and is what `IndexJsonAction`/`ViewJsonAction`/`EmulateOfficialJsonAction` serialize. The DB lives in `db/fest.sqlite` and is rebuilt from `migrations/` — each historical Splatfest has its own pair of `*_fest.php` / `*_data.php` / `*_result.php` migrations, so adding a new fest event means writing new migrations rather than editing seed scripts.
 
@@ -48,5 +48,4 @@ There is no test suite in this repo — no PHPUnit config, no `tests/` directory
 
 - New PHP files start with `declare(strict_types=1);` where present, and use `namespace app\...` mirroring the directory.
 - Lint scope (PSR-12) covers `actions assets commands controllers models`. Files under `components/` are not linted by the Makefile target — match the existing style there but don't expect the linter to enforce it.
-- The Smarty compiler is patched at build time (`make` applies `data/patch/smarty-strip.patch`); don't be surprised if `vendor/smarty/...` differs from a fresh composer install.
 - `config/cookie-secret.php`, `config/favicon.license.txt`, and `db/fest.sqlite` are gitignored / shared-across-deploys — don't commit them.

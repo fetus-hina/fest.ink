@@ -16,7 +16,7 @@ class IndexAction extends BaseAction
 {
     public function run()
     {
-        return $this->controller->render('index.tpl', [
+        return $this->controller->render('index', [
             'allFest' => Fest::find()->orderBy('fest.id DESC')->all(),
         ]);
     }

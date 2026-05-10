@@ -1,10 +1,30 @@
-{{strip}}
+<?php
 
-{{title}}{{$app->name|escape}} | フェス「{{$fest->name|escape}}」の推定勝率{{/title}}
+declare(strict_types=1);
 
-<div class="container" data-fest="{{$fest->id|escape}}">
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+/** @var \yii\web\View $this */
+/** @var \app\models\Fest $fest */
+
+$this->title = sprintf('%s | フェス「%s」の推定勝率', Yii::$app->name, $fest->name);
+
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Chango');
+$this->registerCss(<<<'CSS'
+#official-result-container .result-number,
+#official-result-container .result-percent,
+#official-result-container .result-multiply{
+  font-family:'Chango',cursive
+}
+CSS);
+
+$statink = $fest->statInkUrl;
+
+?>
+<div class="container" data-fest="<?= Html::encode($fest->id) ?>">
   <div id="social">
-    <a class="share-button" data-text="フェス「{{$fest->name|escape}}」の推定勝率" data-url="{{url route="/fest/view" id=$fest->id}}" data-via="ikafest" href="https://twitter.com/intent/tweet" style="display:none">Tweet</a>
+    <a class="share-button" data-text="フェス「<?= Html::encode($fest->name) ?>」の推定勝率" data-url="<?= Html::encode(Url::to(['fest/view', 'id' => $fest->id])) ?>" data-via="ikafest" href="https://twitter.com/intent/tweet" style="display:none">Tweet</a>
     &#32;
     <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/ikafest">Follow @ikafest</a>
   </div>
@@ -24,17 +44,9 @@
     </div>
   </div>
 
-  {{registerCssFile url="https://fonts.googleapis.com/css?family=Chango"}}
-  {{registerCss}}
-    #official-result-container .result-number,
-    #official-result-container .result-percent,
-    #official-result-container .result-multiply{
-      font-family:'Chango',cursive
-    }
-  {{/registerCss}}
   <div id="official-result">
     <h1>
-      フェス「{{$fest->name|escape}}」の結果
+      フェス「<?= Html::encode($fest->name) ?>」の結果
     </h1>
     <div id="official-result-container">
     </div>
@@ -42,7 +54,7 @@
   </div>
 
   <h1>
-    フェス「{{$fest->name|escape}}」の推定勝率
+    フェス「<?= Html::encode($fest->name) ?>」の推定勝率
   </h1>
   <p>
     スプラトゥーンの公式サイトで公開されているデータを基に推計したデータです。
@@ -54,28 +66,27 @@
   <p>
     <a href="https://blog.fetus.jp/201606/371.html">何を表示しているかや誤差の意味に関する説明はこちら</a>をご覧ください。
   </p>
-  {{$statink = $fest->statInkUrl}}
-  {{if $statink}}
+  <?php if ($statink) { ?>
     <p>
-      <a href="{{$statink|escape}}">
+      <a href="<?= Html::encode($statink) ?>">
         stat.inkの投稿情報に基づいて計算したデータはこちらです。
       </a>
     </p>
-  {{/if}}
-  {{if $fest->is_multiple_region}}
+  <?php } ?>
+  <?php if ($fest->is_multiple_region) { ?>
     <p>
       <strong style="color:red">
         このフェスは複数の地域にまたがって開催されています。<br>
         統計対象はおそらく日本のみとなっていますので、他の地域を合わせてみると結果は大きくずれるかもしれません。
       </strong>
     </p>
-  {{/if}}
+  <?php } ?>
 
   <h2 id="rate">
     推定勝率: <span class="total-rate-info"></span> <span class="total-rate" data-team="alpha">取得中</span> VS <span class="total-rate" data-team="bravo">取得中</span>
   </h2>
   <p>
-    {{$fest->alphaTeam->name|escape}}チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
+    <?= Html::encode($fest->alphaTeam->name) ?>チーム: <span class="total-rate" data-team="alpha">取得中</span>（サンプル数：<span class="sample-count" data-team="alpha">???</span>）
   </p>
   <div class="progress">
     <div class="progress-bar bg-danger progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="alpha">
@@ -84,7 +95,7 @@
     </div>
   </div>
   <p>
-    {{$fest->bravoTeam->name|escape}}チーム: <span class="total-rate" data-team="bravo">取得中</span>（サンプル数：<span class="sample-count" data-team="bravo">???</span>）
+    <?= Html::encode($fest->bravoTeam->name) ?>チーム: <span class="total-rate" data-team="bravo">取得中</span>（サンプル数：<span class="sample-count" data-team="bravo">???</span>）
   </p>
   <div class="progress">
     <div class="progress-bar bg-success progress-bar-striped total-progressbar total-progressbar-certain" style="width:0%" data-team="bravo">
@@ -140,7 +151,7 @@
     表示している情報
   </h2>
   <p>
-    フェス開催期間: {{$fest->start_at|date_format:'%Y-%m-%d %H:%M %Z'|escape}} ～ {{$fest->end_at|date_format:'%Y-%m-%d %H:%M %Z'|escape}}
+    フェス開催期間: <?= Html::encode(date('Y-m-d H:i T', (int)$fest->start_at)) ?> ～ <?= Html::encode(date('Y-m-d H:i T', (int)$fest->end_at)) ?>
   </p>
   <p>
     <span title="サーバが任天堂から最後にデータを取得したタイミングです">データ最終更新: <span class="last-updated-at">(取得中)</span></span>、
@@ -148,6 +159,5 @@
     サンプル数: <span class="sample-count">(取得中)</span>
   </p>
 
-  {{include '@app/views/fest/attention.tpl'}}
+  <?= $this->render('attention') ?>
 </div>
-{{/strip}}
