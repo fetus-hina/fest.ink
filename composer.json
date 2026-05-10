@@ -8,8 +8,8 @@
         "php": ">= 8.3",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "ext-openssl": "*",
         "ext-pcre": "*",
-        "laminas/laminas-crypt": "^4.0.0",
         "yiisoft/yii2": "~2.0.52",
         "yiisoft/yii2-bootstrap5": "^2.0.6"
     },
