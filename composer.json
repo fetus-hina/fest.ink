@@ -10,14 +10,14 @@
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-pcre": "*",
-        "yiisoft/yii2": "~2.0.52",
-        "yiisoft/yii2-bootstrap5": "^2.0.6"
+        "yiisoft/yii2": "~2.0.55",
+        "yiisoft/yii2-bootstrap5": "^2.0.51"
     },
     "require-dev": {
-        "deployer/deployer": "^7.5.11",
-        "ergebnis/composer-normalize": "^2.45",
-        "squizlabs/php_codesniffer": "^3.11.3",
-        "yiisoft/yii2-debug": "^2.1.26",
+        "deployer/deployer": "^7.5.12",
+        "ergebnis/composer-normalize": "^2.52",
+        "squizlabs/php_codesniffer": "^3.13.5",
+        "yiisoft/yii2-debug": "^2.1.28",
         "yiisoft/yii2-gii": "^2.2.7"
     },
     "replace": {
