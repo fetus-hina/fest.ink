@@ -129,7 +129,6 @@ data/favicon/ikagirl.png: vendor data/favicon/ikagirl.dat
 resources/.compiled/fest.ink/fest.js: $(JS_SRCS) node_modules
 	@mkdir -p resources/.compiled/fest.ink
 	cat $(JS_SRCS) | \
-		npx babel -s false -f jsfile | \
 		npx uglifyjs -c -m -b beautify=false,ascii_only=true --comments -o $@
 
 resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
@@ -138,7 +137,7 @@ resources/.compiled/fest.ink/fest.css: resources/fest.ink/fest.less node_modules
 
 resources/.compiled/tz-data/tz-init.js: resources/tz-data/tz-init.js node_modules runtime/tzdata
 	@mkdir -p resources/.compiled/tz-data
-	npx babel -s false $< | npx uglifyjs -c -m -b beautify=false,ascii_only=true --comments -o $@
+	npx uglifyjs $< -c -m -b beautify=false,ascii_only=true --comments -o $@
 
 db/fest.sqlite: vendor runtime/tzdata FORCE
 	./yii migrate/up --interactive=0

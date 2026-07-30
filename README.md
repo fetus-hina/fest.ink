@@ -11,7 +11,7 @@ https://fest.ink/ のソースコードです。
 
 * PHP 8.3+
 * SQLite3
-* Node.js (`node` `npm`)
+* Node.js 24+ (`node` `npm`)
 
 https://fest.ink/ は現在次の構成で動作しています。
 

@@ -13,7 +13,7 @@ Requires PHP 8.3+ (`ext-intl`, `ext-mbstring`), Node.js, and SQLite 3. ImageMagi
 The Makefile is the canonical build entry point — run targets through it rather than invoking the underlying tools directly.
 
 - `make` — full setup: `composer install`, `npm ci`, compile JS/CSS/tz-data, generate `config/cookie-secret.php`, run migrations to create `db/fest.sqlite`, optionally rebuild the favicon.
-- `make resource` — recompile only frontend assets (LESS → CSS via `lessc`+`postcss`, JS bundles via `babel`+`uglifyjs`, plus `.gz` and `.br` precompressed copies under `resources/.compiled/`).
+- `make resource` — recompile only frontend assets (LESS → CSS via `lessc`+`postcss`, JS bundles via `uglifyjs`, plus `.gz` and `.br` precompressed copies under `resources/.compiled/`).
 - `make favicon` — regenerate favicons; only works if `config/favicon.license.txt` exists (the artwork is non-free, see README).
 - `make clean` / `make clean-resource` / `make clean-favicon` — staged cleanups.
 - `make check-style` — PHP_CodeSniffer against PSR-12 over `actions assets commands controllers models` (note: `components` is intentionally excluded from the lint set).
@@ -36,9 +36,9 @@ There is no test suite in this repo — no PHPUnit config, no `tests/` directory
 
 **Models are Yii ActiveRecord against SQLite.** `models/Fest.php` is the central entity (a Splatfest event); `Team`, `Color`, `OfficialResult`, `OfficialData`, `Mvp`, `Timezone` hang off it. `Fest::toJsonArray()` is the canonical shape for the public JSON API and is what `IndexJsonAction`/`ViewJsonAction`/`EmulateOfficialJsonAction` serialize. The DB lives in `db/fest.sqlite` and is rebuilt from `migrations/` — each historical Splatfest has its own pair of `*_fest.php` / `*_data.php` / `*_result.php` migrations, so adding a new fest event means writing new migrations rather than editing seed scripts.
 
-**Custom web components in `components/web/`** override Yii defaults: `Controller` reads a `timezone` cookie and applies it to the request; `Response` + `PrettyJsonResponseFormatter` produce the pretty-printed JSON; `AssetConverter`/`AssetManager` integrate the LESS/Babel compile pipeline.
+**Custom web components in `components/web/`** override Yii defaults: `Controller` reads a `timezone` cookie and applies it to the request; `Response` + `PrettyJsonResponseFormatter` produce the pretty-printed JSON; `AssetConverter` writes a `.gz` sibling for every published `.js`/`.css`, and `AssetManager` wires it up.
 
-**Frontend bundling is concat-then-minify, not webpack.** `resources/fest.ink/fest.js/*.js` files are concatenated in lexical order (the numeric prefixes — `00-`, `01-`, `03-`, … `99-` — define load order) and piped through Babel + UglifyJS. LESS is compiled with `lessc` and post-processed by PostCSS. Outputs land in `resources/.compiled/` and are served from there with precompressed `.gz`/`.br` siblings. When adding new JS, pick a numeric prefix matching its phase rather than introducing a bundler.
+**Frontend bundling is concat-then-minify, not webpack.** `resources/fest.ink/fest.js/*.js` files are concatenated in lexical order (the numeric prefixes — `00-`, `01-`, `03-`, … `99-` — define load order) and piped through UglifyJS. There is no transpile step — the sources are written directly against the `.browserslistrc` baseline (which tracks Bootstrap 5's). LESS is compiled with `lessc` and post-processed by PostCSS. Outputs land in `resources/.compiled/` and are served from there with precompressed `.gz`/`.br` siblings. When adding new JS, pick a numeric prefix matching its phase rather than introducing a bundler.
 
 **Timezone data is bundled from IANA tzdata.** `make` downloads `tzdata-latest.tar.gz` from `ftp.iana.org` and extracts it under `runtime/tzdata`; the JS frontend uses `timezone-js` against `resources/.compiled/tz-data/files`.
 

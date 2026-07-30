@@ -5,11 +5,10 @@
         "name": "AIZAWA Hina",
         "email": "hina@bouhime.com"
     },
+    "engines": {
+        "node": ">=24"
+    },
     "dependencies": {
-        "@babel/cli": "^7.29.7",
-        "@babel/core": "^7.29.7",
-        "@babel/polyfill": "^7.12.1",
-        "@babel/preset-env": "^7.29.7",
         "@fortawesome/fontawesome-free": "^5.15.4",
         "autoprefixer": "^10.5.4",
         "cssnano": "^7.1.9",

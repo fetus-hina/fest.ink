@@ -1,7 +1,12 @@
-last 2 versions
+# https://github.com/browserslist/browserslist#readme
+
+>= 0.5%
+last 2 major versions
+not dead
+Chrome >= 60
+Firefox >= 60
 Firefox ESR
-Android >= 5.0
-iOS >= 9.0
-IE >= 10
-not OperaMini all
-# not dead
+iOS >= 12
+Safari >= 12
+not Explorer <= 11
+not kaios <= 2.5 # fix floating label issues in Firefox (see https://github.com/postcss/autoprefixer/issues/1533)
