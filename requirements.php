@@ -40,12 +40,6 @@ $requirements = array(
         'by' => 'All DB-related classes',
         'memo' => 'Required for SQLite database.',
     ),
-    array(
-        'name' => 'GD extension',
-        'mandatory' => true,
-        'condition' => extension_loaded('gd'),
-        'by' => 'apple-touch-startup-image generator',
-    ),
     'phpExposePhp' => array(
         'name' => 'Expose PHP',
         'mandatory' => false,

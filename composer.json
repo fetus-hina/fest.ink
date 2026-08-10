@@ -6,10 +6,14 @@
     "homepage": "https://fest.ink/",
     "require": {
         "php": ">= 8.3",
-        "ext-intl": "*",
+        "ext-hash": "*",
+        "ext-json": "*",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-pcre": "*",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-zlib": "*",
         "yiisoft/yii2": "~2.0.55",
         "yiisoft/yii2-bootstrap5": "^2.0.51"
     },

@@ -26,7 +26,6 @@ https://fest.ink/ は現在次の構成で動作しています。
   - PHP 8.3
     - `php-cli`
     - `php-fpm`
-    - `php-gd`
     - `php-mbstring`
     - `php-pdo`
 
