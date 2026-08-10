@@ -9,7 +9,7 @@ https://fest.ink/ のソースコードです。
 動作環境
 --------
 
-* PHP 8.3+
+* PHP 8.4+
 * SQLite3
 * Node.js 24+ (`node` `npm`)
 
@@ -23,7 +23,7 @@ https://fest.ink/ は現在次の構成で動作しています。
   - Zopfli
   - pngcrush
 * [Remi's RPM repository](http://rpms.remirepo.net/) with DNF modules
-  - PHP 8.3
+  - PHP 8.4
     - `php-cli`
     - `php-fpm`
     - `php-mbstring`

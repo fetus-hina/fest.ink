@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Source for https://fest.ink/ — "イカフェスレート", a Splatoon Splatfest tracking/rating site. Yii 2 PHP application backed by SQLite, with a server-rendered Bootstrap 5 frontend (plain Yii PHP views) and a JSON API documented in `API.md`.
 
-Requires PHP 8.3+ (`ext-pdo_sqlite`, `ext-mbstring`, `ext-openssl`, `ext-zlib`, plus the always-bundled `ext-hash`/`ext-json`/`ext-pcre` — see `require` in `composer.json`, which is the canonical list), Node.js, and SQLite 3. ImageMagick (`convert`) and `pngcrush` are needed only when building the favicon.
+Requires PHP 8.4+ (`ext-pdo_sqlite`, `ext-mbstring`, `ext-openssl`, `ext-zlib`, plus the always-bundled `ext-hash`/`ext-json`/`ext-pcre` — see `require` in `composer.json`, which is the canonical list), Node.js, and SQLite 3. ImageMagick (`convert`) and `pngcrush` are needed only when building the favicon.
 
 ## Common commands
 
